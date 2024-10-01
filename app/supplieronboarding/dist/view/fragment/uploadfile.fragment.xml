@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog title="Uploaded Files" class="sapUiResponsivePadding" draggable="true" resizable="true">
+        <VBox>
+            <!-- List for displaying uploaded files -->
+            <List id="fileList1" items="{/documentFiles}">
+                <CustomListItem>
+                    <HBox justifyContent="SpaceBetween" alignItems="Center">
+                        <!-- File Name Text -->
+                        <HBox alignItems="Center">
+                            <Text text="{fileName}" />
+                        </HBox>
+
+                        <!-- Action Buttons (Download & Delete) -->
+                        <HBox>
+                            <!-- Download Button -->
+                            <Button
+                                icon="sap-icon://download"
+                                press="onDownloadFile">
+                                <customData>
+                                    <core:CustomData key="fileName" value="{fileName}" />
+                                </customData>
+                            </Button>
+                            <!-- Delete Button -->
+                            <Button
+                                icon="sap-icon://delete"
+                                press="onDeleteFile">
+                                <customData>
+                                    <core:CustomData key="fileName" value="{fileName}" />
+                                </customData>
+                            </Button>
+                        </HBox>
+                    </HBox>
+                </CustomListItem>
+            </List>
+        </VBox>
+        <endButton>
+            <Button text="Close" press=".onCloseDialog" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

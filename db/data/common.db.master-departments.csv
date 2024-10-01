@@ -1,0 +1,6 @@
+DepartmentName,Functions
+SSU,"['A&T Prop', 'Casting', 'Forging', 'Engine', 'RM, Steel, Tyres, Paints & Chemicals', 'Vehicle Prop', 'FES', 'CV Prop.', 'EE1', 'EE2', 'Ept', 'BIW', 'Trims', 'Swaraj']"
+SIMS,"['SIMS - Indirect Material', 'SIMS - Indirect Services', 'SIMS - Logistics & Packaging', 'SIMS - Sales & Marketing', 'SIMS - Travel & Hospitality']"
+SBU,"['SBU - AD', 'SBU - FD']"
+IL,"['IL - Imports', 'IL - Exports']"
+PCM,"['PCM']"

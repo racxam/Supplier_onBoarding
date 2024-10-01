@@ -1,0 +1,122 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.RegistrationForm"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:uxap="sap.uxap"
+    xmlns:sample="com.sumo.supplieronboarding.controller.blocks"
+    xmlns="sap.m"
+    xmlns:upload="sap.m.upload"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+>
+    <Page
+        id="page2"
+        title="{i18n>title}"
+    >
+        <content>
+            <uxap:ObjectPageLayout
+                id="ObjectPageLayout"
+                upperCaseAnchorBar="false"
+                class="img-bg"
+            >
+                <uxap:sections>
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="section1"
+                        title="Section 1"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="section1_SS1"
+                                title="Supplier Registration Questionnaire Form"
+                                titleUppercase="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:SRQF id="bbt1" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="section2"
+                        title="Section 2"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="section2_SS1"
+                                title="Company Identification and Regulatory Details"
+                                titleUppercase="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:CIRD id="bbt2" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="section3"
+                        title="Section 3"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="section3_SS1"
+                                title="Compliance and Certification Documents"
+                                titleUppercase="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:CCD id="bbt3" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="section4"
+                        title="Section 4"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="section5_SS1"
+                                title="Payment Terms "
+                                titleUppercase="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:payment id="bbt5" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
+            <FlexBox
+                id="_IDGenFlexBox1"
+                height="100px"
+                alignItems="Start"
+                justifyContent="Center"
+            >
+                <Button
+                    id="_IDGenButton1"
+                    width="200px"
+                    class="sapUiSmallMargin"
+                    text="Submit"
+                    press="SubmitSupplieronBoardForm"
+                />
+                <Button
+                    id="save_btn"
+                    width="200px"
+                    class="sapUiSmallMargin"
+                    text="Save"
+                    press="onFormsubmit"
+                />
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

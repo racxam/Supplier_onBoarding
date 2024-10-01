@@ -1,0 +1,372 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.RequestForm"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <VBox
+            id="VBox1"
+            height="100%"
+            width="100%"
+        >
+            <f:SimpleForm
+                id="SimpleForm"
+                maxContainerCols="2"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanL="3"
+                labelSpanM="3"
+                columnsL="2"
+                columnsM="2"
+                emptySpanL="4"
+                emptySpanM="4"
+                adjustLabelSpan="false"
+                class="editableForm"
+                title="Request Form"
+            >
+                <f:content>
+                    <Label
+                        id="Label"
+                        text="Validity of digression vendor code upto"
+                        required="true"
+                    />
+                    <DatePicker
+                        id="datePicker"
+                        valueFormat="yyyy-MM-dd"
+                        displayFormat="long"
+                    />
+
+                    <Label
+                        id="Label1"
+                        text="Is it a related party vendor code?"
+                        required="true"
+                    />
+                    <RadioButtonGroup
+                        id="radioGroup"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButton_new"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                    <Label
+                        id="Label3"
+                        text="Supplier Spend Type"
+                        required="true"
+                    />
+                    <Select
+                        id="supplierSpendType"
+                        selectedKey=""
+                        items="{/results}"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item"
+                                text="{SpendsTypes}"
+                                key="{SpendsTypes}"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        id="Label4"
+                        text="Nature of Activity"
+                        required="true"
+                    />
+                    <Select
+                        id="NatureofActivity"
+                        selectedKey=""
+                        items="{/results}"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item1"
+                                text="{Activity}"
+                                key="{Activity}"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        id="Label5"
+                        text="Sector"
+                        required="true"
+                    />
+                    <MultiComboBox
+                        id="sectorComboBox"
+                        selectedKeys=""
+                        placeholder="Select sectors"
+                        items="{/results}"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item100"
+                                text="{Sectors} - {Description}"
+                                key="{Sectors} - {Description}"
+                            />
+                        </items>
+                    </MultiComboBox>
+
+                    <Label
+                        id="Label6"
+                        text="Function &amp; Subfunction"
+                        required="true"
+                    />
+
+                    <Select
+                        id="FunctionandSubfunctionComboBox"
+                        change="onDepartmentChange"
+                        items="{
+        path: 'departmentsModel>/results'
+    }"
+                    >
+                        <core:Item
+                            id="Item3"
+                            key="{departmentsModel>DepartmentName}"
+                            text="{departmentsModel>DepartmentName}"
+                        />
+                    </Select>
+
+                    <MultiComboBox
+                        id="childMultiComboBox"
+                        visible="true"
+                        placeholder="Select Subfunction"
+                        items="{functionsModel>/Functions}"
+                    >
+                        <core:Item
+                            id="Item4"
+                            key="{functionsModel>}"
+                            text="{functionsModel>}"
+                        />
+                    </MultiComboBox>
+
+                    <Label
+                        id="Label7"
+                        text="PAN Card No."
+                        required="true"
+                    />
+                    <!-- <Input id="Input7" type="Text"/> -->
+                    <Input
+                        id="panInput"
+                        placeholder="ABCDE1234F"
+                        value="{/panCardValue}"
+                        liveChange="onPanCardChange"
+                        valueStateText="Invalid PAN Card format. Please enter a valid PAN (e.g., ABCDE1234F)."
+                        maxLength="10"
+                    />
+                    <Button
+                        id="Button110"
+                        text="Verify"
+                        press="onSubmitpan"
+                    />
+
+                    <Label
+                        id="Label08"
+                        text="PAN Card Attachment"
+                        required="true"
+                    />
+                    <unified:FileUploader
+                        id="panfileUploader"
+                        fileType="jpg,png,pdf,docx"
+                        change="onFileUploadpan"
+                        width="100%"
+                    />
+
+                    <Button
+                        id="panuploadbutton"
+                        text="{path: '/pan', formatter: '.formatAttachmentButtonTextpan'}"
+                        press="onOpenDialogpan"
+                    />
+
+                    <Label
+                        id="Label111"
+                        text=" GSTIN No."
+                        required="true"
+                    />
+                    <Input
+                        id="gstinInput"
+                        placeholder="22ABCDE1234F1Z5"
+                        value="{/gstinValue}"
+                        liveChange="onGSTINChange"
+                        valueStateText="Invalid PAN Card format. Please enter a valid PAN (e.g., ABCDE1234F)."
+                        maxLength="15"
+                    />
+                    <Button
+                        id="Button"
+                        text="Verify"
+                        press="onSubmitgst"
+                    />
+
+                    <Label
+                        id="Label19"
+                        text="GST Registration Certificate Attachment"
+                        required="true"
+                    />
+                    <unified:FileUploader
+                        id="gstfileUploader"
+                        fileType="jpg,png,pdf,docx"
+                        change="onFileUploadgst"
+                        width="100%"
+                    />
+
+                    <Button
+                        id="gstuploadbutton"
+                        text="{path: '/gst', formatter: '.formatAttachmentButtonTextgst'}"
+                        press="onOpenDialoggst"
+                    />
+
+                    <Label
+                        id="Label11"
+                        text="Supplier Full Legal Name"
+                        required="true"
+                    />
+                    <Input
+                        id="SupplierNameInput"
+                        type="Text"
+                        value="{/SupplierNameValue}"
+                    />
+
+                    <Label
+                        id="Label12"
+                        text="Supplier Trade Name (GST)"
+                        required="true"
+                    />
+                    <Input
+                        id="SuppliertradeNameInput"
+                        type="Text"
+                        value="{/SuppliertradeNameValue}"
+                    />
+
+                    <Label
+                        id="Label13"
+                        text="Supplier Address"
+                        required="true"
+                    />
+                    <Input
+                        id="SupplierAddressInput"
+                        type="Text"
+                        value="{/SupplierAddressValue}"
+                    />
+
+                    <Label
+                        id="Label14"
+                        text="Supplier Address (GST)"
+                        required="true"
+                    />
+                    <Input
+                        id="SupplierAddressgstInput"
+                        type="Text"
+                        value="{/SupplierAddressgstValue}"
+                    />
+
+                    <Label
+                        id="Label15"
+                        text=" Primary Contact First Name"
+                        required="true"
+                    />
+                    <Input
+                        id="PrimaryFirstnameInput"
+                        type="Text"
+                        value="{/PrimaryFirstnameValue}"
+                    />
+
+                    <Label
+                        id="Label16"
+                        text="Primary Contact Last Name"
+                        required="true"
+                    />
+                    <Input
+                        id="PrimaryLastnameInput"
+                        type="Text"
+                        value="{/PrimaryLastnameValue}"
+                    />
+
+                    <Label
+                        id="Label17"
+                        text="Primary Contact Email"
+                        required="true"
+                    />
+                    <Input
+                        id="emailInput"
+                        placeholder="Enter your email"
+                        value="{/emailValue}"
+                        liveChange="onEmailChange"
+                        valueStateText="Invalid email format. Please enter a valid email address."
+                    />
+                    <Button
+                        id="Button3"
+                        text="Verify"
+                        press="onSubmitemail"
+                    />
+
+                    <Label
+                        id="Label18"
+                        text="Primary Contact Mobile Number"
+                        required="true"
+                    />
+                    <Input
+                        id="numberInput"
+                        placeholder="Enter your Mobile number"
+                        type="Number"
+                        value="{/numberValue}"
+                        liveChange="onNumberChange"
+                        valueStateText="Invalid Number. Please enter a valid Mobile Number."
+                    />
+                    <Button
+                        id="Button4"
+                        text="Verify"
+                        press="onSubmitnumber"
+                    />
+                </f:content>
+            </f:SimpleForm>
+
+            <core:Fragment
+                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
+                id="fileListFragmentpan"
+                type="XML"
+            />
+            <core:Fragment
+                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
+                id="fileListFragmentgst"
+                type="XML"
+            />
+
+            <Toolbar id="Toolbar1">
+                <ToolbarSpacer id="ToolbarSpacer" />
+                <Button
+                    id="Button2"
+                    text="Save"
+                    press="onSave"
+                    width="100px"
+                    type="Emphasized"
+                />
+                <Button
+                    id="Button1"
+                    text="Submit"
+                    press="onFormsubmit"
+                    width="100px"
+                    type="Emphasized"
+                />
+
+                <ToolbarSpacer id="ToolbarSpacer1" />
+            </Toolbar>
+        </VBox>
+    </Page>
+</mvc:View>

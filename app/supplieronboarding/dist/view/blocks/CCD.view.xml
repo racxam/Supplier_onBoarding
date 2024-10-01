@@ -1,0 +1,277 @@
+<mvc:View
+ 		controllerName="com.sumo.supplieronboarding.controller.RegistrationForm"
+		xmlns:forms="sap.ui.layout.form"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		xmlns="sap.m"
+	xmlns:m="sap.m" 
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+ 	xmlns:unified="sap.ui.unified"
+		width="100%">
+	<html:div style="font-size: 0.875rem;">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormToolbar3"
+			editable="true"
+			layout="ColumnLayout"
+			labelSpanXL="6"
+			labelSpanL="3"
+			labelSpanM="6"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false"
+			ariaLabelledBy="Title1" >
+			<f:toolbar>
+				<Toolbar id="TB3">
+					<Title id="Title3" text="Compliance and Certification Documents"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+        <Label text="UDYAM Number " required='true' />
+		<Input placeholder="UDYAM Number"></Input>
+         <Label text="Type of Industry" required='true' />
+			<Select id="Manufacturing" selectedKey="Manufacturing" >
+				<items>
+						<core:Item text="Manufacturing" key="Manufacturing"/>
+						<core:Item text="Service" key="Service"/>
+					</items>
+			</Select>
+         <Label text="MSME Type" required='true' />
+			<Select id="Manufacturing1" selectedKey="Manufacturing" >
+				<items>
+						<core:Item text="Medium" key="Medium"/>
+						<core:Item text="Micro" key="Micro"/>
+                        <core:Item text="Small" key="Small"/>
+					</items>
+			</Select>
+         <Label text="Please provide attachment of MSME Certificate." required='true' />
+         <unified:FileUploader
+            id="fileUploader5"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />  
+         <Label text="Country Code" required='true' />
+			<Select id="CountryCode1" selectedKey="Country Code" >
+				<items>
+						<core:Item text="[IN] - INDIA" key="india"/>
+						<core:Item text="Micro" key="Micro"/>
+                        <core:Item text="Small" key="Small"/>
+					</items>
+			</Select>
+        <Label text="Kindly upload DSA - Development and Supply Agreement (Only applicable for Direct)" required='true' />
+         <unified:FileUploader
+            id="fileUploader6"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+           /> 
+         <Label text="Kindly upload the Signed copy of the Accepted Non Disclosure Agreement (NDA)" required='true' />
+         <unified:FileUploader
+            id="fileUploader7"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            /> 
+		 <Label text="Kindly upload the Copy of the ISO/TS Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader8"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            /> 
+        <Label text="Enter certificate number of the ISO/TS Certificate" required='true' />
+		<Input placeholder="Enter certificate number of the ISO/TS Certificate"></Input>  
+		<Label text="Enter expiry date of the ISO/TS Certificate" required='true' />
+		<DatePicker
+					id="DP1"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+	 
+		<Label text="Kindly upload the Copy of the ISO 9001 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader9"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            /> 
+		<Label text="Enter ISO 9001 certificate number" required='true' />
+		<Input placeholder="Enter ISO 9001 certificate number"></Input>  
+		<Label text="Enter expiry date of the ISO 9001 Certificate" required='true' />
+				<DatePicker
+					id="DP2"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the ISO 16949 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader10"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+           /> 
+		 <Label text="Enter ISO 16949 certificate number" required='true' />
+		<Input placeholder="EEnter ISO 16949 certificate number"></Input>  
+		<Label text="Enter expiry date of the ISO 16949 Certificate" required='true' />
+				<DatePicker
+					id="DP3"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the ISO 14001 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader11"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            /> 
+		 <Label text="Enter ISO 14001 certificate number" required='true' />
+		<Input placeholder="Enter ISO 14001 certificate number"></Input>  
+
+		<Label text="Enter expiry date of the ISO 14001 Certificate" required='true' />
+		<DatePicker
+					id="DP4"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		
+		<Label text="Kindly upload the Copy of the ISO 45001 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader12"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            /> 
+		 <Label text="Enter ISO 45001 certificate number" required='true' />
+		<Input placeholder="Enter ISO 45001 certificate number"></Input>  
+		<Label text="Enter expiry date of the ISO 45001 Certificate" required='true' />
+				<DatePicker
+					id="DP5"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the Factory License as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader14"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            /> 
+	
+		<Label text="Enter Factory License number" required='true' />	
+		<Input placeholder="Enter Factory License number" ></Input>  
+
+		<Label text="Enter expiry date of the Factory License" required='true' />
+				<DatePicker
+					id="DP6"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+				
+		<Label text="Kindly upload the Copy of the Consent to Operate Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader16"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+		<Label text="Enter Consent to Operate certificate number" required='true' />	
+		<Input placeholder="Enter Consent to Operate certificate number" ></Input>
+		
+		<Label text="Enter expiry date of the Consent to Operate Certificate" required='true' />
+				<DatePicker
+					id="DP7"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the Fire NOC Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader17"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+		
+		<Label text="Enter Fire NOC certificate number" required='true' />
+		<Input placeholder="Enter Fire NOC certificate number"></Input>  
+		
+		<Label text="Enter expiry date of the Fire NOC Certificate" required='true' />
+				<DatePicker
+					id="DP8"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+
+
+		<Label text="Kindly upload the Wage Agreement Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="fileUploader18"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+		
+		<Label text="Enter Wage Agreement certificate number" required='true' />
+		<Input placeholder="Enter Wage Agreement certificate number"></Input>
+
+		<Label text="Enter Wage Agreement certificate number" required='true' />
+				<DatePicker
+					id="DP9"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+
+
+			</f:content> 
+		</f:SimpleForm>
+	</VBox>
+
+	</html:div>
+</mvc:View>
