@@ -1,0 +1,72 @@
+###GET the request
+GET http://localhost:4004/odata/v4/attachments/supplierReqSrv
+
+### SAVing the request
+POST http://localhost:4004/odata/v4/attachments/SavingsupplierReqSrv
+Content-Type: application/json
+
+{
+    "DigressionVendorCodeVal": "2025-09-30",          
+    "IsRelPartyVCode": true,                          
+    "SpendType": "Indirect",               
+    "NatureOfActivity": "Material",                
+    "Sector": ["IT", "Manufacturing"],                
+    "FunAndSubfun": ["Finance", "HR"],                
+    "PANCardNo": "ABCDE1234F",                        
+    "GSTIN": "27ABCDE1234F1Z5",                       
+    "SFullName": "ABC Corp Pvt. Ltd.",                
+    "STradeNameGST": "ABC Trade",                     
+    "SAddress": "123, Example Street, City, State",   
+    "Status":"DRAFT"               
+}
+
+
+### POST the request
+POST http://localhost:4004/odata/v4/attachments/supplierReqSrv
+Content-Type: application/json
+
+{
+    "DigressionVendorCodeVal": "2025-09-30",          
+    "IsRelPartyVCode": true,                          
+    "SpendType": "Indirect",               
+    "NatureOfActivity": "Material",                
+    "Sector": ["IT", "Manufacturing"],                
+    "FunAndSubfun": ["Finance", "HR"],                
+    "PANCardNo": "ABCDE1234F",                        
+    "GSTIN": "27ABCDE1234F1Z5",                       
+    "SFullName": "ABC Corp Pvt. Ltd.",                
+    "STradeNameGST": "ABC Trade",                     
+    "SAddress": "123, Example Street, City, State",   
+    "SAddressGST": "123, Example Street, City, State",
+    "PriContactFName": "Sumit",                        
+    "PriContactLName": "Doe",                         
+    "PriContactEmail": "john.doe@example.com",        
+    "PriContactMNumber": "1234567890"                 
+}
+
+####
+POST  http://localhost:4004/odata/v4/attachments/SReqattachmentsSrv
+Content-Type: application/json
+
+{
+    "Req_Supplier_ID": "10a41e6d-1dd5-463e-bfa7-c0f2f00d7353",
+    "Doc_Type": "PAN",
+    "Attachment_ID": 1,
+    "image": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB...==",
+    "imageType": "image/png",
+    "createdAt": "2024-09-23T18:34:51.668Z",
+     "createdBy": "anonymous",
+     "modifiedAt": "2024-09-23T18:34:52.078Z",
+     "modifiedBy": "anonymous"
+  
+}
+#### PUT Call
+PUT http://localhost:4004/odata/v4/attachments/SReqattachmentsSrv('445d0631-8a33-4698-a285-22d896f9319c')
+Content-Type: application/json
+
+{
+ "image": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB...=="
+}
+
+
+

@@ -1,0 +1,247 @@
+{
+    "_version": "1.26.0",
+    "sap.app": {
+        "id": "com.sumo.processtaskuimodule",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.8.4",
+            "toolsId": "59694622-121e-4104-a091-d48b596ca941"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.82.2",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.sumo.processtaskuimodule.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.sumo.processtaskuimodule.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "Routeprocesstaskui",
+                    "pattern": ":?query:",
+                    "target": [
+                        "Targetprocesstaskui"
+                    ]
+                }
+            ],
+            "targets": {
+                "Targetprocesstaskui": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "processtaskui",
+                    "viewName": "processtaskui"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "com.sumo.processtaskuimodule.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "supplier_creation"
+    },
+    "sap.bpa.task": {
+        "_version": "1.0.0",
+        "outcomes": [
+            {
+                "id": "approve",
+                "label": "Approve"
+            },
+            {
+                "id": "reject",
+                "label": "Reject"
+            }
+        ],
+        "inputs": {
+            "$schema": "http://json-schema.org/draft-07/schema",
+            "title": "input",
+            "type": "object",
+            "required": [],
+            "properties": {
+                "ReqID": {
+                    "type": "string",
+                    "title": "Request ID",
+                    "description": "Unique identifier for the request"
+                },
+                "DigressionVendorCode": {
+                    "type": "string",
+                    "title": "Digression Vendor Code",
+                    "description": "Code for the digression vendor"
+                },
+                "PartyVendorCode": {
+                    "type": "string",
+                    "title": "Party Vendor Code",
+                    "description": "Code for the related party vendor"
+                },
+                "SupplierSpendType": {
+                    "type": "string",
+                    "title": "Supplier Spend Type",
+                    "description": "Type of spending related to the supplier"
+                },
+                "NatureActivity": {
+                    "type": "string",
+                    "title": "Nature of Activity",
+                    "description": "Description of the activity"
+                },
+                "Sector": {
+                    "type": "string",
+                    "title": "Sector",
+                    "description": "Sector associated with the request"
+                },
+                "FunctionSubfunction": {
+                    "type": "string",
+                    "title": "Function/Subfunction",
+                    "description": "Function and subfunction details"
+                },
+                "PANCardNo": {
+                    "type": "string",
+                    "title": "PAN Card Number",
+                    "description": "Permanent Account Number of the supplier"
+                },
+                "GSTIN": {
+                    "type": "string",
+                    "title": "GST Identification Number",
+                    "description": "GSTIN of the supplier"
+                },
+                "SFullName": {
+                    "type": "string",
+                    "title": "Supplier Full Name",
+                    "description": "Full name of the supplier"
+                },
+                "STradeNameGST": {
+                    "type": "string",
+                    "title": "Trade Name (GST)",
+                    "description": "Trade name of the supplier as registered under GST"
+                },
+                "SAddress": {
+                    "type": "string",
+                    "title": "Supplier Address",
+                    "description": "Address of the supplier"
+                },
+                "SAddressGST": {
+                    "type": "string",
+                    "title": "Supplier GST Address",
+                    "description": "GST registered address of the supplier"
+                },
+                "PRIContactFName": {
+                    "type": "string",
+                    "title": "Primary Contact First Name",
+                    "description": "First name of the primary contact person"
+                },
+                "PRIContactLName": {
+                    "type": "string",
+                    "title": "Primary Contact Last Name",
+                    "description": "Last name of the primary contact person"
+                },
+                "PRIContactEmail": {
+                    "type": "string",
+                    "title": "Primary Contact Email",
+                    "description": "Email address of the primary contact person"
+                },
+                "PRIContactMNumber": {
+                    "type": "string",
+                    "title": "Primary Contact Mobile Number",
+                    "description": "Mobile number of the primary contact person"
+                }
+            }
+        },
+        "outputs": {
+            "$schema": "http://json-schema.org/draft-07/schema",
+            "title": "output",
+            "type": "object",
+            "required": [
+                "comment"
+            ],
+            "properties": {
+                "comment": {
+                    "type": "string",
+                    "title": "Comment",
+                    "description": "Comment to buyer"
+                }
+            }
+        },
+        "category": "approval"
+    }
+}
