@@ -4,5 +4,5 @@ echo -e "Enter the comment........?"
 read;
 git commit -m "${REPLY}"
 echo -e "Commited the change in the local git...........!"
-git push origin sumit
+git push origin main
 echo -e "Sucessfully !! pushed the changes to git"
