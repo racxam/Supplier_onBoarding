@@ -1,5 +1,5 @@
 ###GET the request
-GET http://localhost:4004/odata/v4/attachments/supplierReqSrv
+GET http://localhost:4004/odata/v2/attachments/SReqattachmentsSrv
 
 ### SAVing the request
 POST http://localhost:4004/odata/v4/attachments/SavingsupplierReqSrv
@@ -45,7 +45,7 @@ Content-Type: application/json
 }
 
 ####
-POST  http://localhost:4004/odata/v4/attachments/SReqattachmentsSrv
+POST  http://localhost:4004/odata/v2/attachments/SReqattachmentsSrv
 Content-Type: application/json
 
 {

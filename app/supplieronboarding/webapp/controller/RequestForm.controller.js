@@ -454,7 +454,9 @@ sap.ui.define([
                             Doc_Type: "PAN",
                             Attachment_ID: 1,
                             fileName: attachment.fileName,
-                            imageType: attachment.fileType // Assuming imageType refers to fileType
+                            mediaType: attachment.fileType,
+                            content:attachment.fileContent
+                            // Assuming imageType refers to fileType
                         };
                         console.log(payLoad);
                         

@@ -1,6 +1,4 @@
 
-
-
 <mvc:View controllerName="com.sumo.supplieronboarding.controller.RequestForm"
     xmlns:mvc="sap.ui.core.mvc" 
     displayBlock="true"

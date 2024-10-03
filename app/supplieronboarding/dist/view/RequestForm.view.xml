@@ -1,15 +1,16 @@
-<mvc:View
-    controllerName="com.sumo.supplieronboarding.controller.RequestForm"
-    xmlns:mvc="sap.ui.core.mvc"
+
+<mvc:View controllerName="com.sumo.supplieronboarding.controller.RequestForm"
+    xmlns:mvc="sap.ui.core.mvc" 
+    displayBlock="true"
+    xmlns="sap.m"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
-    xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:unified="sap.ui.unified"
-    xmlns:upload="sap.m.upload"
->
-    <Page
-        id="page"
+    xmlns:upload="sap.m.upload">
+   
+      <Page
+        id="page1"
         title="{i18n>title}"
     >
         <VBox
@@ -50,7 +51,7 @@
                         required="true"
                     />
                     <RadioButtonGroup
-                        id="radioGroup"
+                        id="radioGroup1"
                         columns="2"
                         selectedIndex="0"
                     >
@@ -182,18 +183,22 @@
                         text="PAN Card Attachment"
                         required="true"
                     />
-                    <unified:FileUploader
-                        id="panfileUploader"
-                        fileType="jpg,png,pdf,docx"
-                        change="onFileUploadpan"
-                        width="100%"
-                    />
-
-                    <Button
-                        id="panuploadbutton"
-                        text="{path: '/pan', formatter: '.formatAttachmentButtonTextpan'}"
-                        press="onOpenDialogpan"
-                    />
+                      <unified:FileUploader
+        id="fileUploaderPan"
+        fileType="jpg,png,pdf,docx"
+        change="onFileUpload"
+        width="100%"
+    />
+    <Button
+        text="{
+            parts: [
+                { path: '/documentFiles/pan' },
+                { value: 'pan' }
+            ],
+            formatter: '.formatAttachmentButtonText'
+        }"
+        press="onOpenDialog('pan')"
+    />
 
                     <Label
                         id="Label111"
@@ -219,18 +224,23 @@
                         text="GST Registration Certificate Attachment"
                         required="true"
                     />
-                    <unified:FileUploader
-                        id="gstfileUploader"
-                        fileType="jpg,png,pdf,docx"
-                        change="onFileUploadgst"
-                        width="100%"
-                    />
-
-                    <Button
-                        id="gstuploadbutton"
-                        text="{path: '/gst', formatter: '.formatAttachmentButtonTextgst'}"
-                        press="onOpenDialoggst"
-                    />
+                    <Label text="GST Registration Certificate Attachment" required="true"/>
+   <unified:FileUploader
+        id="fileUploaderGst"
+        fileType="jpg,png,pdf,docx"
+        change="onFileUpload"
+        width="100%"
+    />
+    <Button
+        text="{
+            parts: [
+                { path: '/documentFiles/gst' },
+                { value: 'gst' }
+            ],
+            formatter: '.formatAttachmentButtonText'
+        }"
+        press="onOpenDialog('gst')"
+    />
 
                     <Label
                         id="Label11"
@@ -337,16 +347,7 @@
                 </f:content>
             </f:SimpleForm>
 
-            <core:Fragment
-                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
-                id="fileListFragmentpan"
-                type="XML"
-            />
-            <core:Fragment
-                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
-                id="fileListFragmentgst"
-                type="XML"
-            />
+             <core:Fragment fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile" id="fileListFragment1" type="XML"/>
 
             <Toolbar id="Toolbar1">
                 <ToolbarSpacer id="ToolbarSpacer" />

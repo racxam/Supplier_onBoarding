@@ -38,12 +38,15 @@ context transcation {
 
     entity sreq_attachments : cuid, managed {
 
-        Req_Supplier  : Association to supplier_request;
+        @Core.ContentDisposition.Filename:fileName
+        @Core.MediaType :mediaType
+        content         : LargeBinary;
+        fileName      : String;
         Doc_Type      : common.attachmentT;
         Attachment_ID : Int16;
-        fileName      : String;
-        image         : LargeBinary @Core.MediaType: imageType;
-        imageType     : String      @Core.IsMediaType;
+        @Core.IsMediaType:true
+        mediaType     : String ;    
+        Req_Supplier  : Association to supplier_request;
 
 
     };

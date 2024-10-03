@@ -34,13 +34,17 @@
             "native_hana_associations": false
         },
         "requires": {
+            "db":{
+                "kind": "hana"
+            },
+           
             "workflow": {
                 "kind": "rest",
                 "credentials": {
                     "destination": "spa_process_destination"
                 }
             },
-            "auth": "xsuaa"
+            "auth": "mocked"
         }
     }
 }

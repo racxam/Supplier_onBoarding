@@ -3,151 +3,154 @@ ID: SupplierOnboarding
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: SupplierOnboarding-srv
-  type: nodejs
-  path: gen/srv
-  requires:
-  - name: SupplierOnboarding-db
-  - name: SupplierOnboarding-auth
-  provides:
-  - name: srv-api
-    properties:
-      srv-url: ${default-url}
-  parameters:
-    buildpack: nodejs_buildpack
-    readiness-health-check-http-endpoint: /health
-    readiness-health-check-type: http
-  build-parameters:
-    builder: npm
-- name: SupplierOnboarding-db-deployer
-  type: hdb
-  path: gen/db
-  requires:
-  - name: SupplierOnboarding-db
-  parameters:
-    buildpack: nodejs_buildpack
-- name: SupplierOnboarding-destination-content
-  type: com.sap.application.content
-  requires:
-  - name: SupplierOnboarding-destination-service
-    parameters:
-      content-target: true
-  - name: SupplierOnboarding_html_repo_host
-    parameters:
-      service-key:
-        name: SupplierOnboarding_html_repo_host-key
-  - name: SupplierOnboarding-auth
-    parameters:
-      service-key:
-        name: SupplierOnboarding-auth-key
-  parameters:
-    content:
-      subaccount:
-        destinations:
-        - Name: supplier_creation_SupplierOnboarding_html_repo_host
-          ServiceInstanceName: SupplierOnboarding-html5-app-host-service
-          ServiceKeyName: SupplierOnboarding_html_repo_host-key
-          sap.cloud.service: supplier_creation
-        - Authentication: OAuth2UserTokenExchange
-          Name: supplier_creation_SupplierOnboarding_auth
-          ServiceInstanceName: SupplierOnboarding-auth
-          ServiceKeyName: SupplierOnboarding-auth-key
-          sap.cloud.service: supplier_creation
-        existing_destinations_policy: ignore
-  build-parameters:
-    no-source: true
-- name: SupplierOnboarding-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: SupplierOnboarding_html_repo_host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
+  - name: SupplierOnboarding-srv
+    type: nodejs
+    path: gen/srv
     requires:
-    - artifacts:
-      - comsumosupplieronboarding.zip
-      name: comsumosupplieronboarding
-      target-path: resources/
-    - artifacts:
-      - comsumoprocesstaskuimodule.zip
-      name: comsumoprocesstaskuimodule
-      target-path: resources/
-- name: comsumosupplieronboarding
-  type: html5
-  path: app/supplieronboarding
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: comsumoprocesstaskuimodule
-  type: html5
-  path: processtask-ui-module
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: SupplierOnboarding-db
-  type: com.sap.xs.hdi-container
-  parameters:
-    service: hana
-    service-plan: hdi-shared
-- name: SupplierOnboarding-auth
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      tenant-mode: dedicated
-      xsappname: SupplierOnboarding-${org}-${space}
-    path: ./xs-security.json
-    service: xsuaa
-    service-plan: application
-- name: SupplierOnboarding-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
+      - name: SupplierOnboarding-db
+      - name: SupplierOnboarding-auth
+      - name: SupplierOnboarding-destination-service
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-http-endpoint: /health
+      readiness-health-check-type: http
+    build-parameters:
+      builder: npm
+  - name: SupplierOnboarding-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: SupplierOnboarding-db
+    parameters:
+      buildpack: nodejs_buildpack
+  - name: SupplierOnboarding-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: SupplierOnboarding-destination-service
+        parameters:
+          content-target: true
+      - name: SupplierOnboarding_html_repo_host
+        parameters:
+          service-key:
+            name: SupplierOnboarding_html_repo_host-key
+      - name: SupplierOnboarding-auth
+        parameters:
+          service-key:
+            name: SupplierOnboarding-auth-key
+    parameters:
+      content:
         subaccount:
           destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
-          - Authentication: NoAuthentication
-            HTML5.DynamicDestination: true
-            HTML5.ForwardAuthToken: true
-            Name: SupplierOnboarding-srv-api
-            ProxyType: Internet
-            Type: HTTP
-            URL: ~{srv-api/srv-url}
-          existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: SupplierOnboarding-destination-service
-    service-plan: lite
-  requires:
-  - name: srv-api
-- name: SupplierOnboarding_html_repo_host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: SupplierOnboarding-html5-app-host-service
-    service-plan: app-host
+            - Name: supplier_creation_SupplierOnboarding_html_repo_host
+              ServiceInstanceName: SupplierOnboarding-html5-app-host-service
+              ServiceKeyName: SupplierOnboarding_html_repo_host-key
+              sap.cloud.service: supplier_creation
+            - Authentication: OAuth2UserTokenExchange
+              Name: supplier_creation_SupplierOnboarding_auth
+              ServiceInstanceName: SupplierOnboarding-auth
+              ServiceKeyName: SupplierOnboarding-auth-key
+              sap.cloud.service: supplier_creation
+          existing_destinations_policy: ignore
+    build-parameters:
+      no-source: true
+  - name: SupplierOnboarding-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: SupplierOnboarding_html_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - comsumosupplieronboarding.zip
+          name: comsumosupplieronboarding
+          target-path: resources/
+        - artifacts:
+            - comsumoprocesstaskuimodule.zip
+          name: comsumoprocesstaskuimodule
+          target-path: resources/
+  - name: comsumosupplieronboarding
+    type: html5
+    path: app/supplieronboarding
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+  - name: comsumoprocesstaskuimodule
+    type: html5
+    path: processtask-ui-module
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+resources:
+  - name: SupplierOnboarding-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: SupplierOnboarding-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: SupplierOnboarding-${org}-${space}
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: SupplierOnboarding-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          subaccount:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+              - Authentication: NoAuthentication
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                Name: SupplierOnboarding-srv-api
+                ProxyType: Internet
+                Type: HTTP
+                URL: ~{srv-api/srv-url}
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: SupplierOnboarding-destination-service
+      service-plan: lite
+    requires:
+      - name: srv-api
+  - name: SupplierOnboarding_html_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: SupplierOnboarding-html5-app-host-service
+      service-plan: app-host
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-  - builder: custom
-    commands:
-    - npm ci
-    - npx cds build --production
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production

@@ -1,1 +1,1 @@
-Req_Supplier_ID,Doc_Type,Attachment_ID,imageType,createdAt,createdBy,modifiedAt,modifiedBy
+ID,fileName,Doc_Type,Attachment_ID,mediaType,Req_Supplier_ID,createdAt,createdBy,modifiedAt,modifiedBy

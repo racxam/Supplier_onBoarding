@@ -11,7 +11,7 @@ module.exports = async function () {
             console.log("Uploading file of size:", req.data.content.length);
         }
 
-        req.data.url = `v2/odata/v4/attachments/FilesSrv(${req.data.ID})/content`;
+        req.data.url = `/odata/v2/attachments/SReqattachmentsSrv(${req.data.ID})/content`;
     });
 
     this.after('CREATE', 'SReqattachmentsSrv', (req) => {
@@ -21,7 +21,7 @@ module.exports = async function () {
 
     this.before('CREATE', supplierReqSrv, BeforeSupReqFun);
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
-    this.after('CREATE', supplierReqSrv, AfterSupReqFun);
+    // this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
     // functions
     //1. Before supplier req form

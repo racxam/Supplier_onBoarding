@@ -1,6 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
+    "sap/m/MessageBox",
     "sap/ui/core/Icon",
     "sap/m/Link",
     "sap/ui/model/json/JSONModel",
@@ -14,6 +15,9 @@ sap.ui.define([
 
         return Controller.extend("com.sumo.supplieronboarding.controller.RequestForm", {
             onInit: function () {
+                // Initialize the model with an empty array for files
+                var oModel = new sap.ui.model.json.JSONModel({ documentfiles: [] });
+                this.getView().setModel(oModel);
                 this.onReadSupplierSpendType();
                 this.onReadNatureofActivity();
                 this.onReadDepartments();
@@ -27,12 +31,6 @@ sap.ui.define([
 
                 oDatePicker.setMinDate(currentDate);
                 oDatePicker.setMaxDate(maxDate);
-
-                // var oModel1 = new sap.ui.model.json.JSONModel();
-                // oModel1.loadData("/model/data.json");
-                // this.getView().setModel(oModel1, "customerModel");
-
-
 
                 var oModel = new sap.ui.model.json.JSONModel({
                     panCardValue: "",
@@ -281,42 +279,6 @@ sap.ui.define([
                 }
             },
 
-            // onFileUploadpan: function (oEvent) {
-            //     var oFileUploader = oEvent.getSource();
-            //     var oFile = oFileUploader.oFileUpload.files[0]; // Get the uploaded file
-
-            //     if (oFile) {
-            //         var sFileName = oFile.name;
-            //         var oReader = new FileReader();
-            //         var that = this;
-
-            //         oReader.onload = function (e) {
-            //             var sFileUrl = e.target.result;  // Get the file's base64 data URL
-
-            //             // Add the file info to the model
-            //             var oModel = that.getView().getModel();
-            //             var aFiles = oModel.getProperty("/pan") || [];  // Get current PAN files array
-
-            //             aFiles.push({
-            //                 fileName: sFileName,
-            //                 fileUrl: sFileUrl // Base64 encoded file content
-            //             });
-
-            //             // Update the model with the new file
-            //             oModel.setProperty("/pan", aFiles);
-
-            //             // Log updated /pan data to console
-            //             console.log("Updated /pan attachment:", oModel.getProperty("/pan"));
-
-            //             // Show success message
-            //             MessageToast.show("File " + sFileName + " uploaded successfully.");
-
-            //             oModel.refresh(true);
-            //         };
-
-            //         oReader.readAsDataURL(oFile);  // Read the file as Data URL (base64)
-            //     }
-            // },
 
             formatAttachmentButtonTextpan: function (pan) {
                 if (pan && pan.length > 0) {
@@ -351,55 +313,12 @@ sap.ui.define([
             // },
 
 
-            onFileUploadgst: function (oEvent) {
-                var oFileUploader = oEvent.getSource();
-                var oFile = oFileUploader.oFileUpload.files[0]; // Get the uploaded file
-
-                if (oFile) {
-                    var sFileName = oFile.name;
-                    var oReader = new FileReader();
-                    var that = this;
-
-                    oReader.onload = function (e) {
-                        var sFileUrl = e.target.result;  // Get the file's base64 data URL
-
-                        // Add the file info to the model
-                        var oModel = that.getView().getModel();
-                        var aFiles = oModel.getProperty("/gst");  // Get current documentfiles array
-
-                        aFiles.push({
-                            fileName: sFileName,
-                            fileUrl: sFileUrl
-                        });
-
-                        // Update the model with the new file
-                        oModel.setProperty("/gst", aFiles);
-
-                        // Log updated /files data to console
-                        console.log("Updated /Gst attachment:", oModel.getProperty("/gst"));
-
-                        // Show success message
-                        MessageToast.show("File " + sFileName + " uploaded successfully.");
-
-                        oModel.refresh(true);
-                    };
-
-                    oReader.readAsDataURL(oFile);  // Read the file as Data URL (base64)
-                }
-
-            },
-            formatAttachmentButtonTextgst: function (gst) {
-                if (gst && gst.length > 0) {
-                    return "View Attachments (" + gst.length + ")";
-                } else {
-                    return "View Attachments (0)";
-                }
-            },
 
             // Open the dialog for PAN attachments
             onOpenDialogpan: function () {
                 if (!this._oPanDialog) {
                     this._oPanDialog = this.getView().byId("panDialog");
+
 
                     if (!this._oPanDialog) {
                         this._oPanDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.uploadfile", this);
@@ -409,18 +328,6 @@ sap.ui.define([
                 this._oPanDialog.open();
             },
 
-            // Open the dialog for GST attachments
-            onOpenDialoggst: function () {
-                if (!this._oGstDialog) {
-                    this._oGstDialog = this.getView().byId("gstDialog");
-
-                    if (!this._oGstDialog) {
-                        this._oGstDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.uploadfile", this);
-                        this.getView().addDependent(this._oGstDialog);
-                    }
-                }
-                this._oGstDialog.open();
-            },
 
             // Close the PAN dialog
             onCloseDialogpan: function () {
@@ -429,12 +336,6 @@ sap.ui.define([
                 }
             },
 
-            // Close the GST dialog
-            onCloseDialoggst: function () {
-                if (this._oGstDialog) {
-                    this._oGstDialog.close();
-                }
-            },
 
             onFormsubmit: function () {
                 // Get the view
@@ -443,10 +344,10 @@ sap.ui.define([
                 console.log(oModel);
 
 
-                // Collect form field values
+
                 var oFormData = {
                     validity: oView.byId("datePicker").getDateValue(),
-                    relatedParty: oView.byId("radioGroup").getSelectedButton().getText(),
+                    relatedParty: oView.byId("radioGroup1").getSelectedButton().getText(),
                     supplierSpendType: oView.byId("supplierSpendType").getSelectedKey(),
                     natureOfActivity: oView.byId("NatureofActivity").getSelectedKey(),
                     sector: oView.byId("sectorComboBox").getSelectedKeys(),
@@ -490,9 +391,28 @@ sap.ui.define([
                     "PriContactMNumber": oFormData.primaryPhone
                 };
 
+                // var oNewEntry = {
+                //     "DigressionVendorCodeVal": "2025-09-30",
+                //     "IsRelPartyVCode": true,
+                //     "SpendType": "Indirect",
+                //     "NatureOfActivity": "Material",
+                //     "Sector": ["IT", "Manufacturing"],
+                //     "FunAndSubfun": ["Finance", "HR"],
+                //     "PANCardNo": "ABCDE1234F",
+                //     "GSTIN": "27ABCDE1234F1Z5",
+                //     "SFullName": "ABC Corp Pvt. Ltd.",
+                //     "STradeNameGST": "ABC Trade",
+                //     "SAddress": "123, Example Street, City, State",
+                //     "SAddressGST": "123, Example Street, City, State",
+                //     "PriContactFName": "Sumit",
+                //     "PriContactLName": "Doe",
+                //     "PriContactEmail": "john.doe@example.com",
+                //     "PriContactMNumber": "1234567890"
+                // }
+
                 // Output form data to the console (or process it further)
-                console.log(oFormData);
-                console.log(oNewEntry);
+                // console.log(oFormData);
+                // console.log(oNewEntry);
 
                 // Use the OData create method
                 oModel.setUseBatch(false);
@@ -501,8 +421,13 @@ sap.ui.define([
                     success: function (oData) {
 
                         MessageToast.show("Form submitted successfully." + oData.ID);
+                        console.log(oData.ID);
+                        this.onUploadFile(oData.ID);
+                        console.log("---------->Upload");
 
-                    },  // Ensure 'this' refers to the controller instance
+
+
+                    }.bind(this),  // Ensure 'this' refers to the controller instance
                     error: function () {
                         MessageToast.show("Error while submitting the Form.");
                     }
@@ -515,6 +440,237 @@ sap.ui.define([
                 //this.oFormData.FunctionandSubfunction.setValue("");
 
             },
+
+
+            onUploadFile: function(ReqID) {
+                console.log("On Upload file--------->");
+            
+                // Use arrow function for postAttachments
+                const postAttachments = (attachments, ReqID) => {
+                    attachments.forEach((attachment) => {
+                        console.log("Control reached!!!");
+                        var payLoad = {
+                            Req_Supplier_ID: ReqID,
+                            Doc_Type: "PAN",
+                            Attachment_ID: 1,
+                            fileName: attachment.fileName,
+                            mediaType: attachment.fileType,
+                            content:attachment.fileContent
+                            // Assuming imageType refers to fileType
+                        };
+                        console.log(payLoad);
+                        
+                        var oModel = this.getOwnerComponent().getModel();
+                        oModel.setUseBatch(false);
+                        oModel.create("/SReqattachmentsSrv", payLoad, {
+                            method: "POST",
+                            success: function(oData) {
+                                MessageToast.show("Attachments uploaded successfully: " + oData.ID);
+                            }.bind(this),  // Ensure 'this' refers to the controller instance
+                            error: function() {
+                                MessageToast.show("Error while Uploading the Attachments.");
+                            }
+                        });
+                    });
+                };
+            
+                // Combine both arrays
+                var localModel = this.getView().getModel();
+                var docFiles = localModel.getProperty("/documentFiles");
+                console.log(docFiles.pan);
+                console.log(docFiles.gst);
+                var allAttachments = docFiles.pan.concat(docFiles.gst);
+                console.log(allAttachments);
+                console.log(`++++++++++ ${allAttachments}++++++++++`);
+            
+                // Post all attachments
+                postAttachments(allAttachments, ReqID);
+            },
+            
+            onFileUpload: function (oEvent) {
+                var oFileUploader = oEvent.getSource();
+                var oFile = oFileUploader.oFileUpload.files[0];  // Get the uploaded file
+
+                if (oFile) {
+                    var sFileName = oFile.name;
+                    var sFileType = sFileName.split('.').pop();  // Extract the file type
+
+                    var oReader = new FileReader();
+                    var that = this;
+
+                    oReader.onload = function (e) {
+                        var sFileUrl = e.target.result;  // Get the file's base64 data URL
+                        console.log("Base64 File URL: ", sFileUrl);
+
+                        var oModel = that.getView().getModel();
+                        var oDocumentFiles = oModel.getProperty("/documentFiles") || { pan: [], gst: [], cin: [] };  // Initialize documentFiles object
+
+                        // Determine the document type based on the uploader ID
+                        var uploaderId = oFileUploader.getId();
+                        var documentType = "";
+
+                        if (uploaderId.includes("fileUploaderPan")) {
+                            documentType = "PAN";
+                            oDocumentFiles.pan.push({
+                                fileName: sFileName,
+                                fileUrl: sFileUrl,
+                                fileContent: sFileUrl,
+                                fileType: sFileType
+                            });
+                        } else if (uploaderId.includes("fileUploaderGst")) {
+                            documentType = "GST";
+                            oDocumentFiles.gst.push({
+                                fileName: sFileName,
+                                fileUrl: sFileUrl,
+                                fileContent: sFileUrl,
+                                fileType: sFileType
+                            });
+                        } else if (uploaderId.includes("fileUploaderCin")) {
+                            documentType = "CIN";
+                            oDocumentFiles.cin.push({
+                                fileName: sFileName,
+                                fileUrl: sFileUrl,
+                                fileContent: sFileUrl,
+                                fileType: sFileType
+                            });
+                        }
+
+                        // Update the model with the new document files
+                        oModel.setProperty("/documentFiles", oDocumentFiles);
+                        console.log("Updated /documentFiles:", oModel.getProperty("/documentFiles"));
+
+                        // Show success message
+                        MessageToast.show(documentType + " file " + sFileName + " uploaded successfully.");
+                        oModel.refresh(true);
+                    };
+
+                    oReader.readAsDataURL(oFile);  // Read the file as Data URL (base64)
+                }
+            },
+            formatAttachmentButtonText: function (aDocumentFiles, documentType) {
+                // Ensure that aDocumentFiles is defined
+                aDocumentFiles = aDocumentFiles || [];
+
+                // Return the formatted button text based on the number of attachments
+                return "View Attachments (" + aDocumentFiles.length + ")";
+            },
+
+
+            onOpenDialog: function (documentType) {
+                if (!this._oDialog) {
+                    this._oDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.uploadfile", this);
+                    this.getView().addDependent(this._oDialog);
+                }
+
+                // Get the document files for the specific document type (e.g., PAN, GST, CIN)
+                var oModel = this.getView().getModel();
+                var aDocumentFiles = oModel.getProperty("/documentFiles/" + documentType) || [];
+
+                // Set the filtered document files to the dialog's list model
+                var oDialogModel = new sap.ui.model.json.JSONModel({ documentFiles: aDocumentFiles });
+                this._oDialog.setModel(oDialogModel);
+
+                // Set the document type in the dialog's data for future use (e.g., download, delete)
+                this._oDialog.data("documentType", documentType);
+
+                // Open the dialog
+                this._oDialog.open();
+            },
+
+
+            onCloseDialog: function () {
+                if (this._oDialog) {
+                    this._oDialog.close();
+                }
+            },
+            onDownloadFile: function (oEvent) {
+                const sFileName = oEvent.getSource().data("fileName");
+                const documentType = this._oDialog.data("documentType");
+
+                var oModel = this.getView().getModel(); // Assuming this is a JSONModel
+
+                // Fetch the file content from the JSON model
+                var aDocumentFiles = oModel.getProperty("/documentFiles/" + documentType);
+                var oFile = aDocumentFiles.find(file => file.fileName === sFileName);
+
+                console.log("Selected File: ", oFile); // Log to see what the selected file object looks like
+
+                if (oFile && oFile.fileContent) {
+                    // Create a blob and trigger download
+                    const blob = this._base64ToBlob(oFile.fileContent);
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = sFileName;
+                    link.click();
+                } else {
+                    MessageToast.show("File not found or missing content.");
+                }
+            },
+
+
+
+            onDeleteFile: function (oEvent) {
+                const sFileName = oEvent.getSource().data("fileName");
+                const documentType = this._oDialog.data("documentType");
+
+                // Confirm and delete file
+                sap.m.MessageBox.confirm(`Are you sure you want to delete the file "${sFileName}"?`, {
+                    onClose: function (oAction) {
+                        if (oAction === "OK") {
+                            // Get the current model and document files
+                            const oModel = this.getView().getModel();
+                            const aDocumentFiles = oModel.getProperty("/documentFiles/" + documentType);
+
+                            // Filter out the file to be deleted
+                            const updatedDocumentFiles = aDocumentFiles.filter(file => file.fileName !== sFileName);
+
+                            // Update the model with the new list
+                            oModel.setProperty("/documentFiles/" + documentType, updatedDocumentFiles);
+
+                            // Show success message
+                            MessageToast.show(`File "${sFileName}" deleted successfully.`);
+                            // Close the dialog
+                            this.onCloseDialog();
+                        }
+                    }.bind(this)
+                });
+            },
+
+
+
+
+            // Utility function to convert base64 to blob
+            _base64ToBlob: function (base64) {
+                // Strip the prefix if present
+                if (base64.startsWith("data:")) {
+                    base64 = base64.split(",")[1]; // Get the part after the comma
+                }
+
+                // Log the base64 string for debugging
+                console.log("Base64 String: ", base64);
+
+                // Try-catch for base64 decoding
+                try {
+                    const byteCharacters = atob(base64);
+                    const byteArrays = [];
+
+                    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                        const slice = byteCharacters.slice(offset, offset + 512);
+                        const byteNumbers = new Array(slice.length);
+                        for (let i = 0; i < slice.length; i++) {
+                            byteNumbers[i] = slice.charCodeAt(i);
+                        }
+                        const byteArray = new Uint8Array(byteNumbers);
+                        byteArrays.push(byteArray);
+                    }
+
+                    return new Blob(byteArrays, { type: "application/octet-stream" });
+                } catch (error) {
+                    console.error("Base64 decoding failed: ", error);
+                    return null; // Handle the error
+                }
+            },
+
 
             onReadSector: function () {
                 var that = this;
