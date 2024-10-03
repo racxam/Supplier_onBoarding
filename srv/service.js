@@ -96,6 +96,7 @@ module.exports = async function () {
 
     //After supplier Req Fun We are triggering the workflow
     async function AfterSupReqFun(req, res) {
+
         const {
             DigressionVendorCodeVal,
             IsRelPartyVCode,
@@ -112,59 +113,42 @@ module.exports = async function () {
             PriContactFName,
             PriContactLName,
             PriContactEmail,
-            PriContactMNumber,
-        } = res.data;
+            PriContactMNumber
+        } = Object.fromEntries(
+            Object.entries(res.data).map(([key, value]) => [key, String(value)])
+        );
+        
+        let ReqID=res.id;
+        console.log(ReqID);
 
         try {
 
 
             const apprwf = await cds.connect.to("workflow");
-            // let workflowData = JSON.stringify({
-            //     "definitionId": "us10.fd8df7c4trial.vihaanworkflow.approvalProcess",
-            //     "context": {
-            //         "ReqID": req.ID,
-            //         "DigressionVendorCode": DigressionVendorCodeVal,
-            //         "PartyVendorCode": IsRelPartyVCode,
-            //         "SupplierSpendType": SpendType,
-            //         "NatureActivity": NatureOfActivity,
-            //         "Sector": Sector,
-            //         "FunctionSubfunction": FunAndSubfun,
-            //         "PANCardNo": PANCardNo,
-            //         "GSTIN": GSTIN,
-            //         "SFullName": SFullName,
-            //         "STradeNameGST": STradeNameGST,
-            //         "SAddress": SAddress,
-            //         "SAddressGST": SAddressGST,
-            //         "PRIContactFName": PriContactFName,
-            //         "PRIContactLName": PriContactLName,
-            //         "PRIContactEmail": PriContactEmail,
-            //         "PRIContactMNumber": PriContactMNumber
-            //     }
-
-            // });
 
             let workflowData=JSON.stringify({
                 "definitionId": "us10.fd8df7c4trial.vihaanworkflow.approvalProcess",
                 "context": {
-                     "ReqID": "66666",
-                     "digressionvendorcode": "DVC7890",
-                     "partyvendorcode": "PVC4567",
-                     "supplierspendtype": "Operational",
-                     "natureactivity": "Consulting Services",
-                     "sector": "IT Services",
-                     "functionsubfunction": "IT/Consulting",
-                     "pancardno": "sumit",
-                     "gstin": "12ABCDE1234F1Z5",
-                     "sfullname": "Tech Solutions Inc.",
-                     "stradenamegst": "Tech Solutions",
-                     "saddress": "123 Tech Lane, Silicon Valley, CA",
-                     "saddressgst": "456 Business Blvd, San Francisco, CA",
-                     "pricontactfname": "John",
-                     "pricontactlname": "Doe",
-                     "pricontactemail": "john.doe@techsolutions.com",
-                     "pricontactmnumber": "+1-234-567-8901"
-                 }
+                    "ReqID": ReqID,
+                    "DigressionVendorCode": DigressionVendorCodeVal,
+                    "PartyVendorCode": IsRelPartyVCode,
+                    "SupplierSpendType": SpendType,
+                    "NatureActivity": NatureOfActivity,
+                    "Sector": Sector,
+                    "FunctionSubfunction": FunAndSubfun,
+                    "PANCardNo": PANCardNo,
+                    "GSTIN": GSTIN,
+                    "SFullName": SFullName,
+                    "STradeNameGST": STradeNameGST,
+                    "SAddress": SAddress,
+                    "SAddressGST":  SAddressGST,
+                    "PRIContactFName":  PriContactFName,
+                    "PRIContactLName":   PriContactLName,
+                    "PRIContactEmail":  PriContactEmail,
+                    "PRIContactMNumber": PriContactMNumber
+                }
              });
+             console.log(workflowData);
 
             const wfResponse = await apprwf.send({
                 method: 'POST',

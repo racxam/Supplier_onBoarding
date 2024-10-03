@@ -36,11 +36,12 @@ context transcation {
 
     };
 
-    entity sreq_attachments : managed {
+    entity sreq_attachments : cuid, managed {
 
-       key Req_Supplier  : Association to supplier_request;
-       key Doc_Type      : common.attachmentT;
-       key Attachment_ID : Int16;
+        Req_Supplier  : Association to supplier_request;
+        Doc_Type      : common.attachmentT;
+        Attachment_ID : Int16;
+        fileName      : String;
         image         : LargeBinary @Core.MediaType: imageType;
         imageType     : String      @Core.IsMediaType;
 
