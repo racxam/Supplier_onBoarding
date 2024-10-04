@@ -1,0 +1,203 @@
+ <mvc:View
+	controllerName="com.sumo.supplieronboarding.controller.form3"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+>
+    <Page
+        id="page3"
+        title="{i18n>title}"
+    >
+
+   <VBox
+            height="100%"
+            width="100%"
+            id="wf-box2"
+            class="editableForm"
+            alignItems="Center"
+        >
+            <List
+                id="requestFormList"
+                items="/results"
+            >
+                <items>
+                    <StandardListItem
+                        title="Validity of digression vendor code up to"
+                        info="{/DigressionVendorCodeVal}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Is it a related party vendor code?"
+                        info="{/IsRelPartyVCode}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Supplier Spend Type"
+                        info="{/SpendType}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Nature of Activity"
+                        info="{/NatureOfActivity}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Sector"
+                        info="{/Sector/1}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Function &amp; Subfunction"
+                        info="{/FunAndSubfun/0}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="PAN Card No."
+                        info="{/PANCardNo}"
+                        type="Active"
+                    />
+ 
+                <CustomListItem>
+                        <VBox>
+                            <Label text="PAN" />
+                            <Select
+                                enabled="{/Enabled}"
+                                editable="{/Editable}"
+                                forceSelection="false"
+                                selectedKey="{/selectedPanFile}"
+                                id="panDropdowns"
+                                items="{
+                                    path: '/documentFiles/pan',
+                                    templateShareable: false
+                                }"
+                            >
+                                <core:Item
+                                    key="{attachmentId}"   
+                                    text="{fileName}"     
+                                />
+                            </Select>
+                        </VBox>
+                    </CustomListItem>
+
+
+        
+            <StandardListItem
+                title="PAN Card Attachment"
+                info="{fileName}" 
+                type="Active"
+                press="onDownloadPanCard"  
+            />
+
+         
+           
+
+
+ 
+                    <StandardListItem
+                        title="GSTIN No."
+                        info="{/GSTIN}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Supplier Full Legal Name"
+                        info="{/SFullName}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Supplier Trade Name (GST)"
+                        info="{/STradeNameGST}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Supplier Address"
+                        info="{/SAddress}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Supplier Address (GST)"
+                        info="{/SAddressGST}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Primary Contact First Name"
+                        info="{PriContactFName}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Primary Contact Last Name"
+                        info="{/PriContactLName}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Primary Contact Email"
+                        info="{/PriContactEmail}"
+                        type="Active"
+                    />
+ 
+                    <StandardListItem
+                        title="Primary Contact Mobile Number"
+                        info="{/PriContactMNumber}"
+                        type="Active"
+                    />
+                </items>
+            </List>
+ 
+<!-- <Label text="PAN" />
+<Select
+    enabled="{/Enabled}"
+    editable="{/Editable}"
+    forceSelection="false"
+    selectedKey="{/selectedPanFile}"
+    id="panDropdowns"
+    items="{
+        path: '/documentFiles/pan',
+        templateShareable: false
+    }"
+>
+    <core:Item
+        key="{attachmentId}"   
+        text="{fileName}"     
+    />
+</Select> -->
+            <Label text="GST" /> 
+
+<Select
+    enabled="{/Enabled}"
+    editable="{/Editable}"
+    forceSelection="false"
+    selectedKey="{/selectedGstFile}"
+    id="gstDropdowns"
+    items="{
+        path: '/documentFiles/gst',
+        templateShareable: false
+    }"
+>
+    <core:Item
+        key="{attachmentId}" 
+        text="{fileName}"     
+    />
+</Select>
+
+        </VBox>
+
+    
+      
+    </Page>
+</mvc:View>

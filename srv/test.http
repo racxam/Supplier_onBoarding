@@ -20,7 +20,6 @@ Content-Type: application/json
     "Status":"DRAFT"               
 }
 
-
 ### POST the request
 POST http://localhost:4004/odata/v4/attachments/supplierReqSrv
 Content-Type: application/json

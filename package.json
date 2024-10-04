@@ -5,9 +5,11 @@
     "repository": "<Add your repository here>",
     "license": "UNLICENSED",
     "private": true,
+    "@cap-js-community/odata-v2-adapter": "github:cap-js-community/odata-v2-adapter",
     "dependencies": {
-        "@cap-js-community/odata-v2-adapter": "github:cap-js-community/odata-v2-adapter",
+        "@cap-js-community/odata-v2-adapter": "^1.13.3",
         "@cap-js/hana": "^1",
+        "@sap-cloud-sdk/connectivity": "^3.21.0",
         "@sap-cloud-sdk/http-client": "^3.21.0",
         "@sap-cloud-sdk/resilience": "^3.21.0",
         "@sap/cds": "^8",

@@ -97,27 +97,6 @@ module.exports = async function () {
     //After supplier Req Fun We are triggering the workflow
     async function AfterSupReqFun(req, res) {
 
-        const {
-            DigressionVendorCodeVal,
-            IsRelPartyVCode,
-            SpendType,
-            NatureOfActivity,
-            Sector,
-            FunAndSubfun,
-            PANCardNo,
-            GSTIN,
-            SFullName,
-            STradeNameGST,
-            SAddress,
-            SAddressGST,
-            PriContactFName,
-            PriContactLName,
-            PriContactEmail,
-            PriContactMNumber
-        } = Object.fromEntries(
-            Object.entries(res.data).map(([key, value]) => [key, String(value)])
-        );
-        
         let ReqID=res.id;
         console.log(ReqID);
 
@@ -129,23 +108,8 @@ module.exports = async function () {
             let workflowData=JSON.stringify({
                 "definitionId": "us10.fd8df7c4trial.vihaanworkflow.approvalProcess",
                 "context": {
-                    "ReqID": ReqID,
-                    "DigressionVendorCode": DigressionVendorCodeVal,
-                    "PartyVendorCode": IsRelPartyVCode,
-                    "SupplierSpendType": SpendType,
-                    "NatureActivity": NatureOfActivity,
-                    "Sector": Sector,
-                    "FunctionSubfunction": FunAndSubfun,
-                    "PANCardNo": PANCardNo,
-                    "GSTIN": GSTIN,
-                    "SFullName": SFullName,
-                    "STradeNameGST": STradeNameGST,
-                    "SAddress": SAddress,
-                    "SAddressGST":  SAddressGST,
-                    "PRIContactFName":  PriContactFName,
-                    "PRIContactLName":   PriContactLName,
-                    "PRIContactEmail":  PriContactEmail,
-                    "PRIContactMNumber": PriContactMNumber
+                    "reqId": ReqID
+                  
                 }
              });
              console.log(workflowData);

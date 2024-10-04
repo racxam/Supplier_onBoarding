@@ -116,8 +116,8 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "RequestForm",
-          "viewName": "RequestForm"
+          "viewId": "form3",
+          "viewName": "form3"
         }
       }
     },

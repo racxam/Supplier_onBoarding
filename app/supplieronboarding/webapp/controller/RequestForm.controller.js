@@ -20,8 +20,8 @@ sap.ui.define([
                 this.getView().setModel(oModel);
                 this.onReadSupplierSpendType();
                 this.onReadNatureofActivity();
-                this.onReadDepartments();
                 this.onReadSector();
+                this.onReadDepartments();
 
                 var currentDate = new Date();
                 var maxDate = new Date();
@@ -345,70 +345,70 @@ sap.ui.define([
 
 
 
-                var oFormData = {
-                    validity: oView.byId("datePicker").getDateValue(),
-                    relatedParty: oView.byId("radioGroup1").getSelectedButton().getText(),
-                    supplierSpendType: oView.byId("supplierSpendType").getSelectedKey(),
-                    natureOfActivity: oView.byId("NatureofActivity").getSelectedKey(),
-                    sector: oView.byId("sectorComboBox").getSelectedKeys(),
-                    FunctionandSubfunction: oView.byId("childMultiComboBox").getSelectedKeys(),
-                    panCardNumber: oView.byId("panInput").getValue(),
-                    gstinNumber: oView.byId("gstinInput").getValue(),
-                    supplierFullName: oView.byId("SupplierNameInput").getValue(),
-                    supplierTradeName: oView.byId("SuppliertradeNameInput").getValue(),
-                    supplierAddress: oView.byId("SupplierAddressInput").getValue(),
-                    supplierGstAddress: oView.byId("SupplierAddressgstInput").getValue(),
-                    primaryFirstName: oView.byId("PrimaryFirstnameInput").getValue(),
-                    primaryLastName: oView.byId("PrimaryLastnameInput").getValue(),
-                    primaryEmail: oView.byId("emailInput").getValue(),
-                    primaryPhone: oView.byId("numberInput").getValue()
-                };
-                if (oFormData.relatedParty === 'Yes') {
-                    oFormData.relatedParty = true;
+                // var oFormData = {
+                //     validity: oView.byId("datePicker").getDateValue(),
+                //     relatedParty: oView.byId("radioGroup1").getSelectedButton().getText(),
+                //     supplierSpendType: oView.byId("supplierSpendType").getSelectedKey(),
+                //     natureOfActivity: oView.byId("NatureofActivity").getSelectedKey(),
+                //     sector: oView.byId("sectorComboBox").getSelectedKeys(),
+                //     FunctionandSubfunction: oView.byId("childMultiComboBox").getSelectedKeys(),
+                //     panCardNumber: oView.byId("panInput").getValue(),
+                //     gstinNumber: oView.byId("gstinInput").getValue(),
+                //     supplierFullName: oView.byId("SupplierNameInput").getValue(),
+                //     supplierTradeName: oView.byId("SuppliertradeNameInput").getValue(),
+                //     supplierAddress: oView.byId("SupplierAddressInput").getValue(),
+                //     supplierGstAddress: oView.byId("SupplierAddressgstInput").getValue(),
+                //     primaryFirstName: oView.byId("PrimaryFirstnameInput").getValue(),
+                //     primaryLastName: oView.byId("PrimaryLastnameInput").getValue(),
+                //     primaryEmail: oView.byId("emailInput").getValue(),
+                //     primaryPhone: oView.byId("numberInput").getValue()
+                // };
+                // if (oFormData.relatedParty === 'Yes') {
+                //     oFormData.relatedParty = true;
 
-                }
-                else {
-                    oFormData.relatedParty = false;
-                }
+                // }
+                // else {
+                //     oFormData.relatedParty = false;
+                // }
 
-
-                var oNewEntry = {
-                    "DigressionVendorCodeVal": oFormData.validity,
-                    "IsRelPartyVCode": oFormData.relatedParty,
-                    "SpendType": oFormData.supplierSpendType,
-                    "NatureOfActivity": oFormData.natureOfActivity,
-                    "Sector": oFormData.sector,
-                    "FunAndSubfun": oFormData.FunctionandSubfunction,
-                    "PANCardNo": oFormData.panCardNumber,
-                    "GSTIN": oFormData.gstinNumber,
-                    "SFullName": oFormData.supplierFullName,
-                    "STradeNameGST": oFormData.supplierTradeName,
-                    "SAddress": oFormData.supplierAddress,
-                    "SAddressGST": oFormData.supplierGstAddress,
-                    "PriContactFName": oFormData.primaryFirstName,
-                    "PriContactLName": oFormData.primaryLastName,
-                    "PriContactEmail": oFormData.primaryEmail,
-                    "PriContactMNumber": oFormData.primaryPhone
-                };
 
                 // var oNewEntry = {
-                //     "DigressionVendorCodeVal": "2025-09-30",
-                //     "IsRelPartyVCode": true,
-                //     "SpendType": "Indirect",
-                //     "NatureOfActivity": "Material",
-                //     "Sector": ["IT", "Manufacturing"],
-                //     "FunAndSubfun": ["Finance", "HR"],
-                //     "PANCardNo": "ABCDE1234F",
-                //     "GSTIN": "27ABCDE1234F1Z5",
-                //     "SFullName": "ABC Corp Pvt. Ltd.",
-                //     "STradeNameGST": "ABC Trade",
-                //     "SAddress": "123, Example Street, City, State",
-                //     "SAddressGST": "123, Example Street, City, State",
-                //     "PriContactFName": "Sumit",
-                //     "PriContactLName": "Doe",
-                //     "PriContactEmail": "john.doe@example.com",
-                //     "PriContactMNumber": "1234567890"
-                // }
+                //     "DigressionVendorCodeVal": oFormData.validity,
+                //     "IsRelPartyVCode": oFormData.relatedParty,
+                //     "SpendType": oFormData.supplierSpendType,
+                //     "NatureOfActivity": oFormData.natureOfActivity,
+                //     "Sector": oFormData.sector,
+                //     "FunAndSubfun": oFormData.FunctionandSubfunction,
+                //     "PANCardNo": oFormData.panCardNumber,
+                //     "GSTIN": oFormData.gstinNumber,
+                //     "SFullName": oFormData.supplierFullName,
+                //     "STradeNameGST": oFormData.supplierTradeName,
+                //     "SAddress": oFormData.supplierAddress,
+                //     "SAddressGST": oFormData.supplierGstAddress,
+                //     "PriContactFName": oFormData.primaryFirstName,
+                //     "PriContactLName": oFormData.primaryLastName,
+                //     "PriContactEmail": oFormData.primaryEmail,
+                //     "PriContactMNumber": oFormData.primaryPhone
+                // };
+
+                var oNewEntry = {
+                    "DigressionVendorCodeVal": "2025-09-30",
+                    "IsRelPartyVCode": true,
+                    "SpendType": "Indirect",
+                    "NatureOfActivity": "Material",
+                    "Sector": ["IT", "Manufacturing"],
+                    "FunAndSubfun": ["Finance", "HR"],
+                    "PANCardNo": "ABCDE1234F",
+                    "GSTIN": "27ABCDE1234F1Z5",
+                    "SFullName": "ABC Corp Pvt. Ltd.",
+                    "STradeNameGST": "ABC Trade",
+                    "SAddress": "123, Example Street, City, State",
+                    "SAddressGST": "123, Example Street, City, State",
+                    "PriContactFName": "Sumit",
+                    "PriContactLName": "Doe",
+                    "PriContactEmail": "john.doe@example.com",
+                    "PriContactMNumber": "1234567890"
+                }
 
                 // Output form data to the console (or process it further)
                 // console.log(oFormData);
@@ -447,16 +447,16 @@ sap.ui.define([
             
                 // Use arrow function for postAttachments
                 const postAttachments = (attachments, ReqID) => {
-                    attachments.forEach((attachment) => {
-                        console.log("Control reached!!!");
+                    attachments.forEach((attachment, index) => {
                         var payLoad = {
                             Req_Supplier_ID: ReqID,
-                            Doc_Type: "PAN",
-                            Attachment_ID: 1,
+                            Doc_Type: attachment.Doc_Type, 
+                            Attachment_ID: index + 1,  // Set as a number
                             fileName: attachment.fileName,
-                            imageType: attachment.fileType // Assuming imageType refers to fileType
+                            mediaType: attachment.fileType,
+                            content: attachment.fileContent
                         };
-                        console.log(payLoad);
+                        console.log("GGGGGGGGGGGGGGG",payLoad);
                         
                         var oModel = this.getOwnerComponent().getModel();
                         oModel.setUseBatch(false);
@@ -464,13 +464,14 @@ sap.ui.define([
                             method: "POST",
                             success: function(oData) {
                                 MessageToast.show("Attachments uploaded successfully: " + oData.ID);
-                            }.bind(this),  // Ensure 'this' refers to the controller instance
+                            }.bind(this),
                             error: function() {
                                 MessageToast.show("Error while Uploading the Attachments.");
                             }
                         });
                     });
                 };
+                
             
                 // Combine both arrays
                 var localModel = this.getView().getModel();
@@ -488,63 +489,79 @@ sap.ui.define([
             onFileUpload: function (oEvent) {
                 var oFileUploader = oEvent.getSource();
                 var oFile = oFileUploader.oFileUpload.files[0];  // Get the uploaded file
-
+            
                 if (oFile) {
                     var sFileName = oFile.name;
                     var sFileType = sFileName.split('.').pop();  // Extract the file type
-
+            
                     var oReader = new FileReader();
                     var that = this;
-
+            
                     oReader.onload = function (e) {
                         var sFileUrl = e.target.result;  // Get the file's base64 data URL
                         console.log("Base64 File URL: ", sFileUrl);
-
+            
                         var oModel = that.getView().getModel();
                         var oDocumentFiles = oModel.getProperty("/documentFiles") || { pan: [], gst: [], cin: [] };  // Initialize documentFiles object
-
-                        // Determine the document type based on the uploader ID
+            
+                        // Get the current count for each document type (initialize if not present)
+                        var panCount = oDocumentFiles.pan.length + 1;
+                        var gstCount = oDocumentFiles.gst.length + 1;
+                        var cinCount = oDocumentFiles.cin.length + 1;
+            
+                        // Determine the document type based on the uploader ID and assign counter
                         var uploaderId = oFileUploader.getId();
                         var documentType = "";
-
+                        var attachmentId = "";  // For storing the ID
+            
                         if (uploaderId.includes("fileUploaderPan")) {
                             documentType = "PAN";
+                            attachmentId = "PAN-" + panCount;  // Simple counter for PAN
                             oDocumentFiles.pan.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
-                                fileType: sFileType
+                                fileType: sFileType,
+                                Doc_Type: 'PAN',
+                                attachmentId: attachmentId  // Add counter-based attachment ID
                             });
                         } else if (uploaderId.includes("fileUploaderGst")) {
                             documentType = "GST";
+                            attachmentId = "GST-" + gstCount;  // Simple counter for GST
                             oDocumentFiles.gst.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
-                                fileType: sFileType
+                                fileType: sFileType,
+                                Doc_Type: 'GST',
+                                attachmentId: attachmentId  // Add counter-based attachment ID
                             });
                         } else if (uploaderId.includes("fileUploaderCin")) {
                             documentType = "CIN";
+                            attachmentId = "CIN-" + cinCount;  // Simple counter for CIN
                             oDocumentFiles.cin.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
-                                fileType: sFileType
+                                fileType: sFileType,
+                                Doc_Type: 'CIN',
+                                attachmentId: attachmentId  // Add counter-based attachment ID
                             });
                         }
-
+            
                         // Update the model with the new document files
                         oModel.setProperty("/documentFiles", oDocumentFiles);
                         console.log("Updated /documentFiles:", oModel.getProperty("/documentFiles"));
-
+            
                         // Show success message
                         MessageToast.show(documentType + " file " + sFileName + " uploaded successfully.");
                         oModel.refresh(true);
                     };
-
+            
                     oReader.readAsDataURL(oFile);  // Read the file as Data URL (base64)
                 }
             },
+            
             formatAttachmentButtonText: function (aDocumentFiles, documentType) {
                 // Ensure that aDocumentFiles is defined
                 aDocumentFiles = aDocumentFiles || [];
@@ -671,6 +688,7 @@ sap.ui.define([
 
 
             onReadSector: function () {
+                console.log("I am sector srv");
                 var that = this;
                 var oModel = this.getOwnerComponent().getModel();
                 oModel.read("/SectorSrv", {
