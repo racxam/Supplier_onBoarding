@@ -20,8 +20,8 @@ sap.ui.define([
                 this.getView().setModel(oModel);
                 this.onReadSupplierSpendType();
                 this.onReadNatureofActivity();
-                this.onReadDepartments();
                 this.onReadSector();
+                this.onReadDepartments();
 
                 var currentDate = new Date();
                 var maxDate = new Date();
@@ -673,6 +673,7 @@ sap.ui.define([
 
 
             onReadSector: function () {
+                console.log("I am sector srv");
                 var that = this;
                 var oModel = this.getOwnerComponent().getModel();
                 oModel.read("/SectorSrv", {

@@ -34,17 +34,17 @@
             "native_hana_associations": false
         },
         "requires": {
-            "db":{
-                "kind": "hana"
+            "db": {
+                "kind": "hana",
+                "pool": {"max": 1400,"min": 100}
             },
-           
             "workflow": {
                 "kind": "rest",
                 "credentials": {
                     "destination": "spa_process_destination"
                 }
             },
-            "auth": "mocked"
+            "auth": "xsuaa"
         }
     }
 }

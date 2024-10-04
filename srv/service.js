@@ -3,9 +3,9 @@ module.exports = async function () {
     const { supplierReqSrv, SavingsupplierReqSrv } = this.entities;
 
     this.before('CREATE', 'SReqattachmentsSrv', async (req) => {
-        console.log("Control Reached!!", req.user.id);
 
-        console.log("File Details: ", JSON.stringify(req.data));
+
+
 
         if (req.data.content && req.data.content.length > 0) {
             console.log("Uploading file of size:", req.data.content.length);
@@ -21,7 +21,7 @@ module.exports = async function () {
 
     this.before('CREATE', supplierReqSrv, BeforeSupReqFun);
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
-    // this.after('CREATE', supplierReqSrv, AfterSupReqFun);
+    this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
     // functions
     //1. Before supplier req form
@@ -98,26 +98,10 @@ module.exports = async function () {
     async function AfterSupReqFun(req, res) {
 
         const {
-            DigressionVendorCodeVal,
-            IsRelPartyVCode,
-            SpendType,
-            NatureOfActivity,
-            Sector,
-            FunAndSubfun,
-            PANCardNo,
-            GSTIN,
+           
             SFullName,
-            STradeNameGST,
-            SAddress,
-            SAddressGST,
-            PriContactFName,
-            PriContactLName,
-            PriContactEmail,
-            PriContactMNumber
-        } = Object.fromEntries(
-            Object.entries(res.data).map(([key, value]) => [key, String(value)])
-        );
-        
+           
+        } = res.data;
         let ReqID=res.id;
         console.log(ReqID);
 
@@ -130,22 +114,9 @@ module.exports = async function () {
                 "definitionId": "us10.fd8df7c4trial.vihaanworkflow.approvalProcess",
                 "context": {
                     "ReqID": ReqID,
-                    "DigressionVendorCode": DigressionVendorCodeVal,
-                    "PartyVendorCode": IsRelPartyVCode,
-                    "SupplierSpendType": SpendType,
-                    "NatureActivity": NatureOfActivity,
-                    "Sector": Sector,
-                    "FunctionSubfunction": FunAndSubfun,
-                    "PANCardNo": PANCardNo,
-                    "GSTIN": GSTIN,
-                    "SFullName": SFullName,
-                    "STradeNameGST": STradeNameGST,
-                    "SAddress": SAddress,
-                    "SAddressGST":  SAddressGST,
-                    "PRIContactFName":  PriContactFName,
-                    "PRIContactLName":   PriContactLName,
-                    "PRIContactEmail":  PriContactEmail,
-                    "PRIContactMNumber": PriContactMNumber
+                    "SFullName":SFullName,
+                    "ApproverEmail":"sumitracxam@gmail.com"
+                   
                 }
              });
              console.log(workflowData);
