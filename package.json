@@ -34,10 +34,7 @@
             "native_hana_associations": false
         },
         "requires": {
-            "db": {
-                "kind": "hana",
-                "pool": {"max": 1400,"min": 100}
-            },
+          
             "workflow": {
                 "kind": "rest",
                 "credentials": {
