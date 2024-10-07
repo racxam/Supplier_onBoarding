@@ -22,7 +22,7 @@
         >
             <List
                 id="requestFormList"
-                items="/results"
+                items="/"
             >
                 <items>
                     <StandardListItem
@@ -67,27 +67,48 @@
                         type="Active"
                     />
  
-                <CustomListItem>
-                        <VBox>
-                            <Label text="PAN" />
-                            <Select
-                                enabled="{/Enabled}"
-                                editable="{/Editable}"
-                                forceSelection="false"
-                                selectedKey="{/selectedPanFile}"
-                                id="panDropdowns"
-                                items="{
-                                    path: '/documentFiles/pan',
-                                    templateShareable: false
-                                }"
-                            >
-                                <core:Item
-                                    key="{attachmentId}"   
-                                    text="{fileName}"     
-                                />
-                            </Select>
-                        </VBox>
-                    </CustomListItem>
+<!-- <CustomListItem>
+    <VBox>
+        <Label text="PAN" />
+        <Select
+            enabled="{jModel>/Enabled}"
+            editable="{jModel>/Editable}"
+            forceSelection="false"
+            selectedKey="{jModel>/selectedPanFile}"
+            id="panDropdowns"
+            items="{
+                path: 'jModel>/documentFiles/pan',
+                templateShareable: false
+            }"
+        >
+            <core:Item
+                key="{jModel>attachmentId}"   
+                text="{jModel>fileName}"     
+            />
+        </Select>
+    </VBox>
+</CustomListItem> -->
+ <CustomListItem>
+            <VBox>
+                <Label text="PAN" />
+                <Select
+                    enabled="{localModel>/Enabled}"
+                    editable="{localModel>/Editable}"
+                    forceSelection="false"
+                    selectedKey="{localModel>/selectedPanFile}"
+                    id="panDropdowns"
+                    items="{
+                        path: 'localModel>/documentFiles/pan',
+                        templateShareable: false
+                    }"
+                >
+                    <core:Item
+                        key="{localModel>attachmentId}"   
+                        text="{localModel>fileName}"     
+                    />
+                </Select>
+            </VBox>
+        </CustomListItem>
 
 
         
@@ -178,7 +199,7 @@
 </Select> -->
             <Label text="GST" /> 
 
-<Select
+<!-- <Select
     enabled="{/Enabled}"
     editable="{/Editable}"
     forceSelection="false"
@@ -193,7 +214,28 @@
         key="{attachmentId}" 
         text="{fileName}"     
     />
-</Select>
+</Select> -->
+<CustomListItem>
+            <VBox>
+                <Label text="GST" />
+                <Select
+                    enabled="{localModel>/Enabled}"
+                    editable="{localModel>/Editable}"
+                    forceSelection="false"
+                    selectedKey="{localModel>/selectedPanFile}"
+                    id="gstDropdowns"
+                    items="{
+                        path: 'localModel>/documentFiles/pan',
+                        templateShareable: false
+                    }"
+                >
+                    <core:Item
+                        key="{localModel>attachmentId}"   
+                        text="{localModel>fileName}"     
+                    />
+                </Select>
+            </VBox>
+        </CustomListItem>
 
         </VBox>
 

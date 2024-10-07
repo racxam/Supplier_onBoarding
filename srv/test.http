@@ -1,10 +1,9 @@
 ###GET the request
 GET http://localhost:4004/odata/v4/attachments/supplierReqSrv
-
+ 
 ### SAVing the request
 POST http://localhost:4004/odata/v4/attachments/SavingsupplierReqSrv
 Content-Type: application/json
-
 {
     "DigressionVendorCodeVal": "2025-09-30",          
     "IsRelPartyVCode": true,                          
