@@ -1,48 +1,38 @@
 {
-    "name": "SupplierOnboarding",
-    "version": "1.0.0",
-    "description": "A simple CAP project.",
-    "repository": "<Add your repository here>",
-    "license": "UNLICENSED",
-    "private": true,
-    "@cap-js-community/odata-v2-adapter": "github:cap-js-community/odata-v2-adapter",
-    "dependencies": {
-        "@cap-js-community/odata-v2-adapter": "^1.13.3",
-        "@cap-js/hana": "^1",
-        "@sap-cloud-sdk/connectivity": "^3.21.0",
-        "@sap-cloud-sdk/http-client": "^3.21.0",
-        "@sap-cloud-sdk/resilience": "^3.21.0",
-        "@sap/cds": "^8",
-        "@sap/xssec": "^4.2.4",
-        "express": "^4.21.0",
-        "passport": "^0.7.0"
-    },
-    "devDependencies": {
-        "@cap-js/cds-types": "^0.6",
-        "@cap-js/sqlite": "^1",
-        "@sap/cds-dk": "^8",
-        "@sap/ux-specification": "UI5-1.128",
-        "rimraf": "^5.0.5"
-    },
-    "scripts": {
-        "start": "cds-serve",
-        "watch-supplieronboarding": "cds watch --open supplieronboarding/webapp/index.html?sap-ui-xx-viewCache=false",
-        "undeploy": "cf undeploy SupplierOnboarding --delete-services --delete-service-keys --delete-service-brokers",
-        "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
-    },
-    "cds": {
-        "sql": {
-            "native_hana_associations": false
-        },
-        "requires": {
-            "workflow": {
-                "kind": "rest",
-                "credentials": {
-                    "destination": "spa_process_destination"
-                }
-            },
-            "auth": "xsuaa"
-        }
+  "name": "SupplierOnboarding",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "@cap-js-community/odata-v2-adapter": "github:cap-js-community/odata-v2-adapter",
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.13.4",
+    "@cap-js/hana": "^1",
+    "@sap-cloud-sdk/connectivity": "^3.21.0",
+    "@sap/cds": "^8.3.1",
+    "@sap/xssec": "^4.2.4",
+    "express": "^4.21.0",
+    "passport": "^0.7.0"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.6",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "@sap/ux-specification": "UI5-1.128",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-supplieronboarding": "cds watch --open supplieronboarding/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy SupplierOnboarding --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "db": "hana",
+      "auth": "mocked"
     }
+  }
 }

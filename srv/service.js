@@ -21,7 +21,7 @@ module.exports = async function () {
 
     this.before('CREATE', supplierReqSrv, BeforeSupReqFun);
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
-    this.after('CREATE', supplierReqSrv, AfterSupReqFun);
+    // this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
     // functions
     //1. Before supplier req form

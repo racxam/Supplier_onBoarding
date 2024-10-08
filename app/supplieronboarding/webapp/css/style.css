@@ -1,1 +1,7 @@
 /* Enter your custom styles here */
+.img-bg{
+    background-image: url("../images/bg-blue.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }

@@ -444,7 +444,6 @@ sap.ui.define([
 
             onUploadFile: function(ReqID) {
                 console.log("On Upload file--------->");
-            
                 // Use arrow function for postAttachments
                 const postAttachments = (attachments, ReqID) => {
                     attachments.forEach((attachment, index) => {
@@ -476,8 +475,8 @@ sap.ui.define([
                 // Combine both arrays
                 var localModel = this.getView().getModel();
                 var docFiles = localModel.getProperty("/documentFiles");
-                console.log(docFiles.pan);
-                console.log(docFiles.gst);
+                // console.log(docFiles.pan);
+                // console.log(docFiles.gst);
                 var allAttachments = docFiles.pan.concat(docFiles.gst);
                 console.log(allAttachments);
                 console.log(`++++++++++ ${allAttachments}++++++++++`);
@@ -622,8 +621,6 @@ sap.ui.define([
                 }
             },
 
-
-
             onDeleteFile: function (oEvent) {
                 const sFileName = oEvent.getSource().data("fileName");
                 const documentType = this._oDialog.data("documentType");
@@ -650,9 +647,6 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
-
-
-
 
             // Utility function to convert base64 to blob
             _base64ToBlob: function (base64) {
