@@ -140,17 +140,17 @@
             "type": "object",
             "required": [],
             "properties": {
-                "ReqID": {
+                "reqid": {
                     "type": "string",
                     "title": "Request ID",
                     "description": "Unique identifier for the request"
                 },
-                "SFullName":{
+                "sfullname":{
                     "type": "string",
                     "title": "Supplier FullName",
                     "description": "Supplier Full Name"
                 },
-                "ApproverEmail":{
+                "approveremail":{
                     "type": "string",
                     "title": "Approver Email",
                     "description": "Approver's Email"

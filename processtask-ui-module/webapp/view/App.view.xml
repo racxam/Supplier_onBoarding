@@ -38,12 +38,12 @@
                     <f:content>
 
                         <Label
-                            id="Approver Email"
+                            id="Approver-Email"
                             text="Approver's Email"
                         />
                         <Text
                             id="approverEmail"
-                            text="{context>/ApproverEmail}"
+                            text="{context>/approveremail}"
                         />
 
                         <Label
@@ -52,7 +52,7 @@
                         />
                         <Text
                             id="req-txt"
-                            text="{context>/ReqID}"
+                            text="{context>/reqid}"
                         />
 
                         <Label
@@ -154,7 +154,7 @@
                         />
                         <Text
                             id="Supplier-name-txt"
-                            text="{context>/SFullName}"
+                            text="{context>/supplierfullname}"
                         />
 
                         <Label

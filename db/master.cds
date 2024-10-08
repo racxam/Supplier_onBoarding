@@ -57,12 +57,12 @@ type SpendTypeT                : String @assert.range enum {
     ValueFit                                       = 'Value Fit';
     Proto;
     Accessories;
-};
+}; 
 
 
 type NatureOfActivityT         : String @assert.range enum {
-    Material;
-    Services;
+    Material='Material';
+    Services='Services';
 };
 
 type SectorT                   : String @assert.range enum {

@@ -98,37 +98,35 @@ module.exports = async function () {
     async function AfterSupReqFun(req, res) {
 
         const {
-           
+
             SFullName,
-           
+
         } = res.data;
-        let ReqID=res.id;
+        let ReqID = res.id;
         console.log(ReqID);
 
         try {
 
 
-            const apprwf = await cds.connect.to("workflow");
+            const apprwf = await cds.connect.to("spa_process_destination");
 
-            let workflowData=JSON.stringify({
+            let workflowData = JSON.stringify({
                 "definitionId": "us10.fd8df7c4trial.vihaanworkflow.approvalProcess",
                 "context": {
-                    "ReqID": ReqID,
-                    "SFullName":SFullName,
-                    "ApproverEmail":"sumitracxam@gmail.com"
-                   
-                }
-             });
-             console.log(workflowData);
+                    "reqid": ReqID,
+                    "approveremail": "sumitracxam@gmail.com",
+                     "supplierfullname": SFullName,
 
-            const wfResponse = await apprwf.send({
-                method: 'POST',
-                path: "/workflow/rest/v1/workflow-instances",
-                data: workflowData,
+                }
+            });
+            console.log(workflowData);
+
+            const wfResponse = await apprwf.post('/workflow-instances', workflowData, {
                 headers: {
+                    // "X-CSRF-Token": token,
                     'Content-Type': 'application/json'
+                    //   'Authorization': token
                 }
-
             });
 
             console.log('Workflow Triggered', wfResponse);

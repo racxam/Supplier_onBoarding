@@ -34,11 +34,13 @@
             "native_hana_associations": false
         },
         "requires": {
-          
-            "workflow": {
+            "spa_process_destination": {
                 "kind": "rest",
+                "csrf": true,
+                "csrfInBatch": true,
                 "credentials": {
-                    "destination": "spa_process_destination"
+                    "destination": "spa_process_destination",
+                    "path": "/workflow/rest/v1"
                 }
             },
             "auth": "xsuaa"

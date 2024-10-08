@@ -51,6 +51,7 @@ sap.ui.define([
                     oInput.setValueState("Success");
                 } else {
                     oInput.setValueState("Error");
+                    oInput.setValueStateText("Invalid PAN format. Please enter a valid PAN.");
                 }
             },
             onGSTINChange: function (oEvent) {
@@ -149,6 +150,7 @@ sap.ui.define([
                     oInput.setValueState("Success");
                 } else {
                     oInput.setValueState("Error");
+                    oInput.setValueStateText("Invalid Email format. Please enter a valid Email.");
                 }
             },
 
@@ -166,8 +168,6 @@ sap.ui.define([
             onNumberChange: function (oEvent) {
                 var oInput = oEvent.getSource();   // Get the input control
                 var sValue = oInput.getValue();    // Get the current value of the input
-
-
                 sValue = sValue.replace(/\D/g, '');  // This removes all non-numeric characters
 
                 if (sValue.length > 10) {
@@ -180,7 +180,7 @@ sap.ui.define([
                     oInput.setValueState("Success");
                 } else {
                     oInput.setValueState("Error");
-                    oInput.setValueStateText("Mobile number must be 10 digits.");
+                    oInput.setValueStateText("Invalid Number. Please enter a valid Mobile Number.");
                 }
             },
 
@@ -288,32 +288,6 @@ sap.ui.define([
                 }
             },
 
-            // onAttachmentubmit: function () {
-            //     var oModel = this.getOwnerComponent().getModel();
-            //     var aFiles = oModel.getProperty("/pan");  // Retrieve the uploaded PAN file(s)
-            //     console.log("Updated /Pan attachment:", oModel.getProperty("/pan"));
-
-            //     // Prepare the payload for submission
-            //     var oNewEntry = {
-            //       //  Name: this.byId("inputName").getValue(), // Assuming you have other fields in the form
-            //         PANFile: aFiles.length > 0 ? aFiles[0].fileUrl : "" // Sending the first PAN file's base64
-            //     };
-
-            //     // Use the OData create method
-            //     oModel.setUseBatch(false);  // Disable batch mode for simplicity
-            //     oModel.create("/attachmentsSrv", oNewEntry, {
-            //         method: "POST",
-            //         success: function (oData) {
-            //             MessageToast.show("Form submitted successfully. ID: " + oData.ID);
-            //         },
-            //         error: function () {
-            //             MessageToast.show("Error while submitting the Form.");
-            //         }
-            //     });
-            // },
-
-
-
             // Open the dialog for PAN attachments
             onOpenDialogpan: function () {
                 if (!this._oPanDialog) {
@@ -338,16 +312,17 @@ sap.ui.define([
 
 
             onFormsubmit: function () {
-                // Get the view
                 var oView = this.getView();
                 var oModel = this.getOwnerComponent().getModel();
-                console.log(oModel);
-
-
-
+                var bValid = true;  // Flag to track form validity
+                var attachment = {
+                    panattachment: oView.byId("fileUploaderPan").getValue(),
+                    gstattachment: oView.byId("fileUploaderGst").getValue(),
+                };
+                // Collect form field values
                 var oFormData = {
                     validity: oView.byId("datePicker").getDateValue(),
-                    relatedParty: oView.byId("radioGroup1").getSelectedButton().getText(),
+                    relatedParty: oView.byId("radioGroup").getSelectedButton(),
                     supplierSpendType: oView.byId("supplierSpendType").getSelectedKey(),
                     natureOfActivity: oView.byId("NatureofActivity").getSelectedKey(),
                     sector: oView.byId("sectorComboBox").getSelectedKeys(),
@@ -363,88 +338,181 @@ sap.ui.define([
                     primaryEmail: oView.byId("emailInput").getValue(),
                     primaryPhone: oView.byId("numberInput").getValue()
                 };
-                if (oFormData.relatedParty === 'Yes') {
-                    oFormData.relatedParty = true;
 
+
+                if (!oFormData.validity) {
+                    oView.byId("datePicker").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Date is required");
+                    bValid = false;
+                } else {
+                    oView.byId("datePicker").setValueState(sap.ui.core.ValueState.None);
                 }
-                else {
-                    oFormData.relatedParty = false;
+
+                if (oFormData.supplierSpendType.length === 0) {
+                    oView.byId("supplierSpendType").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Spend Type is required");
+                    bValid = false;
+                } else {
+                    oView.byId("supplierSpendType").setValueState(sap.ui.core.ValueState.None);
                 }
 
+                if (oFormData.natureOfActivity.length === 0) {
+                    oView.byId("NatureofActivity").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Nature of Activity is required");
+                    bValid = false;
+                } else {
+                    oView.byId("NatureofActivity").setValueState(sap.ui.core.ValueState.None);
+                }
 
-                var oNewEntry = {
-                    "DigressionVendorCodeVal": oFormData.validity,
-                    "IsRelPartyVCode": oFormData.relatedParty,
-                    "SpendType": oFormData.supplierSpendType,
-                    "NatureOfActivity": oFormData.natureOfActivity,
-                    "Sector": oFormData.sector,
-                    "FunAndSubfun": oFormData.FunctionandSubfunction,
-                    "PANCardNo": oFormData.panCardNumber,
-                    "GSTIN": oFormData.gstinNumber,
-                    "SFullName": oFormData.supplierFullName,
-                    "STradeNameGST": oFormData.supplierTradeName,
-                    "SAddress": oFormData.supplierAddress,
-                    "SAddressGST": oFormData.supplierGstAddress,
-                    "PriContactFName": oFormData.primaryFirstName,
-                    "PriContactLName": oFormData.primaryLastName,
-                    "PriContactEmail": oFormData.primaryEmail,
-                    "PriContactMNumber": oFormData.primaryPhone
-                };
+                if (oFormData.sector.length === 0) {
+                    oView.byId("sectorComboBox").setValueState(sap.ui.core.ValueState.Error).setValueStateText("At least one sector is required.");
+                    bValid = false;
+                } else {
+                    oView.byId("sectorComboBox").setValueState(sap.ui.core.ValueState.None);
+                }
 
-                // var oNewEntry = {
-                //     "DigressionVendorCodeVal": "2025-09-30",
-                //     "IsRelPartyVCode": true,
-                //     "SpendType": "Indirect",
-                //     "NatureOfActivity": "Material",
-                //     "Sector": ["IT", "Manufacturing"],
-                //     "FunAndSubfun": ["Finance", "HR"],
-                //     "PANCardNo": "ABCDE1234F",
-                //     "GSTIN": "27ABCDE1234F1Z5",
-                //     "SFullName": "ABC Corp Pvt. Ltd.",
-                //     "STradeNameGST": "ABC Trade",
-                //     "SAddress": "123, Example Street, City, State",
-                //     "SAddressGST": "123, Example Street, City, State",
-                //     "PriContactFName": "Sumit",
-                //     "PriContactLName": "Doe",
-                //     "PriContactEmail": "john.doe@example.com",
-                //     "PriContactMNumber": "1234567890"
-                // }
+                if (oFormData.FunctionandSubfunction.length === 0) {
+                    oView.byId("childMultiComboBox").setValueState(sap.ui.core.ValueState.Error).setValueStateText("At least one function/subfunction is required.");
+                    bValid = false;
+                } else {
+                    oView.byId("childMultiComboBox").setValueState(sap.ui.core.ValueState.None);
+                }
 
-                // Output form data to the console (or process it further)
-                // console.log(oFormData);
-                // console.log(oNewEntry);
+                if (!oFormData.panCardNumber) {
+                    oView.byId("panInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("PAN Card Number is required");
+                    bValid = false;
+                } else {
+                    oView.byId("panInput").setValueState(sap.ui.core.ValueState.None);
+                }
 
-                // Use the OData create method
-                oModel.setUseBatch(false);
-                oModel.create("/supplierReqSrv", oNewEntry, {
-                    method: "POST",
-                    success: function (oData) {
+                if (!attachment.panattachment) {
+                    oView.byId("fileUploaderPan").setValueState(sap.ui.core.ValueState.Error).setValueStateText("PAN Card Attachment is required");
+                    bValid = false;
+                } else {
+                    oView.byId("fileUploaderPan").setValueState(sap.ui.core.ValueState.None);
+                }
 
-                        MessageToast.show("Form submitted successfully." + oData.ID);
-                        console.log(oData.ID);
-                        this.onUploadFile(oData.ID);
-                        console.log("---------->Upload");
+                if (!attachment.gstattachment) {
+                    oView.byId("fileUploaderGst").setValueState(sap.ui.core.ValueState.Error).setValueStateText("PAN Card Attachment is required");
+                    bValid = false;
+                } else {
+                    oView.byId("fileUploaderGst").setValueState(sap.ui.core.ValueState.None);
+                }
 
+                if (!oFormData.gstinNumber) {
+                    oView.byId("gstinInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("GSTIN Number is required");
+                    bValid = false;
+                } else {
+                    oView.byId("gstinInput").setValueState(sap.ui.core.ValueState.None);
+                }
 
+                if (!oFormData.supplierFullName) {
+                    oView.byId("SupplierNameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Full Name is required");
+                    bValid = false;
+                } else {
+                    oView.byId("SupplierNameInput").setValueState(sap.ui.core.ValueState.None);
+                }
 
-                    }.bind(this),  // Ensure 'this' refers to the controller instance
-                    error: function () {
-                        MessageToast.show("Error while submitting the Form.");
+                if (!oFormData.supplierTradeName) {
+                    oView.byId("SuppliertradeNameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier trade Name is required");
+                    bValid = false;
+                } else {
+                    oView.byId("SuppliertradeNameInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if (!oFormData.supplierAddress) {
+                    oView.byId("SupplierAddressInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Address is required");
+                    bValid = false;
+                } else {
+                    oView.byId("SupplierAddressInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if (!oFormData.supplierGstAddress) {
+                    oView.byId("SupplierAddressgstInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Address gst is required");
+                    bValid = false;
+                } else {
+                    oView.byId("SupplierAddressgstInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if (!oFormData.primaryFirstName) {
+                    oView.byId("PrimaryFirstnameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary First name is required");
+                    bValid = false;
+                } else {
+                    oView.byId("PrimaryFirstnameInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if (!oFormData.primaryLastName) {
+                    oView.byId("PrimaryLastnameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary Last name is required");
+                    bValid = false;
+                } else {
+                    oView.byId("PrimaryLastnameInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if (!oFormData.primaryEmail) {
+                    oView.byId("emailInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary Email is required");
+                    bValid = false;
+                } else {
+                    oView.byId("emailInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if (!oFormData.primaryPhone) {
+                    oView.byId("numberInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary Phone Number is required");
+                    bValid = false;
+                } else {
+                    oView.byId("numberInput").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                // If the form is valid, proceed with the OData service call
+                if (bValid) {
+                    if (oFormData.relatedParty.getText() === 'Yes') {
+                        oFormData.relatedParty = true;
+                    } else {
+                        oFormData.relatedParty = false;
                     }
-                });
 
+                    var oNewEntry = {
+                        "DigressionVendorCodeVal": oFormData.validity,
+                        "IsRelPartyVCode": oFormData.relatedParty,
+                        "SpendType": oFormData.supplierSpendType,
+                        "NatureOfActivity": oFormData.natureOfActivity,
+                        "Sector": oFormData.sector,
+                        "FunAndSubfun": oFormData.FunctionandSubfunction,
+                        "PANCardNo": oFormData.panCardNumber,
+                        "GSTIN": oFormData.gstinNumber,
+                        "SFullName": oFormData.supplierFullName,
+                        "STradeNameGST": oFormData.supplierTradeName,
+                        "SAddress": oFormData.supplierAddress,
+                        "SAddressGST": oFormData.supplierGstAddress,
+                        "PriContactFName": oFormData.primaryFirstName,
+                        "PriContactLName": oFormData.primaryLastName,
+                        "PriContactEmail": oFormData.primaryEmail,
+                        "PriContactMNumber": oFormData.primaryPhone
+                    };
 
-                // Show a success message (or handle the form data as needed)
-                MessageToast.show("Form submitted successfully!");
-                //this.oLabelInput.setValue("");
-                //this.oFormData.FunctionandSubfunction.setValue("");
+                    // Use the OData create method
+                    oModel.setUseBatch(false);
+                    var oView = this;
+                    oModel.create("/supplierReqSrv", oNewEntry, {
+                        method: "POST",
+                        success: function (oData) {
 
+                            MessageToast.show("Form submitted successfully." + oData.ID);
+                            console.log(oData.ID);
+                            this.onUploadFile(oData.ID);
+                            console.log("---------->Upload");
+                            oView.clearFormFields();
+
+                        }.bind(this),  // Ensure 'this' refers to the controller instance
+                        error: function () {
+                            MessageToast.show("Error while submitting the Form.");
+                        }
+                    });
+                } else {
+                    sap.m.MessageToast.show("Please fill All The Required fields.");
+                }
             },
 
 
-            onUploadFile: function(ReqID) {
+            onUploadFile: function (ReqID) {
                 console.log("On Upload file--------->");
-            
+
                 // Use arrow function for postAttachments
                 const postAttachments = (attachments, ReqID) => {
                     attachments.forEach((attachment) => {
@@ -452,28 +520,29 @@ sap.ui.define([
                         var payLoad = {
                             Req_Supplier_ID: ReqID,
                             Doc_Type: "PAN",
-                            Attachment_ID: 1,
+                            Attachment_ID: attachment.attachmentId,
                             fileName: attachment.fileName,
                             mediaType: attachment.fileType,
-                            content:attachment.fileContent
+                            content: attachment.fileContent,
+                            Doc_Type: attachment.Doc_Type
                             // Assuming imageType refers to fileType
                         };
                         console.log(payLoad);
-                        
+
                         var oModel = this.getOwnerComponent().getModel();
                         oModel.setUseBatch(false);
                         oModel.create("/SReqattachmentsSrv", payLoad, {
                             method: "POST",
-                            success: function(oData) {
+                            success: function (oData) {
                                 MessageToast.show("Attachments uploaded successfully: " + oData.ID);
                             }.bind(this),  // Ensure 'this' refers to the controller instance
-                            error: function() {
+                            error: function () {
                                 MessageToast.show("Error while Uploading the Attachments.");
                             }
                         });
                     });
                 };
-            
+
                 // Combine both arrays
                 var localModel = this.getView().getModel();
                 var docFiles = localModel.getProperty("/documentFiles");
@@ -482,14 +551,19 @@ sap.ui.define([
                 var allAttachments = docFiles.pan.concat(docFiles.gst);
                 console.log(allAttachments);
                 console.log(`++++++++++ ${allAttachments}++++++++++`);
-            
+
                 // Post all attachments
                 postAttachments(allAttachments, ReqID);
             },
-            
+
             onFileUpload: function (oEvent) {
                 var oFileUploader = oEvent.getSource();
+                var sValue = oFileUploader.getValue();
                 var oFile = oFileUploader.oFileUpload.files[0];  // Get the uploaded file
+
+                if (sValue) {
+                    oFileUploader.setValueState(sap.ui.core.ValueState.None); // Reset ValueState if a file is uploaded
+                }
 
                 if (oFile) {
                     var sFileName = oFile.name;
@@ -505,33 +579,48 @@ sap.ui.define([
                         var oModel = that.getView().getModel();
                         var oDocumentFiles = oModel.getProperty("/documentFiles") || { pan: [], gst: [], cin: [] };  // Initialize documentFiles object
 
-                        // Determine the document type based on the uploader ID
+                        // Get the current count for each document type (initialize if not present)
+                        var panCount = oDocumentFiles.pan.length + 1;
+                        var gstCount = oDocumentFiles.gst.length + 1;
+                        var cinCount = oDocumentFiles.cin.length + 1;
+
+                        // Determine the document type based on the uploader ID and assign counter
                         var uploaderId = oFileUploader.getId();
                         var documentType = "";
+                        var attachmentId = "";  // For storing the ID
 
                         if (uploaderId.includes("fileUploaderPan")) {
                             documentType = "PAN";
+                            attachmentId = "PAN-" + panCount;  // Simple counter for PAN
                             oDocumentFiles.pan.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
-                                fileType: sFileType
+                                fileType: sFileType,
+                                Doc_Type: 'PAN',
+                                attachmentId: attachmentId  // Add counter-based attachment ID
                             });
                         } else if (uploaderId.includes("fileUploaderGst")) {
                             documentType = "GST";
+                            attachmentId = "GST-" + gstCount;  // Simple counter for GST
                             oDocumentFiles.gst.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
-                                fileType: sFileType
+                                fileType: sFileType,
+                                Doc_Type: 'GST',
+                                attachmentId: attachmentId  // Add counter-based attachment ID
                             });
                         } else if (uploaderId.includes("fileUploaderCin")) {
                             documentType = "CIN";
+                            attachmentId = "CIN-" + cinCount;  // Simple counter for CIN
                             oDocumentFiles.cin.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
-                                fileType: sFileType
+                                fileType: sFileType,
+                                Doc_Type: 'CIN',
+                                attachmentId: attachmentId  // Add counter-based attachment ID
                             });
                         }
 
@@ -547,6 +636,7 @@ sap.ui.define([
                     oReader.readAsDataURL(oFile);  // Read the file as Data URL (base64)
                 }
             },
+
             formatAttachmentButtonText: function (aDocumentFiles, documentType) {
                 // Ensure that aDocumentFiles is defined
                 aDocumentFiles = aDocumentFiles || [];
@@ -669,6 +759,74 @@ sap.ui.define([
                     console.error("Base64 decoding failed: ", error);
                     return null; // Handle the error
                 }
+            },
+
+            handleLiveChange: function (oEvent) {
+                var oInput = oEvent.getSource(); // Get the input field that triggered the event
+                var sValue = oInput.getValue(); // Get the current value of the input field
+
+                // If the input field has a value, reset its ValueState to None
+                if (sValue) {
+                    oInput.setValueState(sap.ui.core.ValueState.None);
+                }
+            },
+
+            handleComboBoxChange: function (oEvent) {
+                var oComboBox = oEvent.getSource();
+                var sSelectedKey = oComboBox.getSelectedKey(); // Get the selected key
+
+                if (sSelectedKey) {
+                    oComboBox.setValueState(sap.ui.core.ValueState.None); // Reset ValueState if a value is selected
+                }
+            },
+            handleDateChange: function (oEvent) {
+                var oDatePicker = oEvent.getSource();
+                var sValue = oDatePicker.getDateValue(); // Get the selected date value
+
+                if (sValue) {
+                    oDatePicker.setValueState(sap.ui.core.ValueState.None); // Reset ValueState if a valid date is selected
+                }
+            },
+            handleFileChange: function (oEvent) {
+                var oFileUploader = oEvent.getSource();
+                var sValue = oFileUploader.getValue(); // Get the uploaded file's value
+
+                if (sValue) {
+                    oFileUploader.setValueState(sap.ui.core.ValueState.None); // Reset ValueState if a file is uploaded
+                }
+            },
+            handleMultiComboBoxChange: function (oEvent) {
+                var oMultiComboBox = oEvent.getSource();
+                var aSelectedItems = oMultiComboBox.getSelectedItems(); // Get selected items
+
+                // Check if there are any selected items
+                if (aSelectedItems.length > 0) {
+                    oMultiComboBox.setValueState(sap.ui.core.ValueState.None); // Reset ValueState if items are selected
+                }
+            },
+
+            clearFormFields: function () {
+                var oView = this.getView();
+
+                // Clear the fields
+                oView.byId("datePicker").setDateValue(null);
+                oView.byId("radioGroup").setSelectedButton(null);
+                oView.byId("supplierSpendType").setSelectedKey("");
+                oView.byId("NatureofActivity").setSelectedKey("");
+                oView.byId("sectorComboBox").setSelectedKeys([]);
+                oView.byId("childMultiComboBox").setSelectedKeys([]);
+                oView.byId("panInput").setValue("");
+                oView.byId("fileUploaderPan").setValue("");
+                oView.byId("fileUploaderGst").setValue("");
+                oView.byId("gstinInput").setValue("");
+                oView.byId("SupplierNameInput").setValue("");
+                oView.byId("SuppliertradeNameInput").setValue("");
+                oView.byId("SupplierAddressInput").setValue("");
+                oView.byId("SupplierAddressgstInput").setValue("");
+                oView.byId("PrimaryFirstnameInput").setValue("");
+                oView.byId("PrimaryLastnameInput").setValue("");
+                oView.byId("emailInput").setValue("");
+                oView.byId("numberInput").setValue("");
             },
 
 

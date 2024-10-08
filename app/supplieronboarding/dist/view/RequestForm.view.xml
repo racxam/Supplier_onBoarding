@@ -1,4 +1,3 @@
-
 <mvc:View controllerName="com.sumo.supplieronboarding.controller.RequestForm"
     xmlns:mvc="sap.ui.core.mvc" 
     displayBlock="true"
@@ -35,7 +34,7 @@
             >
                 <f:content>
                     <Label
-                        id="Label"
+                        id="ValidityLabel"
                         text="Validity of digression vendor code upto"
                         required="true"
                     />
@@ -43,15 +42,16 @@
                         id="datePicker"
                         valueFormat="yyyy-MM-dd"
                         displayFormat="long"
+                        change="handleDateChange"
                     />
 
                     <Label
-                        id="Label1"
+                        id="relatedpartyLabelID"
                         text="Is it a related party vendor code?"
                         required="true"
                     />
                     <RadioButtonGroup
-                        id="radioGroup1"
+                        id="radioGroup"
                         columns="2"
                         selectedIndex="0"
                     >
@@ -68,14 +68,15 @@
                     </RadioButtonGroup>
 
                     <Label
-                        id="Label3"
+                        id="SupplierSpendTypeLabelID"
                         text="Supplier Spend Type"
                         required="true"
                     />
-                    <Select
+                    <ComboBox
                         id="supplierSpendType"
                         selectedKey=""
                         items="{/results}"
+                        change="handleComboBoxChange"
                     >
                         <items>
                             <core:Item
@@ -84,17 +85,18 @@
                                 key="{SpendsTypes}"
                             />
                         </items>
-                    </Select>
+                    </ComboBox>
 
                     <Label
-                        id="Label4"
+                        id="NatureofActivityLabelID"
                         text="Nature of Activity"
                         required="true"
                     />
-                    <Select
+                    <ComboBox
                         id="NatureofActivity"
                         selectedKey=""
                         items="{/results}"
+                        change="handleComboBoxChange"
                     >
                         <items>
                             <core:Item
@@ -103,18 +105,18 @@
                                 key="{Activity}"
                             />
                         </items>
-                    </Select>
+                    </ComboBox>
 
                     <Label
-                        id="Label5"
+                        id="SectorLabelID"
                         text="Sector"
                         required="true"
                     />
                     <MultiComboBox
                         id="sectorComboBox"
-                        selectedKeys=""
                         placeholder="Select sectors"
                         items="{/results}"
+                         selectionChange="handleMultiComboBoxChange"
                     >
                         <items>
                             <core:Item
@@ -126,7 +128,7 @@
                     </MultiComboBox>
 
                     <Label
-                        id="Label6"
+                        id="FunctionLabel"
                         text="Function &amp; Subfunction"
                         required="true"
                     />
@@ -150,6 +152,7 @@
                         visible="true"
                         placeholder="Select Subfunction"
                         items="{functionsModel>/Functions}"
+                         selectionChange="handleMultiComboBoxChange"
                     >
                         <core:Item
                             id="Item4"
@@ -159,17 +162,15 @@
                     </MultiComboBox>
 
                     <Label
-                        id="Label7"
+                        id="PANLabel"
                         text="PAN Card No."
                         required="true"
                     />
-                    <!-- <Input id="Input7" type="Text"/> -->
                     <Input
                         id="panInput"
                         placeholder="ABCDE1234F"
                         value="{/panCardValue}"
                         liveChange="onPanCardChange"
-                        valueStateText="Invalid PAN Card format. Please enter a valid PAN (e.g., ABCDE1234F)."
                         maxLength="10"
                     />
                     <Button
@@ -179,7 +180,7 @@
                     />
 
                     <Label
-                        id="Label08"
+                        id="PANCardAttachmentLabel"
                         text="PAN Card Attachment"
                         required="true"
                     />
@@ -190,6 +191,7 @@
         width="100%"
     />
     <Button
+       id="panuploadbutton"
         text="{
             parts: [
                 { path: '/documentFiles/pan' },
@@ -201,7 +203,7 @@
     />
 
                     <Label
-                        id="Label111"
+                        id="GSTINLabel"
                         text=" GSTIN No."
                         required="true"
                     />
@@ -210,7 +212,6 @@
                         placeholder="22ABCDE1234F1Z5"
                         value="{/gstinValue}"
                         liveChange="onGSTINChange"
-                        valueStateText="Invalid PAN Card format. Please enter a valid PAN (e.g., ABCDE1234F)."
                         maxLength="15"
                     />
                     <Button
@@ -220,7 +221,7 @@
                     />
 
                     <Label
-                        id="Label19"
+                        id="GSTAttachmentLabel"
                         text="GST Registration Certificate Attachment"
                         required="true"
                     />
@@ -232,6 +233,7 @@
         width="100%"
     />
     <Button
+        id="gstuploadbutton"
         text="{
             parts: [
                 { path: '/documentFiles/gst' },
@@ -243,7 +245,7 @@
     />
 
                     <Label
-                        id="Label11"
+                        id="SupplierNameLabel"
                         text="Supplier Full Legal Name"
                         required="true"
                     />
@@ -251,10 +253,12 @@
                         id="SupplierNameInput"
                         type="Text"
                         value="{/SupplierNameValue}"
+                        liveChange="handleLiveChange"
+                        maxLength="100"
                     />
 
                     <Label
-                        id="Label12"
+                        id="SuppliertradeNameLabel"
                         text="Supplier Trade Name (GST)"
                         required="true"
                     />
@@ -262,10 +266,12 @@
                         id="SuppliertradeNameInput"
                         type="Text"
                         value="{/SuppliertradeNameValue}"
+                        liveChange="handleLiveChange"
+                        maxLength="150"
                     />
 
                     <Label
-                        id="Label13"
+                        id="SupplierAddressLabel"
                         text="Supplier Address"
                         required="true"
                     />
@@ -273,10 +279,12 @@
                         id="SupplierAddressInput"
                         type="Text"
                         value="{/SupplierAddressValue}"
+                        liveChange="handleLiveChange"
+                        maxLength="150"
                     />
 
                     <Label
-                        id="Label14"
+                        id="SupplierAddressgstLabel"
                         text="Supplier Address (GST)"
                         required="true"
                     />
@@ -284,10 +292,12 @@
                         id="SupplierAddressgstInput"
                         type="Text"
                         value="{/SupplierAddressgstValue}"
+                        liveChange="handleLiveChange"
+                        maxLength="150"
                     />
 
                     <Label
-                        id="Label15"
+                        id="PrimaryFirstnameLabel"
                         text=" Primary Contact First Name"
                         required="true"
                     />
@@ -295,10 +305,12 @@
                         id="PrimaryFirstnameInput"
                         type="Text"
                         value="{/PrimaryFirstnameValue}"
+                        liveChange="handleLiveChange"
+                        maxLength="50"
                     />
 
                     <Label
-                        id="Label16"
+                        id="PrimaryLastnameLabel"
                         text="Primary Contact Last Name"
                         required="true"
                     />
@@ -306,10 +318,12 @@
                         id="PrimaryLastnameInput"
                         type="Text"
                         value="{/PrimaryLastnameValue}"
+                        liveChange="handleLiveChange"
+                        maxLength="50"
                     />
 
                     <Label
-                        id="Label17"
+                        id="EmailLabel"
                         text="Primary Contact Email"
                         required="true"
                     />
@@ -318,16 +332,15 @@
                         placeholder="Enter your email"
                         value="{/emailValue}"
                         liveChange="onEmailChange"
-                        valueStateText="Invalid email format. Please enter a valid email address."
                     />
                     <Button
-                        id="Button3"
+                        id="EmailButton"
                         text="Verify"
                         press="onSubmitemail"
                     />
 
                     <Label
-                        id="Label18"
+                        id="MobilenoLabel"
                         text="Primary Contact Mobile Number"
                         required="true"
                     />
@@ -337,10 +350,9 @@
                         type="Number"
                         value="{/numberValue}"
                         liveChange="onNumberChange"
-                        valueStateText="Invalid Number. Please enter a valid Mobile Number."
                     />
                     <Button
-                        id="Button4"
+                        id="MobilenoButton"
                         text="Verify"
                         press="onSubmitnumber"
                     />
@@ -352,14 +364,14 @@
             <Toolbar id="Toolbar1">
                 <ToolbarSpacer id="ToolbarSpacer" />
                 <Button
-                    id="Button2"
+                    id="SaveButton"
                     text="Save"
                     press="onSave"
                     width="100px"
                     type="Emphasized"
                 />
                 <Button
-                    id="Button1"
+                    id="SubmitButton"
                     text="Submit"
                     press="onFormsubmit"
                     width="100px"
