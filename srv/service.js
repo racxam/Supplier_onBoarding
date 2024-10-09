@@ -1,30 +1,20 @@
 module.exports = async function () {
 
+
+    // Vihaan Entities-------------------------------------------->
     const { supplierReqSrv, SavingsupplierReqSrv, SReqattachmentsSrv } = this.entities;
 
-    this.before('CREATE', SReqattachmentsSrv, async (req) => {
-        console.log("URL Of media is here");
 
-
-
-        if (req.data.content && req.data.content.length > 0) {
-            console.log("Uploading file of size:", req.data.content.length);
-        }
-
-        req.data.url = `/odata/v2/attachments/SReqattachmentsSrv(${req.data.ID})/content`;
-        console.log(req.data.url);
-    });
-
-    this.after('CREATE', SReqattachmentsSrv, (req) => {
-
-        console.log("File successfully uploaded!");
-    });
-
+    // Attachments-------------------------------------------->
+    this.before('CREATE', SReqattachmentsSrv, BeforeAttachmentUpload);
+    this.on('CREATE', SReqattachmentsSrv, OnAttachmentsUpload);
+    // request atttachments
     this.before('CREATE', supplierReqSrv, BeforeSupReqFun);
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
     this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
-    // functions
+
+     // functions-------------------------------------------->
     //1. Before supplier req form
     async function BeforeSupReqFun(req, res) {
 
@@ -68,7 +58,7 @@ module.exports = async function () {
             PriContactMNumber,
 
         };
-        console.log(DigressionVendorCodeVal+"DATEE------->");
+        console.log(DigressionVendorCodeVal + "DATEE------->");
 
 
         const missingFields = Object.keys(mandatoryFields).filter(field => !mandatoryFields[field] || mandatoryFields[field].length === 0);
@@ -82,7 +72,6 @@ module.exports = async function () {
 
 
     };
-
 
     //2. Before supplier saving form
     async function BeforeSavingSupReqFun(req, res) {
@@ -117,7 +106,7 @@ module.exports = async function () {
                 "context": {
                     "reqid": ReqID,
                     "approveremail": "sumitracxam@gmail.com",
-                     "sfullname": SFullName
+                    "sfullname": SFullName
 
                 }
             });
@@ -137,6 +126,31 @@ module.exports = async function () {
             throw error;
         }
     }
+
+    //On Attachment Upload...
+    async function OnAttachmentsUpload(req, res) {
+        const { content: base64Content, ...rest } = req.data;
+        if (base64Content) {
+            const binaryContent = Buffer.from(base64Content.split(',')[1], 'base64');
+            rest.content = binaryContent;
+        }
+        await INSERT.into(SReqattachmentsSrv).entries(rest);
+
+        return req.data;
+
+    }
+
+    //Before Attachment Upload
+    async function BeforeAttachmentUpload(req, res) {
+
+        if (req.data.content && req.data.content.length > 0) {
+            console.log("Uploading file of size:", req.data.content.length);
+        }
+        req.data.url = `/odata/v2/attachments/SReqattachmentsSrv(${req.data.ID})/content`;
+
+    }
+
+
 };
 
 
@@ -144,18 +158,18 @@ module.exports = async function () {
 async function ValCheck(DigressionVendorCodeVal, GSTIN, PANCardNo, req) {
 
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);  
+    currentDate.setHours(0, 0, 0, 0);
     console.log(currentDate);
 
 
     const afterFourYearDate = new Date();
     afterFourYearDate.setFullYear(currentDate.getFullYear() + 4);
-    afterFourYearDate.setHours(0, 0, 0, 0);  
+    afterFourYearDate.setHours(0, 0, 0, 0);
     console.log(afterFourYearDate);
 
 
     const ValdityDate = new Date(DigressionVendorCodeVal);
-    ValdityDate.setHours(0, 0, 0, 0); 
+    ValdityDate.setHours(0, 0, 0, 0);
     console.log(ValdityDate);
     console.log(DigressionVendorCodeVal);
 

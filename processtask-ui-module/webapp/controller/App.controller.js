@@ -30,9 +30,12 @@ sap.ui.define(
 
 
       onReadform: function () {
+        console.log("Reached onReadForm");
         var that = this;
+        let ReqId = this.getView().byId("req-txt").getText();
+        console.log(ReqId);
         var oModel = this.getOwnerComponent().getModel();
-        var oFilter = new sap.ui.model.Filter('ID', 'EQ', '2c6444b4-af03-4a61-8a27-37af63ed9a03');
+        var oFilter = new sap.ui.model.Filter('ID', 'EQ', ReqId );
         // Read the OData service and fetch data
         oModel.read("/supplierReqSrv", {
           filters: [oFilter],

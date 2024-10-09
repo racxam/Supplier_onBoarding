@@ -488,6 +488,25 @@ sap.ui.define([
                     console.log("DATE");
                     console.log(oFormData.validity);
 
+                // var oNewEntry = {
+                //     "DigressionVendorCodeVal": "2025-09-30",
+                //     "IsRelPartyVCode": true,
+                //     "SpendType": "Indirect",
+                //     "NatureOfActivity": "Material",
+                //     "Sector": ["IT", "Manufacturing"],
+                //     "FunAndSubfun": ["Finance", "HR"],
+                //     "PANCardNo": "ABCDE1234F",
+                //     "GSTIN": "27ABCDE1234F1Z5",
+                //     "SFullName": "ABC Corp Pvt. Ltd.",
+                //     "STradeNameGST": "ABC Trade",
+                //     "SAddress": "123, Example Street, City, State",
+                //     "SAddressGST": "123, Example Street, City, State",
+                //     "PriContactFName": "Sumit",
+                //     "PriContactLName": "Doe",
+                //     "PriContactEmail": "john.doe@example.com",
+                //     "PriContactMNumber": "1234567890"
+                // }
+
                     // Use the OData create method
                     oModel.setUseBatch(false);
                     var oView = this;
@@ -506,7 +525,8 @@ sap.ui.define([
                             MessageToast.show("Error while submitting the Form.");
                         }
                     });
-                } else {
+                } 
+                else {
                     sap.m.MessageToast.show("Please fill All The Required fields.");
                 }
             },
@@ -520,7 +540,6 @@ sap.ui.define([
                         console.log("Control reached!!!");
                         var payLoad = {
                             Req_Supplier_ID: ReqID,
-                            Doc_Type: "PAN",
                             Attachment_ID: attachment.attachmentId,
                             fileName: attachment.fileName,
                             mediaType: attachment.fileType,
@@ -574,7 +593,7 @@ sap.ui.define([
                     var that = this;
 
                     oReader.onload = function (e) {
-                        var sFileUrl = e.target.result;  // Get the file's base64 data URL
+                        var sFileUrl =e.target.result;  // Get the file's base64 data URL
                         console.log("Base64 File URL: ", sFileUrl);
 
                         var oModel = that.getView().getModel();
