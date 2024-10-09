@@ -1,9 +1,9 @@
 module.exports = async function () {
 
-    const { supplierReqSrv, SavingsupplierReqSrv } = this.entities;
+    const { supplierReqSrv, SavingsupplierReqSrv, SReqattachmentsSrv } = this.entities;
 
-    this.before('CREATE', 'SReqattachmentsSrv', async (req) => {
-
+    this.before('CREATE', SReqattachmentsSrv, async (req) => {
+        console.log("URL Of media is here");
 
 
 
@@ -12,9 +12,10 @@ module.exports = async function () {
         }
 
         req.data.url = `/odata/v2/attachments/SReqattachmentsSrv(${req.data.ID})/content`;
+        console.log(req.data.url);
     });
 
-    this.after('CREATE', 'SReqattachmentsSrv', (req) => {
+    this.after('CREATE', SReqattachmentsSrv, (req) => {
 
         console.log("File successfully uploaded!");
     });
@@ -116,7 +117,7 @@ module.exports = async function () {
                 "context": {
                     "reqid": ReqID,
                     "approveremail": "sumitracxam@gmail.com",
-                     "sfullname": SFullName,
+                     "sfullname": SFullName
 
                 }
             });

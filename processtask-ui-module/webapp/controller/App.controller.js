@@ -16,8 +16,10 @@ sap.ui.define(
 
     return BaseController.extend("com.sumo.processtaskuimodule.controller.App", {
 
+
       onInit: function () {
 
+        // Initialize the model with an empty array for files
         var oModel = new sap.ui.model.json.JSONModel({ documentfiles: [] });
         this.getView().setModel(oModel);
 
@@ -245,11 +247,6 @@ sap.ui.define(
           return null; // Handle the error
         }
       }
-
-
-
-
-
     });
   }
 );

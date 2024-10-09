@@ -1,5 +1,5 @@
 <mvc:View controllerName="com.sumo.processtaskuimodule.controller.processtaskui" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
-    <App id="apps">
+    <App id="page">
         <pages>
             <Page showHeader="false" showFooter="false">
                 <content>
