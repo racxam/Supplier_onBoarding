@@ -67,6 +67,7 @@ module.exports = async function () {
             PriContactMNumber,
 
         };
+        console.log(DigressionVendorCodeVal+"DATEE------->");
 
 
         const missingFields = Object.keys(mandatoryFields).filter(field => !mandatoryFields[field] || mandatoryFields[field].length === 0);
@@ -115,7 +116,7 @@ module.exports = async function () {
                 "context": {
                     "reqid": ReqID,
                     "approveremail": "sumitracxam@gmail.com",
-                     "supplierfullname": SFullName,
+                     "sfullname": SFullName,
 
                 }
             });
@@ -123,9 +124,9 @@ module.exports = async function () {
 
             const wfResponse = await apprwf.post('/workflow-instances', workflowData, {
                 headers: {
-                    // "X-CSRF-Token": token,
+
                     'Content-Type': 'application/json'
-                    //   'Authorization': token
+
                 }
             });
 
@@ -140,27 +141,33 @@ module.exports = async function () {
 
 // service end
 async function ValCheck(DigressionVendorCodeVal, GSTIN, PANCardNo, req) {
+
     const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);  
+    console.log(currentDate);
+
 
     const afterFourYearDate = new Date();
     afterFourYearDate.setFullYear(currentDate.getFullYear() + 4);
+    afterFourYearDate.setHours(0, 0, 0, 0);  
+    console.log(afterFourYearDate);
+
 
     const ValdityDate = new Date(DigressionVendorCodeVal);
+    ValdityDate.setHours(0, 0, 0, 0); 
+    console.log(ValdityDate);
+    console.log(DigressionVendorCodeVal);
 
     if (ValdityDate < currentDate) {
-        req.error(400, "Validity Digression Date must be Greater than Current Date");
-
+        req.error(400, "Validity Digression Date must be greater than the current date");
     }
     if (ValdityDate > afterFourYearDate) {
-        req.error(400, 'Validity Digression Date can not be more than Four Years')
-
+        req.error(400, 'Validity Digression Date cannot be more than four years');
     }
+
 
     const GSTIN_match = GSTIN.substring(2, 12);
     if (GSTIN_match !== PANCardNo) {
-
         req.error(400, "GST's digits from 3 to 10 should exactly match!!");
     }
-
-
 }

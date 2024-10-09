@@ -321,7 +321,7 @@ sap.ui.define([
                 };
                 // Collect form field values
                 var oFormData = {
-                    validity: oView.byId("datePicker").getDateValue(),
+                    validity: oView.byId("datePicker").getValue(),
                     relatedParty: oView.byId("radioGroup").getSelectedButton(),
                     supplierSpendType: oView.byId("supplierSpendType").getSelectedKey(),
                     natureOfActivity: oView.byId("NatureofActivity").getSelectedKey(),
@@ -485,6 +485,8 @@ sap.ui.define([
                         "PriContactEmail": oFormData.primaryEmail,
                         "PriContactMNumber": oFormData.primaryPhone
                     };
+                    console.log("DATE");
+                    console.log(oFormData.validity);
 
                     // Use the OData create method
                     oModel.setUseBatch(false);
@@ -511,7 +513,6 @@ sap.ui.define([
 
 
             onUploadFile: function (ReqID) {
-                console.log("On Upload file--------->");
 
                 // Use arrow function for postAttachments
                 const postAttachments = (attachments, ReqID) => {
@@ -591,7 +592,7 @@ sap.ui.define([
 
                         if (uploaderId.includes("fileUploaderPan")) {
                             documentType = "PAN";
-                            attachmentId = "PAN-" + panCount;  // Simple counter for PAN
+                            attachmentId =panCount;  // Simple counter for PAN
                             oDocumentFiles.pan.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
@@ -602,7 +603,7 @@ sap.ui.define([
                             });
                         } else if (uploaderId.includes("fileUploaderGst")) {
                             documentType = "GST";
-                            attachmentId = "GST-" + gstCount;  // Simple counter for GST
+                            attachmentId = gstCount;  // Simple counter for GST
                             oDocumentFiles.gst.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
@@ -613,10 +614,10 @@ sap.ui.define([
                             });
                         } else if (uploaderId.includes("fileUploaderCin")) {
                             documentType = "CIN";
-                            attachmentId = "CIN-" + cinCount;  // Simple counter for CIN
+                            attachmentId = cinCount;  // Simple counter for CIN
                             oDocumentFiles.cin.push({
                                 fileName: sFileName,
-                                fileUrl: sFileUrl,
+                                fileUrl: sFileUrl, 
                                 fileContent: sFileUrl,
                                 fileType: sFileType,
                                 Doc_Type: 'CIN',

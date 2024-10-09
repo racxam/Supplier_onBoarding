@@ -186,7 +186,7 @@
                     />
                       <unified:FileUploader
         id="fileUploaderPan"
-        fileType="jpg,png,pdf,docx"
+        fileType="jpg,png,pdf,docx,jpeg"
         change="onFileUpload"
         width="100%"
     />
@@ -228,7 +228,7 @@
                     <Label text="GST Registration Certificate Attachment" required="true"/>
    <unified:FileUploader
         id="fileUploaderGst"
-        fileType="jpg,png,pdf,docx"
+        fileType="jpg,png,pdf,docx,jpeg"
         change="onFileUpload"
         width="100%"
     />
