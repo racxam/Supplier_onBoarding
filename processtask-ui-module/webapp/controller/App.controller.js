@@ -15,8 +15,6 @@ sap.ui.define(
     "use strict";
 
     return BaseController.extend("com.sumo.processtaskuimodule.controller.App", {
-
-
       onInit: function () {
 
         // Initialize the model with an empty array for files
@@ -30,12 +28,16 @@ sap.ui.define(
 
 
       onReadform: function () {
-        console.log("Reached onReadForm");
+        var oView = this.getView();
+        var oText = oView.byId("requestId");
+        var RequestID = oText.getText();
+
+        console.log("Req ID Value: " + RequestID);
+
         var that = this;
-        let ReqId = this.getView().byId("req-txt").getText();
-        console.log(ReqId);
         var oModel = this.getOwnerComponent().getModel();
-        var oFilter = new sap.ui.model.Filter('ID', 'EQ', ReqId );
+        var oFilter = new sap.ui.model.Filter('ID', 'EQ', RequestID);
+        console.log("filter" + oFilter);
         // Read the OData service and fetch data
         oModel.read("/supplierReqSrv", {
           filters: [oFilter],
@@ -61,8 +63,12 @@ sap.ui.define(
 
       onReadAttachments: function () {
         var that = this;
+        var oView = this.getView();
         var oModel = this.getOwnerComponent().getModel();
-        var oFilter = new sap.ui.model.Filter('Req_Supplier_ID', 'EQ', '2c6444b4-af03-4a61-8a27-37af63ed9a03');
+        var oText = oView.byId("requestId");
+        var RequestID = oText.getText();
+
+        var oFilter = new sap.ui.model.Filter('Req_Supplier_ID', 'EQ', RequestID);
 
         oModel.read("/SReqattachmentsSrv", {
           filters: [oFilter],
@@ -102,7 +108,7 @@ sap.ui.define(
 
       onOpenDialog: function (documentType) {
         if (!this._oDialog) {
-          this._oDialog = sap.ui.xmlfragment("com.digitech.digitechproject.view.fragment.uploadfile", this);
+          this._oDialog = sap.ui.xmlfragment("com.sumo.processtaskuimodule.view.fragment.uploadfile", this);
           this.getView().addDependent(this._oDialog);
         }
 
@@ -126,29 +132,7 @@ sap.ui.define(
           this._oDialog.close();
         }
       },
-      // onDownloadFile: function (oEvent) {
-      //     const sFileName = oEvent.getSource().data("fileName");
-      //     const documentType = this._oDialog.data("documentType");
 
-      //     var oModel = this.getView().getModel(); // Assuming this is a JSONModel
-
-      //     // Fetch the file content from the JSON model
-      //     var aDocumentFiles = oModel.getProperty("/documentFiles/" + documentType);
-      //     var oFile = aDocumentFiles.find(file => file.fileName === sFileName);
-
-      //     console.log("Selected File: ", oFile); // Log to see what the selected file object looks like
-
-      //     if (oFile && oFile.fileContent) {
-      //         // Create a blob and trigger download
-      //         const blob = this._base64ToBlob(oFile.fileContent);
-      //         const link = document.createElement('a');
-      //         link.href = URL.createObjectURL(blob);
-      //         link.download = sFileName;
-      //         link.click();
-      //     } else {
-      //         MessageToast.show("File not found or missing content.");
-      //     }
-      // },
       onDownloadFile: function (oEvent) {
         const sFileName = oEvent.getSource().data("fileName");
         const documentType = this._oDialog.data("documentType");
@@ -250,6 +234,7 @@ sap.ui.define(
           return null; // Handle the error
         }
       }
+
     });
-  }
-);
+  });
+

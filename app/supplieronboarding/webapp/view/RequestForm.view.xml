@@ -1,14 +1,15 @@
-<mvc:View controllerName="com.sumo.supplieronboarding.controller.RequestForm"
-    xmlns:mvc="sap.ui.core.mvc" 
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.RequestForm"
+    xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns:unified="sap.ui.unified"
-    xmlns:upload="sap.m.upload">
-   
-      <Page
+    xmlns:upload="sap.m.upload"
+>
+    <Page
         id="page1"
         title="{i18n>title}"
     >
@@ -72,7 +73,7 @@
                         text="Supplier Spend Type"
                         required="true"
                     />
-                    <ComboBox
+                    <Select
                         id="supplierSpendType"
                         selectedKey=""
                         items="{/results}"
@@ -85,14 +86,14 @@
                                 key="{SpendsTypes}"
                             />
                         </items>
-                    </ComboBox>
+                    </Select>
 
                     <Label
                         id="NatureofActivityLabelID"
                         text="Nature of Activity"
                         required="true"
                     />
-                    <ComboBox
+                    <Select
                         id="NatureofActivity"
                         selectedKey=""
                         items="{/results}"
@@ -105,7 +106,7 @@
                                 key="{Activity}"
                             />
                         </items>
-                    </ComboBox>
+                    </Select>
 
                     <Label
                         id="SectorLabelID"
@@ -116,7 +117,7 @@
                         id="sectorComboBox"
                         placeholder="Select sectors"
                         items="{/results}"
-                         selectionChange="handleMultiComboBoxChange"
+                        selectionChange="handleMultiComboBoxChange"
                     >
                         <items>
                             <core:Item
@@ -152,7 +153,7 @@
                         visible="true"
                         placeholder="Select Subfunction"
                         items="{functionsModel>/Functions}"
-                         selectionChange="handleMultiComboBoxChange"
+                        selectionChange="handleMultiComboBoxChange"
                     >
                         <core:Item
                             id="Item4"
@@ -184,23 +185,23 @@
                         text="PAN Card Attachment"
                         required="true"
                     />
-                      <unified:FileUploader
-        id="fileUploaderPan"
-        fileType="jpg,png,pdf,docx,jpeg"
-        change="onFileUpload"
-        width="100%"
-    />
-    <Button
-       id="panuploadbutton"
-        text="{
+                    <unified:FileUploader
+                        id="fileUploaderPan"
+                        fileType="jpg,png,pdf,docx,jpeg"
+                        change="onFileUpload"
+                        width="100%"
+                    />
+                    <Button
+                        id="panuploadbutton"
+                        text="{
             parts: [
                 { path: '/documentFiles/pan' },
                 { value: 'pan' }
             ],
             formatter: '.formatAttachmentButtonText'
         }"
-        press="onOpenDialog('pan')"
-    />
+                        press="onOpenDialog('pan')"
+                    />
 
                     <Label
                         id="GSTINLabel"
@@ -225,24 +226,27 @@
                         text="GST Registration Certificate Attachment"
                         required="true"
                     />
-                    <Label text="GST Registration Certificate Attachment" required="true"/>
-   <unified:FileUploader
-        id="fileUploaderGst"
-        fileType="jpg,png,pdf,docx,jpeg"
-        change="onFileUpload"
-        width="100%"
-    />
-    <Button
-        id="gstuploadbutton"
-        text="{
+                    <Label
+                        text="GST Registration Certificate Attachment"
+                        required="true"
+                    />
+                    <unified:FileUploader
+                        id="fileUploaderGst"
+                        fileType="jpg,png,pdf,docx,jpeg"
+                        change="onFileUpload"
+                        width="100%"
+                    />
+                    <Button
+                        id="gstuploadbutton"
+                        text="{
             parts: [
                 { path: '/documentFiles/gst' },
                 { value: 'gst' }
             ],
             formatter: '.formatAttachmentButtonText'
         }"
-        press="onOpenDialog('gst')"
-    />
+                        press="onOpenDialog('gst')"
+                    />
 
                     <Label
                         id="SupplierNameLabel"
@@ -359,7 +363,11 @@
                 </f:content>
             </f:SimpleForm>
 
-             <core:Fragment fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile" id="fileListFragment1" type="XML"/>
+            <core:Fragment
+                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
+                id="fileListFragment1"
+                type="XML"
+            />
 
             <Toolbar id="Toolbar1">
                 <ToolbarSpacer id="ToolbarSpacer" />

@@ -44,37 +44,85 @@ sap.ui.define([
             },
             onPanCardChange: function (oEvent) {
                 var oInput = oEvent.getSource();
-                var sValue = oInput.getValue();
-                var panCardPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                var sValue = oInput.getValue().toUpperCase();  // Convert input to uppercase
 
-                if (panCardPattern.test(sValue)) {
-                    oInput.setValueState("Success");
-                } else {
-                    oInput.setValueState("Error");
-                    oInput.setValueStateText("Invalid PAN format. Please enter a valid PAN.");
+                // Remove all non-alphanumeric characters
+                sValue = sValue.replace(/[^A-Z0-9]/g, '');  // Keep only letters (A-Z) and numbers (0-9)
+
+                // Update the input field with the cleaned-up value
+                oInput.setValue(sValue);
+
+                // Define a variable to hold the timeout reference
+                if (this._panCardDebounceTimeout) {
+                    clearTimeout(this._panCardDebounceTimeout); // Clear previous timeout
                 }
+
+                // Set a new timeout to validate after the user stops typing
+                this._panCardDebounceTimeout = setTimeout(function () {
+                    // Validate only if the length is exactly 10 characters
+                    if (sValue.length === 10) {
+                        var panCardPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;  // PAN format: 5 letters, 4 numbers, 1 letter
+
+                        if (panCardPattern.test(sValue)) {
+                            oInput.setValueState("Success");
+                            oInput.setValueStateText("");
+                        } else {
+                            oInput.setValueState("Error");
+                            oInput.setValueStateText("Invalid PAN format. It should be 5 letters, 4 numbers, and 1 letter.");
+                        }
+                    } else {
+                        // If input is not 10 characters long, show an error
+                        oInput.setValueState("Error");
+                        oInput.setValueStateText("PAN must be exactly 10 characters long.");
+                    }
+                }, 1000);  // Debounce delay of 1000 milliseconds
             },
+
             onGSTINChange: function (oEvent) {
                 var oInput = oEvent.getSource();
-                var sGSTIN = oInput.getValue();
+                var sValue = oInput.getValue().toUpperCase();  // Convert input to uppercase
 
-                var gstinPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
-                var sPanCard = this.getView().getModel().getProperty("/panCardValue");
+                // Remove all non-alphanumeric characters (only digits and uppercase letters)
+                sValue = sValue.replace(/[^A-Z0-9]/g, '');  // Allow only A-Z and 0-9
 
-                if (gstinPattern.test(sGSTIN)) {
+                // Update the input field with the cleaned-up value
+                oInput.setValue(sValue);
 
-                    var sGSTINPan = sGSTIN.substring(2, 12);
+                var sPanCard = this.getView().getModel().getProperty("/panCardValue");  // Get the PAN from the model
 
-                    if (sGSTINPan === sPanCard) {
-                        oInput.setValueState("Success");
-                    } else {
-                        oInput.setValueState("Error");
-                        oInput.setValueStateText("The PAN part of the GSTIN does not match the entered PAN.");
-                    }
-                } else {
-                    oInput.setValueState("Error");
-                    oInput.setValueStateText("Invalid GSTIN format. Please enter a valid GSTIN.");
+                // Define a variable to hold the timeout reference
+                if (this._gstinDebounceTimeout) {
+                    clearTimeout(this._gstinDebounceTimeout);  // Clear previous timeout
                 }
+
+                // Set a new timeout to validate after the user stops typing
+                this._gstinDebounceTimeout = setTimeout(function () {
+                    // Validate only if the length is exactly 15 characters
+                    if (sValue.length === 15) {
+                        var gstinPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;  // GSTIN format
+
+                        if (gstinPattern.test(sValue)) {
+                            // Extract PAN part from GSTIN (2nd to 11th characters)
+                            var sGSTINPan = sValue.substring(2, 12);
+
+                            // Check if the extracted PAN matches the entered PAN
+                            if (sGSTINPan === sPanCard) {
+                                oInput.setValueState("Success");
+                                oInput.setValueStateText("");
+                            } else {
+                                oInput.setValueState("Error");
+                                oInput.setValueStateText("The PAN part of the GSTIN does not match the entered PAN.");
+                            }
+                        } else {
+                            oInput.setValueState("Error");
+                            oInput.setValueStateText("Invalid GSTIN format. It should be 15 characters long with the correct structure.");
+                        }
+                    } else {
+                        // If input is not 15 characters long, show an error
+                        oInput.setValueState("Error");
+                        oInput.setValueStateText("GSTIN must be exactly 15 characters long.");
+                    }
+                }, 1000);  // Debounce delay of 1000 milliseconds
             },
 
             onSubmitpan: function () {
@@ -99,59 +147,74 @@ sap.ui.define([
             //     }
             // },
 
-            onSubmitgst: function () {
-                // Get the input value from the user
-                var sGstinInput = this.byId("gstinInput").getValue().trim();
+            // onSubmitgst: function () {
+            //     // Get the input value from the user
+            //     var sGstinInput = this.byId("gstinInput").getValue().trim();
 
-                // Access the model with customer data
-                var oModel = this.getView().getModel("customerModel");
-                var oData = oModel.getProperty("/customers");
+            //     // Access the model with customer data
+            //     var oModel = this.getView().getModel("customerModel");
+            //     var oData = oModel.getProperty("/customers");
 
-                // Find customer based on GSTIN
-                var oCustomer = oData.find(function (customer) {
-                    return customer.GSTIN === sGstinInput;
-                });
+            //     // Find customer based on GSTIN
+            //     var oCustomer = oData.find(function (customer) {
+            //         return customer.GSTIN === sGstinInput;
+            //     });
 
-                if (oCustomer) {
-                    // GSTIN found, show details in a dialog
-                    var oDialog = new sap.m.Dialog({
-                        title: "Customer Details",
-                        content: new sap.m.Text({
-                            text: "  Name: " + oCustomer.Name + "\n" +
-                                "  Address: " + oCustomer.Address + "\n" +
-                                "  Contact Number: " + oCustomer.ContactNumber
-                        }),
-                        beginButton: new sap.m.Button({
-                            text: "OK",
-                            press: function () {
-                                oDialog.close();
-                            }
-                        }),
-                        afterClose: function () {
-                            oDialog.destroy();
-                        }
-                    });
+            //     if (oCustomer) {
+            //         // GSTIN found, show details in a dialog
+            //         var oDialog = new sap.m.Dialog({
+            //             title: "Customer Details",
+            //             content: new sap.m.Text({
+            //                 text: "  Name: " + oCustomer.Name + "\n" +
+            //                     "  Address: " + oCustomer.Address + "\n" +
+            //                     "  Contact Number: " + oCustomer.ContactNumber
+            //             }),
+            //             beginButton: new sap.m.Button({
+            //                 text: "OK",
+            //                 press: function () {
+            //                     oDialog.close();
+            //                 }
+            //             }),
+            //             afterClose: function () {
+            //                 oDialog.destroy();
+            //             }
+            //         });
 
-                    oDialog.open();
-                } else {
-                    // GSTIN not found, show message toast
-                    MessageToast.show("GSTIN not found!");
-                }
-            },
+            //         oDialog.open();
+            //     } else {
+            //         // GSTIN not found, show message toast
+            //         MessageToast.show("GSTIN not found!");
+            //     }
+            // },
 
             onEmailChange: function (oEvent) {
                 var oInput = oEvent.getSource();
                 var sEmail = oInput.getValue();
 
+                // Disable spaces by removing them immediately after any input
+                sEmail = sEmail.replace(/\s+/g, "");  // This removes all spaces from the input
 
-                var emailPattern = /^[a-zA-Z0-9!#$%&'*+?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])$/;
+                // Set the value back to the input field after removing spaces
+                oInput.setValue(sEmail);
 
-                if (emailPattern.test(sEmail)) {
-                    oInput.setValueState("Success");
-                } else {
-                    oInput.setValueState("Error");
-                    oInput.setValueStateText("Invalid Email format. Please enter a valid Email.");
+                // Clear any previous debounce timeout to reset the timer
+                if (this._emailDebounceTimeout) {
+                    clearTimeout(this._emailDebounceTimeout);
                 }
+
+                // Set a new debounce timeout to validate after 1000ms
+                this._emailDebounceTimeout = setTimeout(function () {
+                    // Updated regex pattern to validate email format
+                    var emailPattern = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])$/;
+
+                    // Check if the email is not empty and matches the pattern
+                    if (sEmail === "" || !emailPattern.test(sEmail)) {
+                        oInput.setValueState("Error");
+                        oInput.setValueStateText("Invalid Email format. Please enter a valid Email.");
+                    } else {
+                        oInput.setValueState("Success");
+                    }
+                }, 1000);  // Debounce delay of 1000 milliseconds
             },
 
             onSubmitemail: function () {
@@ -168,21 +231,35 @@ sap.ui.define([
             onNumberChange: function (oEvent) {
                 var oInput = oEvent.getSource();   // Get the input control
                 var sValue = oInput.getValue();    // Get the current value of the input
-                sValue = sValue.replace(/\D/g, '');  // This removes all non-numeric characters
+
+                sValue = sValue.replace(/\D/g, '');
 
                 if (sValue.length > 10) {
                     sValue = sValue.substring(0, 10);  // Limit the string to 10 digits
                 }
 
                 oInput.setValue(sValue);
-
-                if (sValue.length === 10) {
-                    oInput.setValueState("Success");
-                } else {
-                    oInput.setValueState("Error");
-                    oInput.setValueStateText("Invalid Number. Please enter a valid Mobile Number.");
+                // Clear any previous timeout to reset the debounce timer
+                if (this._numberDebounceTimeout) {
+                    clearTimeout(this._numberDebounceTimeout);
                 }
+
+                // Set a new debounce timeout to validate after 1000ms
+                this._numberDebounceTimeout = setTimeout(function () {
+                    // This removes all non-numeric characters
+
+
+
+                    // Validation logic
+                    if (sValue.length === 10) {
+                        oInput.setValueState("Success");
+                    } else {
+                        oInput.setValueState("Error");
+                        oInput.setValueStateText("Invalid Number. Please enter a valid Mobile Number.");
+                    }
+                }, 1000);  // Debounce delay of 1000 milliseconds
             },
+
 
             onSubmitnumber: function () {
                 var oNumberInput = this.byId("numberInput");
@@ -375,11 +452,20 @@ sap.ui.define([
                     oView.byId("childMultiComboBox").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.panCardNumber) {
+                if (!oFormData.panCardNumber || oFormData.panCardNumber.trim() === "") {
                     oView.byId("panInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("PAN Card Number is required");
                     bValid = false;
                 } else {
-                    oView.byId("panInput").setValueState(sap.ui.core.ValueState.None);
+                    var sPanCard = oFormData.panCardNumber.trim();
+                    // PAN format: 5 letters, 4 digits, 1 letter (e.g., AAAAA9999A)
+                    var panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                    if (!panPattern.test(sPanCard)) {
+                        oView.byId("panInput").setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("Invalid PAN Card Number format. PAN should be in the format AAAAA9999A.");
+                        bValid = false;
+                    } else {
+                        oView.byId("panInput").setValueState(sap.ui.core.ValueState.None);
+                    }
                 }
 
                 if (!attachment.panattachment) {
@@ -396,70 +482,149 @@ sap.ui.define([
                     oView.byId("fileUploaderGst").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.gstinNumber) {
-                    oView.byId("gstinInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("GSTIN Number is required");
+                if (!oFormData.gstinNumber || oFormData.gstinNumber.trim() === "") {
+                    var gstinInput = oView.byId("gstinInput");
+                    if (gstinInput) {
+                        gstinInput.setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("GSTIN Number is required");
+                    }
                     bValid = false;
                 } else {
-                    oView.byId("gstinInput").setValueState(sap.ui.core.ValueState.None);
+                    var sGstinNumber = oFormData.gstinNumber.trim();
+
+                    // GSTIN pattern: 15 characters (e.g., 22AAAAA1234A1Z5)
+                    var gstinPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[0-9]{1}$/;
+
+                    if (!gstinPattern.test(sGstinNumber)) {
+                        var gstinInput = oView.byId("gstinInput");
+                        if (gstinInput) {
+                            gstinInput.setValueState(sap.ui.core.ValueState.Error)
+                                .setValueStateText("Invalid GSTIN Number format. It should be in the format 12ABCDE3456Z1Z5.");
+                        }
+                        bValid = false;
+                    } else {
+                        var gstinInput = oView.byId("gstinInput");
+                        if (gstinInput) {
+                            gstinInput.setValueState(sap.ui.core.ValueState.None);  // GSTIN format is valid, clear error state
+                        }
+
+                        // Extract PAN part from GSTIN (characters 2 to 11)
+                        var sGSTINPan = sGstinNumber.substring(2, 12);
+                        var sPanCard = oFormData.panCardNumber;
+
+                        if (sGSTINPan === sPanCard) {
+                            // GSTIN and PAN match
+                            gstinInput.setValueState(sap.ui.core.ValueState.Success);
+                            gstinInput.setValueStateText("");  // Clear any previous error messages
+                        } else {
+                            // PAN part of GSTIN does not match entered PAN
+                            gstinInput.setValueState(sap.ui.core.ValueState.Error);
+                            gstinInput.setValueStateText("The PAN part of the GSTIN does not match the entered PAN.");
+                            bValid = false;
+                        }
+                    }
                 }
 
-                if (!oFormData.supplierFullName) {
-                    oView.byId("SupplierNameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Full Name is required");
+
+                if (!oFormData.supplierFullName || oFormData.supplierFullName.trim() === "") {
+                    oView.byId("SupplierNameInput").setValueState(sap.ui.core.ValueState.Error);
+                    oView.byId("SupplierNameInput").setValueStateText("Supplier Full Name is required and cannot be only spaces.");
                     bValid = false;
                 } else {
                     oView.byId("SupplierNameInput").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.supplierTradeName) {
-                    oView.byId("SuppliertradeNameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier trade Name is required");
+                if (!oFormData.supplierTradeName || oFormData.supplierTradeName.trim() === "") {
+                    oView.byId("SuppliertradeNameInput").setValueState(sap.ui.core.ValueState.Error);
+                    oView.byId("SuppliertradeNameInput").setValueStateText("Supplier Trade Name is required and cannot be only spaces.");
                     bValid = false;
                 } else {
                     oView.byId("SuppliertradeNameInput").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.supplierAddress) {
-                    oView.byId("SupplierAddressInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Address is required");
+                if (!oFormData.supplierAddress || oFormData.supplierAddress.trim() === "") {
+                    oView.byId("SupplierAddressInput").setValueState(sap.ui.core.ValueState.Error);
+                    oView.byId("SupplierAddressInput").setValueStateText("Supplier Address is required and cannot be only spaces.");
                     bValid = false;
                 } else {
                     oView.byId("SupplierAddressInput").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.supplierGstAddress) {
-                    oView.byId("SupplierAddressgstInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Supplier Address gst is required");
+                if (!oFormData.supplierGstAddress || oFormData.supplierGstAddress.trim() === "") {
+                    oView.byId("SupplierAddressgstInput").setValueState(sap.ui.core.ValueState.Error);
+                    oView.byId("SupplierAddressgstInput").setValueStateText("Supplier GST Address is required and cannot be only spaces.");
                     bValid = false;
                 } else {
                     oView.byId("SupplierAddressgstInput").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.primaryFirstName) {
-                    oView.byId("PrimaryFirstnameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary First name is required");
+                if (!oFormData.primaryFirstName || oFormData.primaryFirstName.trim() === "") {
+                    oView.byId("PrimaryFirstnameInput").setValueState(sap.ui.core.ValueState.Error);
+                    oView.byId("PrimaryFirstnameInput").setValueStateText("Primary First Name is required and cannot be only spaces.");
                     bValid = false;
                 } else {
                     oView.byId("PrimaryFirstnameInput").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.primaryLastName) {
-                    oView.byId("PrimaryLastnameInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary Last name is required");
+                if (!oFormData.primaryLastName || oFormData.primaryLastName.trim() === "") {
+                    oView.byId("PrimaryLastnameInput").setValueState(sap.ui.core.ValueState.Error);
+                    oView.byId("PrimaryLastnameInput").setValueStateText("Primary Last Name is required and cannot be only spaces.");
                     bValid = false;
                 } else {
                     oView.byId("PrimaryLastnameInput").setValueState(sap.ui.core.ValueState.None);
                 }
 
-                if (!oFormData.primaryEmail) {
-                    oView.byId("emailInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary Email is required");
+                if (!oFormData.primaryEmail || oFormData.primaryEmail.trim() === "") {
+                    oView.byId("emailInput").setValueState(sap.ui.core.ValueState.Error)
+                        .setValueStateText("Primary Email is required");
                     bValid = false;
                 } else {
-                    oView.byId("emailInput").setValueState(sap.ui.core.ValueState.None);
+                    // Remove spaces and validate email format
+                    var sEmail = oFormData.primaryEmail.trim().replace(/\s+/g, "");  // Remove spaces
+
+                    var emailPattern = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])$/;
+
+                    if (!emailPattern.test(sEmail)) {
+                        oView.byId("emailInput").setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("Invalid Primary Email format. Please enter a valid email.");
+                        bValid = false;
+                    } else {
+                        oView.byId("emailInput").setValueState(sap.ui.core.ValueState.None);
+                    }
                 }
 
-                if (!oFormData.primaryPhone) {
-                    oView.byId("numberInput").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Primary Phone Number is required");
+                if (!oFormData.primaryPhone || oFormData.primaryPhone.trim() === "") {
+                    var numberInput = oView.byId("numberInput");
+                    if (numberInput) {
+                        numberInput.setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("Primary Phone Number is required");
+                    }
                     bValid = false;
                 } else {
-                    oView.byId("numberInput").setValueState(sap.ui.core.ValueState.None);
+                    var sPhoneNumber = oFormData.primaryPhone.trim();
+
+                    // Phone number validation pattern (allowing only numbers and optional formatting like dashes)
+                    var phonePattern = /^[0-9]{10}$/;  // Example: 10-digit phone number
+
+                    if (!phonePattern.test(sPhoneNumber)) {
+                        var numberInput = oView.byId("numberInput");
+                        if (numberInput) {
+                            numberInput.setValueState(sap.ui.core.ValueState.Error)
+                                .setValueStateText("Invalid Phone Number. It should be 10 digits.");
+                        }
+                        bValid = false;
+                    } else {
+                        var numberInput = oView.byId("numberInput");
+                        if (numberInput) {
+                            numberInput.setValueState(sap.ui.core.ValueState.None);
+                        }
+                    }
                 }
 
-                // If the form is valid, proceed with the OData service call
+                if (!bValid) {
+                    return;  // Prevent form submission
+                }
+
                 if (bValid) {
                     if (oFormData.relatedParty.getText() === 'Yes') {
                         oFormData.relatedParty = true;
@@ -488,24 +653,24 @@ sap.ui.define([
                     console.log("DATE");
                     console.log(oFormData.validity);
 
-                // var oNewEntry = {
-                //     "DigressionVendorCodeVal": "2025-09-30",
-                //     "IsRelPartyVCode": true,
-                //     "SpendType": "Indirect",
-                //     "NatureOfActivity": "Material",
-                //     "Sector": ["IT", "Manufacturing"],
-                //     "FunAndSubfun": ["Finance", "HR"],
-                //     "PANCardNo": "ABCDE1234F",
-                //     "GSTIN": "27ABCDE1234F1Z5",
-                //     "SFullName": "ABC Corp Pvt. Ltd.",
-                //     "STradeNameGST": "ABC Trade",
-                //     "SAddress": "123, Example Street, City, State",
-                //     "SAddressGST": "123, Example Street, City, State",
-                //     "PriContactFName": "Sumit",
-                //     "PriContactLName": "Doe",
-                //     "PriContactEmail": "john.doe@example.com",
-                //     "PriContactMNumber": "1234567890"
-                // }
+                    // var oNewEntry = {
+                    //     "DigressionVendorCodeVal": "2025-09-30",
+                    //     "IsRelPartyVCode": true,
+                    //     "SpendType": "Indirect",
+                    //     "NatureOfActivity": "Material",
+                    //     "Sector": ["IT", "Manufacturing"],
+                    //     "FunAndSubfun": ["Finance", "HR"],
+                    //     "PANCardNo": "ABCDE1234F",
+                    //     "GSTIN": "27ABCDE1234F1Z5",
+                    //     "SFullName": "ABC Corp Pvt. Ltd.",
+                    //     "STradeNameGST": "ABC Trade",
+                    //     "SAddress": "123, Example Street, City, State",
+                    //     "SAddressGST": "123, Example Street, City, State",
+                    //     "PriContactFName": "Sumit",
+                    //     "PriContactLName": "Doe",
+                    //     "PriContactEmail": "john.doe@example.com",
+                    //     "PriContactMNumber": "1234567890"
+                    // }
 
                     // Use the OData create method
                     oModel.setUseBatch(false);
@@ -525,7 +690,7 @@ sap.ui.define([
                             MessageToast.show("Error while submitting the Form.");
                         }
                     });
-                } 
+                }
                 else {
                     sap.m.MessageToast.show("Please fill All The Required fields.");
                 }
@@ -593,7 +758,7 @@ sap.ui.define([
                     var that = this;
 
                     oReader.onload = function (e) {
-                        var sFileUrl =e.target.result;  // Get the file's base64 data URL
+                        var sFileUrl = e.target.result;  // Get the file's base64 data URL
                         console.log("Base64 File URL: ", sFileUrl);
 
                         var oModel = that.getView().getModel();
@@ -611,7 +776,7 @@ sap.ui.define([
 
                         if (uploaderId.includes("fileUploaderPan")) {
                             documentType = "PAN";
-                            attachmentId =panCount;  // Simple counter for PAN
+                            attachmentId = panCount;  // Simple counter for PAN
                             oDocumentFiles.pan.push({
                                 fileName: sFileName,
                                 fileUrl: sFileUrl,
@@ -636,7 +801,7 @@ sap.ui.define([
                             attachmentId = cinCount;  // Simple counter for CIN
                             oDocumentFiles.cin.push({
                                 fileName: sFileName,
-                                fileUrl: sFileUrl, 
+                                fileUrl: sFileUrl,
                                 fileContent: sFileUrl,
                                 fileType: sFileType,
                                 Doc_Type: 'CIN',

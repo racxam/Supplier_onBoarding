@@ -13,7 +13,8 @@
         "@sap/cds": "^8",
         "@sap/xssec": "^4.2.4",
         "express": "^4.21.0",
-        "passport": "^0.7.0"
+        "passport": "^0.7.0",
+        "sap-cf-axios": "^1.0.2"
     },
     "devDependencies": {
         "@cap-js/cds-types": "^0.6",
@@ -41,6 +42,14 @@
                 "credentials": {
                     "destination": "spa_process_destination",
                     "path": "/workflow/rest/v1"
+                }
+            },
+            "GstApi": {
+                "kind": "rest",
+                "credentials": {
+                    "destination": "GstApi",
+                    "requestTimeout": 10000,
+                    "csrf": true
                 }
             },
             "auth": "xsuaa"

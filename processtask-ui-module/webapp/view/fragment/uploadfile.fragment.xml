@@ -1,12 +1,24 @@
 <core:FragmentDefinition
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <Dialog title="Uploaded Files" class="sapUiResponsivePadding sapUiContentPadding" draggable="true" resizable="true">
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        title="Uploaded Files"
+        class="sapUiResponsivePadding sapUiContentPadding"
+        draggable="true"
+        resizable="true"
+    >
         <VBox>
             <!-- List for displaying uploaded files -->
-            <List id="fileList1" items="{/documentFiles}">
+            <List
+                id="fileList1"
+                items="{/documentFiles}"
+            >
                 <CustomListItem>
-                    <HBox justifyContent="SpaceBetween" alignItems="Center">
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        alignItems="Center"
+                    >
                         <!-- File Name Text -->
                         <HBox alignItems="Center">
                             <Text text="{fileName}" />
@@ -17,18 +29,26 @@
                             <!-- Download Button -->
                             <Button
                                 icon="sap-icon://download"
-                                press="onDownloadFile">
+                                press="onDownloadFile"
+                            >
                                 <customData>
-                                    <core:CustomData key="fileName" value="{fileName}" />
+                                    <core:CustomData
+                                        key="fileName"
+                                        value="{fileName}"
+                                    />
                                 </customData>
                             </Button>
                             <!-- Delete Button -->
                             <HBox width="10px" />
                             <Button
                                 icon="sap-icon://delete"
-                                press="onDeleteFile">
+                                press="onDeleteFile"
+                            >
                                 <customData>
-                                    <core:CustomData key="fileName" value="{fileName}" />
+                                    <core:CustomData
+                                        key="fileName"
+                                        value="{fileName}"
+                                    />
                                 </customData>
                             </Button>
                         </HBox>
@@ -37,7 +57,10 @@
             </List>
         </VBox>
         <endButton>
-            <Button text="Close" press=".onCloseDialog" />
+            <Button
+                text="Close"
+                press=".onCloseDialog"
+            />
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

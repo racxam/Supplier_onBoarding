@@ -18,6 +18,13 @@
       "authenticationType": "xsuaa"
     },
     {
+      "source": "^/odata/(.*)$",
+      "target": "/odata/$1",
+      "destination": "SupplierOnboarding-srv-api",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
       "source": "^/sap/(.*)$",
       "target": "/sap/$1",
       "destination": "None",

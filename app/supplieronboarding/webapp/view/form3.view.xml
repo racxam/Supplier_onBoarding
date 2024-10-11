@@ -1,0 +1,220 @@
+
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.form3"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+>
+    <Page
+        id="page3"
+        title="{i18n>title}"
+    >
+        <VBox
+            id="wf-box"
+            height="100%"
+            width="100%"
+        >
+            <f:SimpleForm
+                id="requestFormList"
+                maxContainerCols="2"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanL="3"
+                labelSpanM="3"
+                columnsL="2"
+                columnsM="2"
+                emptySpanL="4"
+                emptySpanM="4"
+                adjustLabelSpan="false"
+                class="editableForm"
+                title="Request Form"
+            >
+                <f:content>
+                   <Label
+                            id="ApproverEmail"
+                            text="Approver's Email"
+                        />
+                        <Text
+                            id="approverEmail"
+                            text="{context>/approveremail}"
+                        />
+
+                        <Label
+                            id="requestLabel"
+                            text="RequestID"
+                        />
+                        <Text
+                            id="requestId"
+                            text="{context>/reqid}"
+                        />
+
+
+                    <Label
+                        id="valid-dig"
+                        text="Validity of digression vendor code upto"
+                        required="true"
+                    />
+                    <Text text="{/DigressionVendorCodeVal}" />
+                    <Label
+                        id="vender-code"
+                        text="Is it a related party vendor code?"
+                        required="true"
+                    />
+                    <Text text="{/IsRelPartyVCode}" />
+                    <Label
+                        id="sup-spend-ty"
+                        text="Supplier Spend Type"
+                        required="true"
+                    />
+                    <Text text="{/SpendType}" />
+                    <Label
+                        id="nature-act"
+                        text="Nature of Activity"
+                        required="true"
+                    />
+                    <Text text="{/NatureOfActivity}" />
+                    <Label
+                        id="sec"
+                        text="Sector"
+                        required="true"
+                    />
+                    <Text text="{/Sector/0}" />
+                    <Label
+                        id="fun-subfun"
+                        text="Function &amp; Subfunction"
+                        required="true"
+                    />
+                    <Text text="{/FunAndSubfun/0}" />
+                    <Label
+                        id="pan-cardno"
+                        text="PAN Card No."
+                        required="true"
+                    />
+                    <Text
+                        id="pancardno"
+                        text="{/PANCardNo}"
+                    />
+
+                    <Label
+                        id="_IDGenLabel111-1"
+                        text=" GSTIN No."
+                        required="true"
+                    />
+                    <Text
+                        id="gstInput-1"
+                        text="{/GSTIN}"
+                    />
+
+                    <Label
+                        id="_IDGenLabel19-1"
+                        text="GST Registration Certificate Attachment"
+                        required="true"
+                    />
+
+                    <Label
+                        id="_IDGenLabel11-1"
+                        text="Supplier Full Legal Name"
+                        required="true"
+                    />
+                    <Text
+                        id="SupplierNameInput-1"
+                        text="{/SFullName} "
+                    />
+                    <Label
+                        id="_IDGenLabel12-1"
+                        text="Supplier Trade Name (GST)"
+                        required="true"
+                    />
+                    <Text
+                        id="SuppliertradeNameInput-1"
+                        text="{/STradeNameGST}"
+                    />
+                    <Label
+                        id="_IDGenLabel13-1"
+                        text="Supplier Address"
+                        required="true"
+                    />
+                    <Text
+                        id="SupplierAddressInput-1"
+                        text="{/SAddress}"
+                    />
+                    <Label
+                        id="_IDGenLabel14-1"
+                        text="Supplier Address (GST)"
+                        required="true"
+                    />
+                    <Text
+                        id="SupplierAddressgstInput-1"
+                        text="{/SAddressGST}"
+                    />
+                    <Label
+                        id="_IDGenLabel15-1"
+                        text=" Primary Contact First Name"
+                        required="true"
+                    />
+                    <Text
+                        id="PrimaryFirstnameInput-1"
+                        text="{/PriContactFName}"
+                    />
+
+                    <Label
+                        id="_IDGenLabel16-1"
+                        text="Primary Contact Last Name"
+                        required="true"
+                    />
+                    <Text
+                        id="PrimaryLastnameInput-1"
+                        text="{/PriContactLName}"
+                    />
+                    <Label
+                        id="_IDGenLabel17-1"
+                        text="Primary Contact Email"
+                        required="true"
+                    />
+                    <Text
+                        id="emailInput-1"
+                        text="{/PriContactEmail}"
+                    />
+
+                    <Label
+                        id="_IDGenLabel18-1"
+                        text="Primary Contact Mobile Number"
+                        required="true"
+                    />
+                    <Text
+                        id="numberInput-1"
+                        text="{/PriContactMNumber}"
+                    />
+
+                    <Label
+                        id="Attachment-label-pan"
+                        text="Pan Attachment"
+                        required="true"
+                    />
+                    <Link
+                        endIcon="sap-icon://inspect"
+                        id="Attachment-pan"
+                        text="{ parts: [ { path: '/documentFiles/pan' } ], formatter: '.formatAttachmentButtonText' }"
+                        press="onOpenDialog('pan')"
+                    />
+
+                    <Label
+                        id="Attachment-label-gst"
+                        text="GST Attachment"
+                        required="true"
+                    />
+                    <Link
+                        endIcon="sap-icon://inspect"
+                        id="Attachment-gst"
+                        text="{ parts: [ { path: '/documentFiles/gst' } ], formatter: '.formatAttachmentButtonText' }"
+                        press="onOpenDialog('gst')"
+                    />
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+    </Page>
+</mvc:View>

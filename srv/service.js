@@ -1,9 +1,15 @@
+// const axios= require('axios');
+const SapCfAxios = require('sap-cf-axios').default;
+// the destination that we want to use is named 'DUMMY'
+const axios = SapCfAxios('GstApi');
+
 module.exports = async function () {
 
 
     // Vihaan Entities-------------------------------------------->
     const { supplierReqSrv, SavingsupplierReqSrv, SReqattachmentsSrv } = this.entities;
 
+    const GstApi = await cds.connect.to('GstApi');
 
     // Attachments-------------------------------------------->
     this.before('CREATE', SReqattachmentsSrv, BeforeAttachmentUpload);
@@ -13,8 +19,10 @@ module.exports = async function () {
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
     this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
+    this.on('getStatus', onGSTValidation);
 
-     // functions-------------------------------------------->
+
+    // functions-------------------------------------------->
     //1. Before supplier req form
     async function BeforeSupReqFun(req, res) {
 
@@ -58,7 +66,7 @@ module.exports = async function () {
             PriContactMNumber,
 
         };
-        console.log(DigressionVendorCodeVal + "DATEE------->");
+        console.log("REQID" + req.ID);
 
 
         const missingFields = Object.keys(mandatoryFields).filter(field => !mandatoryFields[field] || mandatoryFields[field].length === 0);
@@ -93,8 +101,7 @@ module.exports = async function () {
             SFullName,
 
         } = res.data;
-        let ReqID = res.id;
-        console.log(ReqID);
+        let ReqID = res.data.ID;
 
         try {
 
@@ -150,7 +157,24 @@ module.exports = async function () {
 
     }
 
+    async function onGSTValidation(req, res) {
+        console.log(GstApi);
+        try {
+            const response = await axios.get('?email=vikrant.raj@gmail.com&gstin=33GSPTN1351G1ZF', {
+                headers: {
+                    'client_id': '169e8939-4d76-4230-b4c5-935f3f4453ce',
+                    'client_secret': '51c2ad52-03db-4731-a660-af9131b42d6d',
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error calling GST API:', error.message);
+            return false;
+        }
 
+    }
 };
 
 

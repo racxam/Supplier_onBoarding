@@ -17,7 +17,7 @@
       ]
     },
     {
-      "name": "Run SupplierOnboarding-1",
+      "name": "Run Supplier_onBoarding-1",
       "request": "launch",
       "type": "node",
       "cwd": "${workspaceFolder}",
@@ -34,7 +34,7 @@
       "envFile": "${workspaceFolder}/.env1",
       "env": {
         "NODE_ENV": "development",
-        "run.config": "{\"handlerId\":\"cap_run_config_handler_id\",\"runnableId\":\"{\\\"projectPath\\\":\\\"/home/user/projects/SupplierOnboarding\\\",\\\"profileName\\\":\\\"development\\\"}\"}"
+        "run.config": "{\"handlerId\":\"cap_run_config_handler_id\",\"runnableId\":\"{\\\"projectPath\\\":\\\"/home/user/projects/Supplier_onBoarding\\\",\\\"profileName\\\":\\\"development\\\"}\"}"
       }
     }
   ]

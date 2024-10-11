@@ -20,4 +20,7 @@ service Attachments {
     entity SectorSrv                 as projection on common.master.Sector;
 
 
+    function getStatus() returns Boolean;
+
+
 };

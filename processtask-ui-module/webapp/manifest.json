@@ -17,11 +17,10 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/sap/opu/odata/",
+                "uri": "/odata/v2/attachments/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
-                    "localUri": "localService/metadata.xml",
                     "odataVersion": "2.0"
                 }
             }
