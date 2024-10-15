@@ -1,0 +1,55 @@
+<mvc:View controllerName="com.sumo.supplieronboarding.controller.SupplierTable"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core" 
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns="sap.m">
+    <Page id="page-SupplierTable" title="{i18n>title}">
+    <content>
+     	<VBox fitContainer="true">
+
+
+			<!-- <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="LineItemsSet" persistencyKey="SmartFilter_Explored" basicSearchFieldName="Bukrs" enableBasicSearch="true" >
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="SupplierId">
+					<smartFilterBar:defaultFilterValues>
+							<smartFilterBar:SelectOption low="0001">
+							</smartFilterBar:SelectOption>
+						</smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="Created By">
+						<smartFilterBar:defaultFilterValues>
+								<smartFilterBar:SelectOption low="2014">
+								</smartFilterBar:SelectOption>
+							</smartFilterBar:defaultFilterValues>
+						</smartFilterBar:ControlConfiguration>
+				</smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="Supplier Status">
+					<smartFilterBar:defaultFilterValues>
+							<smartFilterBar:SelectOption low="0001">
+							</smartFilterBar:SelectOption>
+						</smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+				
+				<smartFilterBar:layoutData>
+					<FlexItemData shrinkFactor="0"/>
+				</smartFilterBar:layoutData>
+			</smartFilterBar:SmartFilterBar> -->
+
+            
+			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="supplierReqSrv" 
+			smartFilterId="smartFilterBar" tableType="Table" enableExport="true" beforeExport="onBeforeExport" useVariantManagement="true"
+             useTablePersonalisation="true" header="Line Items" showRowCount="true" 
+             persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" 
+             class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="true"
+              >
+				<!-- layout data used to make the table growing but the filter bar fixed -->
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+			</smartTable:SmartTable>
+		</VBox>
+    </content>
+    </Page>
+</mvc:View>

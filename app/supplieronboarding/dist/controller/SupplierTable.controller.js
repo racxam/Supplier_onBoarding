@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(n){"use strict";return n.extend("com.sumo.supplieronboarding.controller.SupplierTable",{onInit:function(){}})});
+//# sourceMappingURL=SupplierTable.controller.js.map

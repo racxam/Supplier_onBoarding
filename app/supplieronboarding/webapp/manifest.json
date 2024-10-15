@@ -116,8 +116,8 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "form3",
-          "viewName": "form3"
+          "viewId": "companycodedata",
+          "viewName": "companycodedata"
         }
       }
     },
