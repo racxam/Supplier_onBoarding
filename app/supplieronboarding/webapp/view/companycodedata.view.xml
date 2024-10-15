@@ -3,7 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns:uxap="sap.uxap"
-    xmlns:sample="com.sumo.supplieronboarding.controller.blocks"
+    xmlns:sample="com.sumo.supplieronboarding.controller.companyblocks"
     xmlns="sap.m"
     xmlns:upload="sap.m.upload"
     xmlns:m="sap.m"
@@ -36,7 +36,7 @@
                                 showTitle="false"
                             >
                                 <uxap:blocks>
-                                    <sample:Supplier-identification id="comp-bbt22" />
+                                    <sample:SI id="comp-bbt22" />
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
@@ -55,7 +55,7 @@
                                 showTitle="false"
                             >
                                 <uxap:blocks>
-                                    <sample:CIRD id="comp-bbt2" />
+                                    <sample:CC id="comp-bbt2" />
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
@@ -74,13 +74,11 @@
                                 showTitle="false"
                             >
                                 <uxap:blocks>
-                                    <sample:CCD id="comp-bbt3" />
+                                    <sample:SI id="comp-bbt3" />
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
-                    </uxap:ObjectPageSection>
-
-                   
+                    </uxap:ObjectPageSection>  
                 </uxap:sections>
             </uxap:ObjectPageLayout>
             <FlexBox

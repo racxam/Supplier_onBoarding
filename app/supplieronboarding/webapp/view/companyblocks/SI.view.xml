@@ -1,0 +1,172 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.companycodedata"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    width="100%"
+>
+    <html:div style="font-size: 0.875rem;">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="compSimpleFormToolbar"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="compTB1">
+                        <Title
+                            id="compTitle1"
+                            text="Supplier Identification"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        text="Supplier Spend Type"
+                        id="compsupname"
+                    />
+                    <Select
+                        id="SpendType"
+                        selectedKey="Country"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="Indirect"
+                                key="Indirect"
+                            />
+                            <core:Item
+                                text="Direct"
+                                key="Direct"
+                            />
+                            <core:Item
+                                text="Capital"
+                                key="Capital"
+                            />
+                            <core:Item
+                                text="Tooling"
+                                key="Tooling"
+                            />
+                            <core:Item
+                                text="Value Fit"
+                                key="Value Fit"
+                            />
+                            <core:Item
+                                text="Proto"
+                                key="Proto"
+                            />
+                            <core:Item
+                                text="Accessories"
+                                key="Accessories"
+                            />
+                           
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Supplier Type"
+                    />
+                    <Select
+                        id="ST"
+                        selectedKey="Supplier Type"
+                         editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="Local GST"
+                                key="Local GST"
+                            />
+                            <core:Item
+                                text="Local Non-GST"
+                                key="Local Non-GST"
+                            />
+                            <core:Item
+                                text="Import"
+                                key="Import"
+                            />
+                        </items>
+                    </Select>
+                    <Label text="Nature Of Activity" />
+                    <Input value="Material"  editable="false"/>
+                    <Label
+                        id="comp_Sector"
+                        text="Sector"
+                    />
+                    <MultiComboBox
+                        id="sector"
+                        selectedKeys=""
+                        placeholder="Select sectors"
+                        items="{/results}"
+                        editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                id="sec-list"
+                                text="{Sectors} - {Description}"
+                                key="{Sectors} - {Description}"
+                            />
+                        </items>
+                    </MultiComboBox>
+                    <Label
+                        displayOnly="true"
+                        wrapping="true"
+                        text="Department"
+                    />
+                    <Input value="AM"  editable="false"/>
+
+                    <Label
+                        text="Function &amp; Subfunction"
+                    />
+                    <Input value="SSU - A&amp;T Prop"  editable="false"/>
+
+                     <Label
+                        id="Label-bank-detl"
+                        text="All the Bank Details have been Checked and Verified (Refer Section 7 of Supplier Registration Questionnaire)"
+                        required="true"
+                    />
+                    <RadioButtonGroup
+                        id="radioGroup"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButtonyes"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButtonno"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+                    
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+    </html:div>
+</mvc:View>
+
+

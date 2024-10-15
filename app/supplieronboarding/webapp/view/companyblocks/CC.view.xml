@@ -1,0 +1,132 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.companycodedata"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    width="100%"
+>
+    <html:div style="font-size: 0.875rem;">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="companycodeform"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="compTB">
+                        <Title
+                            id="compcode"
+                            text="Company Code (1001)"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        text="Company Code"
+                        id="CompanyCode"
+                        required="true"
+                    />
+                    <Select
+                        id="CompanyCodelist"
+                        selectedKey="Country"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[1001] - Mahindra &amp; Mahindra Ltd"
+                                key="[1001] - Mahindra &amp; Mahindra Ltd"
+                            />
+                            <core:Item
+                                text="Direct"
+                                key="Direct"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Reconciliation Account"
+                          required="true"
+                    />
+                    <Select
+                        id="RA"
+                        selectedKey="Reconciliation Account"
+                         editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[0011980006]-Cross Co Clearing- Other than Assets"
+                                key="[0011980006]-Cross Co Clearing- Other than Assets"
+                            />
+                            <core:Item
+                                text="[0011980007]-UNIT / DIVISION ACCOUNTS - PAYABLES"
+                                key="[0011980007]-UNIT / DIVISION ACCOUNTS - PAYABLES"
+                            />
+                           
+                        </items>
+                    </Select>
+                   
+
+                     <Label text="Wtax Country" required="true"/>
+                    <Input value="[IN] - INDIA"  editable="false"/>
+
+                     <Label text="Tolerance Group Code (Invoice Verification)" required="true"/>
+                    <Input value="[0001]" required="true" editable="false"/>
+
+
+                     <Label
+                        id="Label-double"
+                        text="Double Entries Check Indicator"
+                        required="true"
+                    />
+                    <RadioButtonGroup
+                        id="double-radioGroup"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="double-RadioButtonyes"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="double-RadioButtonno"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                 <Label text="Payment Method" required="true"/>
+                <Input value="[A] -Aadharcard Bank File" required="true" editable="false"/>
+
+
+                    
+                </f:content>
+            </f:SimpleForm>
+
+        </VBox>
+    </html:div>
+</mvc:View>
+
+
