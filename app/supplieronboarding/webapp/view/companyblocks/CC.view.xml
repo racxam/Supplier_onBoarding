@@ -43,11 +43,10 @@
                     </Toolbar>
                 </f:toolbar>
                 <f:content>
-                    <Label
-                        text="Company Code"
-                        id="CompanyCode"
-                        required="true"
-                    />
+
+                <Label text="Company Code" id="CompanyCode" required="true" />
+                <Text text="[1001] - Mahindra &amp; Mahindra Ltd"/>
+                
                     <Select
                         id="CompanyCodelist"
                         selectedKey="Country"
@@ -118,9 +117,85 @@
                     </RadioButtonGroup>
 
                  <Label text="Payment Method" required="true"/>
-                <Input value="[A] -Aadharcard Bank File" required="true" editable="false"/>
+                  <Select
+                        id="PM"
+                        selectedKey="Payment Method "
+                         editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[A] -Aadharcard Bank File"
+                                key="[A] -Aadharcard Bank File"
+                            />
+                            <core:Item
+                                text="[B]-Bank transfer (SWIFT)"
+                                key="[B]-Bank transfer (SWIFT)"
+                            />
+                           
+                        </items>
+                    </Select>
 
+                 <Label
+                        id="Label-app"
+                        text="Is Withholding Applicable"
+                        required="true"
+                    />
+                    <RadioButtonGroup
+                        id="app-radioGroup"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="app-RadioButtonyes"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="app-RadioButtonno"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
 
+                     <Label
+                        id="Label-com"
+                        text="Company Code Block"
+                    />
+                    <RadioButtonGroup
+                        id="com-radioGroup"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="com-RadioButtonyes"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="com-RadioButtonno"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                      <Label text="Payment Block" required="true"/>
+                  <Select
+                        id="PB"
+                        selectedKey="Payment Block"
+                         editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[*] - Skip Account"
+                                key="[*] - Skip Account"
+                            />
+                            <core:Item
+                                text="[A] - Locked for Payment"
+                                key="[A] - Locked for Payment"
+                            />
+                           
+                        </items>
+                    </Select>
                     
                 </f:content>
             </f:SimpleForm>

@@ -74,7 +74,7 @@
                                 showTitle="false"
                             >
                                 <uxap:blocks>
-                                    <sample:SI id="comp-bbt3" />
+                                    <sample:WTI id="comp-bbt3" />
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>

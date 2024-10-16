@@ -24,12 +24,12 @@
                 labelSpanS="12"
                 adjustLabelSpan="false"
                 emptySpanXL="0"
-                emptySpanL="4"
+                emptySpanL="1"
                 emptySpanM="0"
                 emptySpanS="0"
-                columnsXL="1"
-                columnsL="1"
-                columnsM="1"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
                 singleContainerFullSize="false"
                 ariaLabelledBy="Title1"
             >
@@ -43,103 +43,23 @@
                     </Toolbar>
                 </f:toolbar>
                 <f:content>
-                    <Label
-                        text="Supplier Spend Type"
-                        id="compsupname"
-                    />
-                    <Select
-                        id="SpendType"
-                        selectedKey="Country"
-                          editable="false"
-                    >
-                        <items>
-                            <core:Item
-                                text="Indirect"
-                                key="Indirect"
-                            />
-                            <core:Item
-                                text="Direct"
-                                key="Direct"
-                            />
-                            <core:Item
-                                text="Capital"
-                                key="Capital"
-                            />
-                            <core:Item
-                                text="Tooling"
-                                key="Tooling"
-                            />
-                            <core:Item
-                                text="Value Fit"
-                                key="Value Fit"
-                            />
-                            <core:Item
-                                text="Proto"
-                                key="Proto"
-                            />
-                            <core:Item
-                                text="Accessories"
-                                key="Accessories"
-                            />
-                           
-                        </items>
-                    </Select>
+                    <Label text="Supplier Spend Type" id="compsupname"/>
+                    <Text text="Indirect"/>
+                
+                    <Label text="Supplier Type" />
+                    <Text text="Local GST"/>
 
-                    <Label
-                        text="Supplier Type"
-                    />
-                    <Select
-                        id="ST"
-                        selectedKey="Supplier Type"
-                         editable="false"
-                    >
-                        <items>
-                            <core:Item
-                                text="Local GST"
-                                key="Local GST"
-                            />
-                            <core:Item
-                                text="Local Non-GST"
-                                key="Local Non-GST"
-                            />
-                            <core:Item
-                                text="Import"
-                                key="Import"
-                            />
-                        </items>
-                    </Select>
                     <Label text="Nature Of Activity" />
-                    <Input value="Material"  editable="false"/>
-                    <Label
-                        id="comp_Sector"
-                        text="Sector"
-                    />
-                    <MultiComboBox
-                        id="sector"
-                        selectedKeys=""
-                        placeholder="Select sectors"
-                        items="{/results}"
-                        editable="false"
-                    >
-                        <items>
-                            <core:Item
-                                id="sec-list"
-                                text="{Sectors} - {Description}"
-                                key="{Sectors} - {Description}"
-                            />
-                        </items>
-                    </MultiComboBox>
-                    <Label
-                        displayOnly="true"
-                        wrapping="true"
-                        text="Department"
-                    />
-                    <Input value="AM"  editable="false"/>
+                    <Text text="Material"/>
 
-                    <Label
-                        text="Function &amp; Subfunction"
-                    />
-                    <Input value="SSU - A&amp;T Prop"  editable="false"/>
+                    <Label text="Sector" />
+                    <Text text="AD - Automotive Division"/>
+
+                   <Label displayOnly="true" text="Department"/>
+                    <Text text="AM"/>
+
+                    <Label text="Function &amp; Subfunction"/>
+                    <Text text="SSU - A&amp;T Prop" />
 
                      <Label
                         id="Label-bank-detl"

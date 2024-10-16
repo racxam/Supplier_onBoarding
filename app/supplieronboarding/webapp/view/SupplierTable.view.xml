@@ -8,7 +8,20 @@
     <Page id="page-SupplierTable" title="{i18n>title}">
     <content>
      	<VBox fitContainer="true">
-
+			   <FlexBox
+                id="comp-btn"
+                height="50px"
+                alignItems="Start"
+                justifyContent="End"
+            >
+                 <Button
+                    id="comp-req_btn"
+                    width="200px"
+                    class="sapUiSmallMargin sapUiNoMarginBottom"
+                    text="Create Request"
+                    press="CreateRequest"
+                />
+            </FlexBox>
 
 			<!-- <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="LineItemsSet" persistencyKey="SmartFilter_Explored" basicSearchFieldName="Bukrs" enableBasicSearch="true" >
 				<smartFilterBar:controlConfiguration>

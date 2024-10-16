@@ -1,0 +1,778 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.companycodedata"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    width="100%"
+>
+    <html:div style="font-size: 0.875rem;">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="WTI"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="true"
+                emptySpanXL="0"
+                emptySpanL="1"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="wtiTB">
+                        <Title
+                            id="wticode"
+                            text="Company Code (1001)"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        text="Withholding Tax Type"
+                        id="Withholding"
+                        required="true"
+                    />
+                    <Select
+                        id="Withholding-sec"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[0I] - Sec 194"
+                                key="[0I] - Sec 194"
+                            />
+                            <core:Item
+                                text="[2I] - 194IC Real Estate"
+                                key="[2I] - 194IC Real Estate"
+                            />
+                        </items>
+                    </Select>
+
+
+                    <Label
+                        id="Label-WTI"
+                        text="Subject to Witholding Tax Indicator"
+                    />
+                    <RadioButtonGroup
+                        id="WTI-radioGroup"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="WTI-RadioButtonyes"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="WTI-RadioButtonno"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                  <Label
+                        text="Withholding Tax Code ( [0I] - Sec 194)"
+                        id="WithholdingTaxCode"
+                        required="true"
+                    />
+                    <Select
+                        id="Withholding-tax"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[01]  Sec 194 Dividend: 10% - INV CO"
+                                key="[01]  Sec 194 Dividend: 10% - INV CO"
+                            />
+                    
+                        </items>
+                    </Select>
+                  
+                   <Label
+                        text="Receipient Type"
+                        id="ReceipientType"
+                        required="true"
+                    />
+                    <Select
+                        id="Receipienttype"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                    
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Withholding Tax Code ( [2I] - 194IC Real Estate)"
+                        id="WTI-RE"
+                        required="true"
+                    />
+                    <Select
+                        id="WTI-sec"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[IA]  194IC Real Estate  Cos - 10%"
+                                key="[IA]  194IC Real Estate  Cos - 10%"
+                            />
+                        </items>
+                         <items>
+                            <core:Item
+                                text="[IB]  194IC Real Estate Non Cos - 10%"
+                                key="[IB]  194IC Real Estate Non Cos - 10%"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Receipient Type"
+                        id="RType"
+                        required="true"
+                    />
+                    <Select
+                        id="Rtype-sec"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                    
+                        </items>
+                    </Select>
+
+
+                     <Label
+                        text="Withholding Tax Code ([3I] - 193 Int.Sec.Cos)"
+                        id="WTI-Isec"
+                        required="true"
+                    />
+                    <Select
+                        id="WTI-Isecc"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[31]  193 Int.Sec.Cos - 10%"
+                                key="[31]  193 Int.Sec.Cos - 10%"
+                            />
+                        </items>
+                    </Select>
+
+                 <Label
+                        text="Receipient Type"
+                        id="RT-Isec"
+                        required="true"
+                    />
+                    <Select
+                        id="RT-Isecc"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Withholding Tax Code ([41] - 194IA -Purch of Immovable)"
+                        id="WTC-P"
+                    />
+                    <Select
+                        id="wt"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[IC]  194IA -Purch ofimmovable NonCo No Pan20%"
+                                key="[ID]  194IA -Purch of Immovable Co No Pan20%"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Receipient Type"
+                        id="RT-T"
+                    />
+                    <Select
+                        id="RT-Ty"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                     <Label
+                        text="Withholding Tax Code ([5I] - 195)"
+                        id="WTC-T"
+                    />
+                    <Select
+                        id="WTC-Ty"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[41]  195 Foreign Nationals Cos - 31.20%"
+                                key="[41]  195 Foreign Nationals Cos - 31.20%"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Receipient Type"
+                        id="RT-C"
+                    />
+                    <Select
+                        id="RT-Cy"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                 <Label
+                        text="Withholding Tax Code ([9I] - ECOM Equalisation)"
+                        id="Ecom"
+                    />
+                    <Select
+                        id="Ecom-w"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[A1]  ECOM Equalisation Levy Cos - 6%"
+                                key="[A1]  ECOM Equalisation Levy Cos - 6%"
+                            />
+                        </items>
+                        <items>
+                            <core:Item
+                                text="[A2]  ECOM Equalisation Levy Non Cos - 6%"
+                                key="[A2]  ECOM Equalisation Levy Non Cos - 6%"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Receipient Type"
+                        id="RT"
+                    />
+                    <Select
+                        id="RT-t"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                 <Label
+                        text="Withholding Tax Code ([AI] - 194A)"
+                        id="AI"
+                    />
+                    <Select
+                        id="AI-t"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[A3]  194A Int. ind./HUF/Firm - 10%"
+                                key="[A3]  194A Int. ind./HUF/Firm - 10%"
+                            />
+                        </items>
+                         <items>
+                            <core:Item
+                                text="[A4]  194A Int. ind./HUF/Firm No PAN - 20%"
+                                key="[A4]  194A Int. ind./HUF/Firm No PAN - 20%"
+                            />
+                        </items>
+                    </Select>
+
+                     <Label
+                        text="Receipient Type"
+                        id="RT2"
+                    />
+                    <Select
+                        id="RT-t2"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                     <Label
+                        text="Withholding Tax Code ([BI] - 194B)"
+                        id="BI"
+                    />
+                    <Select
+                        id="BI-t"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[B1]  194B Winning lottery Cos - 30%"
+                                key="[B1]  194B Winning lottery Cos - 30%"
+                            />
+                        </items>
+                         <items>
+                            <core:Item
+                                text="[B2]  194B Winning lottery Ind/HUF/Firm-30%"
+                                key="[B2]  194B Winning lottery Ind/HUF/Firm-30%"
+                            />
+                        </items>
+                    </Select>
+
+                     <Label
+                        text="Receipient Type"
+                        id="RT3"
+                    />
+                    <Select
+                        id="RT-t3"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Withholding Tax Code [CI] - 194C)"
+                        id="cI"
+                    />
+                    <Select
+                        id="BIi"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[C1]  194C Cont. Cos - 2%"
+                                key="[C1]  194C Cont. Cos - 2%"
+                            />
+                        </items>
+                         <items>
+                            <core:Item
+                                text="[C2]  194C Cos/Trans. No PAN 20%"
+                                key="[C2]  194C Cos/Trans. No PAN 20%"
+                            />
+                        </items>
+                    </Select>
+
+                    <Label
+                        text="Receipient Type"
+                        id="RT4"
+                    />
+                    <Select
+                        id="RT-t4"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+                    </Select>
+
+                <Label
+                        text="Withholding Tax Code ([CD] - 194C TDS Deducted by Customer)"
+                        id="cd"
+                    />
+                    <Select
+                        id="cd2"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CD]  194C TDS Deducted by Customer"
+                                key="[CD]  194C TDS Deducted by Customer"
+                            />
+                        </items>
+                    </Select>
+
+            <Label
+                        text="Receipient Type"
+                        id="RT5"
+                    />
+                    <Select
+                        id="RT-t5"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+            
+                <Label
+                        text="Withholding Tax Code ([DI] - 194D Ins.Comm. Ind/HUF/Firm - 5%)"
+                        id="cd3"
+                    />
+                    <Select
+                        id="cd4"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[D3]  194D Ins.Comm. Ind/HUF/Firm - 5%"
+                                key="[D3]  194D Ins.Comm. Ind/HUF/Firm - 5%"
+                            />
+                        </items>
+                    </Select>
+               <Label
+                        text="Receipient Type"
+                        id="RT6"
+                    />
+                    <Select
+                        id="RT-t6"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+                    <Label
+                        text="Withholding Tax Code ([EI] - 194E)"
+                        id="EI"
+                    />
+                    <Select
+                        id="WEI"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[E1]194E-Non-resi Sportsmen less than 10 lacs-10.3%"
+                                key="[E1]194E-Non-resi Sportsmen less than 10 lacs-10.3%"
+                            />
+                        </items>
+                    </Select>
+
+                 <Label
+                        text="Withholding Tax Code ([HI] - 194H)"
+                        id="HI"
+                    />
+                    <Select
+                        id="WHI"
+                        selectedKey="Withholding-AI"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[H1]  194H Comm/Brokerage Cos - 5%"
+                                key="[H1]  194H Comm/Brokerage Cos - 5%"
+                            />
+                        </items>
+                    </Select>
+
+                     <Label
+                        text="Receipient Type"
+                        id="RT7"
+                    />
+                    <Select
+                        id="RT-t7"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[OT] - Others"
+                                key="[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+            <Label
+                        text="Receipient Type"
+                        id="RT8"
+                    />
+                    <Select
+                        id="RT-t8"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+            <Label
+                        text="Withholding Tax Code ([II] - 194I)"
+                        id="RT9"
+                    />
+                    <Select
+                        id="RT-t9"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[I1]  194I Land/Bldg/Fur Cos - 10%"
+                                key="[I1]  194I Land/Bldg/Fur Cos - 10%"
+                            />
+                        </items>
+                        <items>
+                            <core:Item
+                                text="[I2]  194I Plt/Mach/Eqpt Cos - 2%"
+                                key="[I2]  194I Plt/Mach/Eqpt Cos - 2%"
+                            />
+                        </items>
+            </Select>
+
+                <Label
+                        text="Receipient Type"
+                        id="RT10"
+                    />
+                    <Select
+                        id="RT-t10"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+             <Label
+                        text="Withholding Tax Code ([JI] - 194J)"
+                        id="RT11"
+                    />
+                    <Select
+                        id="RT-t11"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[J1]  194J(b) Prof. Serv. Fees @10% - CO"
+                                key="[J1]  194J(b) Prof. Serv. Fees @10% - CO"
+                            />
+                        </items>
+                        <items>
+                            <core:Item
+                                text="[J2]  194J(b) Prof. Serv. Fees @20% - No PAN"
+                                key="[J2]  194J(b) Prof. Serv. Fees @20% - No PAN"
+                            />
+                        </items>
+            </Select>
+
+            <Label
+                        text="Receipient Type"
+                        id="RT12"
+                    />
+                    <Select
+                        id="RT-t12"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+            <Label
+                        text="Withholding Tax Code ([LI] - 194Q)"
+                        id="RT13"
+                    />
+                    <Select
+                        id="RT-t13"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[L1]  194Q: Purchase of Goods`- 0.1% INV COMP"
+                                key="[L1]  194Q: Purchase of Goods`- 0.1% INV COMP"
+                            />
+                        </items>
+                        <items>
+                            <core:Item
+                                text="[L2]  194Q: Purchase of Goods- 0.1% INV OTH"
+                                key="[L2]  194Q: Purchase of Goods- 0.1% INV OTH"
+                            />
+                        </items>
+            </Select>
+                <Label
+                        text="Receipient Type"
+                        id="RT14"
+                    />
+                    <Select
+                        id="RT-t14"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+             <Label
+                        text="Withholding Tax Code ([MI] - TDS on Benefits)"
+                        id="MI"
+                    />
+                    <Select
+                        id="MI1"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[M1]  TDS On Benefits 194R @ 10% COM PAN"
+                                key="[M1]  TDS On Benefits 194R @ 10% COM PAN"
+                            />
+                        </items>
+                        <items>
+                            <core:Item
+                                text="[M2]  TDS On Benefits 194R @ 10% Non COM PAN"
+                                key="[M2]  TDS On Benefits 194R @ 10% Non COM PAN"
+                            />
+                        </items>
+            </Select>
+
+                    <Label
+                        text="Receipient Type"
+                        id="RT16"
+                    />
+                    <Select
+                        id="RT-t16"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+             <Label
+                        text="Withholding Tax Code ([WI] - WCT TDS)"
+                        id="WI"
+                    />
+                    <Select
+                        id="WI1"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[W1]  WCT TDS - Regd. Companies - 2%"
+                                key="[W1]  WCT TDS - Regd. Companies - 2%"
+                            />
+                        </items>
+                        <items>
+                            <core:Item
+                                text="[W2]  WCT TDS - Un-regd. Companies - 4%"
+                                key="[W2]  WCT TDS - Un-regd. Companies - 4%"
+                            />
+                        </items>
+            </Select>
+
+            <Label
+                        text="Receipient Type"
+                        id="RT17"
+                    />
+                    <Select
+                        id="RT-t17"
+                        selectedKey="Withholding"
+                          editable="false"
+                    >
+                        <items>
+                            <core:Item
+                                text="[CO] - Companies|[OT] - Others"
+                                key="[CO] - Companies|[OT] - Others"
+                            />
+                        </items>
+            </Select>
+
+                  
+                </f:content>
+            </f:SimpleForm>
+
+        </VBox>
+    </html:div>
+</mvc:View>
+
+
