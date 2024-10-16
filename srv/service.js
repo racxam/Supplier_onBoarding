@@ -7,7 +7,7 @@ module.exports = async function () {
 
 
     // Vihaan Entities-------------------------------------------->
-    const { supplierReqSrv, SavingsupplierReqSrv, SReqattachmentsSrv } = this.entities;
+    const { supplierReqSrv, SavingsupplierReqSrv, SReqattachmentsSrv} = this.entities;
 
     const GstApi = await cds.connect.to('GstApi');
 
@@ -17,6 +17,7 @@ module.exports = async function () {
     // request atttachments
     this.before('CREATE', supplierReqSrv, BeforeSupReqFun);
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
+    this.on('CREATE', SavingsupplierReqSrv,OnSavingSupReqFun)
     this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
     this.on('getStatus', onGSTValidation);
@@ -89,9 +90,34 @@ module.exports = async function () {
             GSTIN,
         } = req.data;
 
+
+
         await ValCheck(DigressionVendorCodeVal, GSTIN, PANCardNo, req);
 
-    }
+    };
+
+    async function OnSavingSupReqFun(req,res){
+        console.log(req.data);
+        req.data.Status='DRAFT'
+        console.log(req.data);
+         await cds.tx(req).run([
+            INSERT.into(SavingsupplierReqSrv).entries(req.data)
+
+        ]).then((resolve, reject) => {
+            if (typeof (resolve) !== 'undefined') {
+                return req.data;
+            } else {
+                req.error(500, 'There is an error on Saving the Supplier Request Form');
+            }
+        }).catch(err => {
+            console.log(err);
+            req.error(500, "There is an error " + err.toString());
+        })
+        return req.data;
+
+
+
+    };
 
     //After supplier Req Fun We are triggering the workflow
     async function AfterSupReqFun(req, res) {

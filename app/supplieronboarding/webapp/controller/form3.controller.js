@@ -29,7 +29,7 @@ sap.ui.define([
 
             onReadform: function () {
                 var oView = this.getView();
-                var oText = oView.byId("requestId"); 
+                var oText = oView.byId("requestId");
                 var RequestID = oText.getText();
 
                 console.log("Req ID Value: " + RequestID);
@@ -103,26 +103,26 @@ sap.ui.define([
 
             onOpenDialog: function (documentType) {
                 if (!this._oDialog) {
-                    this._oDialog = sap.ui.xmlfragment("com.digitech.digitechproject.view.fragment.uploadfile", this);
+                    this._oDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.uploadfile", this);
                     this.getView().addDependent(this._oDialog);
                 }
 
-                // Get the document files for the specific document type (e.g., PAN, GST, CIN)
+
                 var oModel = this.getView().getModel();
                 var aDocumentFiles = oModel.getProperty("/documentFiles/" + documentType) || [];
 
-                // Set the filtered document files to the dialog's list model
+
                 var oDialogModel = new sap.ui.model.json.JSONModel({ documentFiles: aDocumentFiles });
                 this._oDialog.setModel(oDialogModel);
 
-                // Set the document type in the dialog's data for future use (e.g., download, delete)
+
                 this._oDialog.data("documentType", documentType);
 
-                // Open the dialog
+
                 this._oDialog.open();
             },
 
-            onCloseDialog: function () {
+          onCloseDialog: function () {
                 if (this._oDialog) {
                     this._oDialog.close();
                 }
@@ -250,6 +250,15 @@ sap.ui.define([
                     console.error("Base64 decoding failed: ", error);
                     return null; // Handle the error
                 }
+            },
+            onPressApprovalLogs: function () {
+                console.log("deep inside");
+                if (!this._oDialog) {
+                    this._oDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.timelinePopup", this);
+                    this.getView().addDependent(this._oDialog);
+                }
+                this._oDialog.open();
+
             }
 
         });

@@ -1218,6 +1218,102 @@ sap.ui.define([
                     }
 
                 };
-            }
+            },
+            onFormSave: function () {
+                var oView = this.getView();
+                var oModel = this.getOwnerComponent().getModel();
+                var bValid = true;  // Flag to track form validity
+              
+                // Collect form field values
+                // var oFormData = {
+                //     validity: oView.byId("datePicker").getValue(),
+                //     relatedParty: oView.byId("radioGroup").getSelectedButton(),
+                //     supplierSpendType: oView.byId("supplierSpendType").getSelectedKey(),
+                //     natureOfActivity: oView.byId("NatureofActivity").getSelectedKey(),
+                //     sector: oView.byId("sectorComboBox").getSelectedKeys(),
+                //     FunctionandSubfunction: oView.byId("childMultiComboBox").getSelectedKeys(),
+                //     panCardNumber: oView.byId("panInput").getValue(),
+                //     gstinNumber: oView.byId("gstinInput").getValue(),
+                //     supplierFullName: oView.byId("SupplierNameInput").getValue(),
+                //     supplierTradeName: oView.byId("SuppliertradeNameInput").getValue(),
+                //     supplierAddress: oView.byId("SupplierAddressInput").getValue(),
+                //     supplierGstAddress: oView.byId("SupplierAddressgstInput").getValue(),
+                //     primaryFirstName: oView.byId("PrimaryFirstnameInput").getValue(),
+                //     primaryLastName: oView.byId("PrimaryLastnameInput").getValue(),
+                //     primaryEmail: oView.byId("emailInput").getValue(),
+                //     primaryPhone: oView.byId("numberInput").getValue()
+                // };
+
+
+               
+
+                // if (bValid) {
+                //     if (oFormData.relatedParty.getText() === 'Yes') {
+                //         oFormData.relatedParty = true;
+                //     } else {
+                //         oFormData.relatedParty = false;
+                //     }
+
+                //     var oNewEntry = {
+                //         "DigressionVendorCodeVal": oFormData.validity,
+                //         "IsRelPartyVCode": oFormData.relatedParty,
+                //         "SpendType": oFormData.supplierSpendType,
+                //         "NatureOfActivity": oFormData.natureOfActivity,
+                //         "Sector": oFormData.sector,
+                //         "FunAndSubfun": oFormData.FunctionandSubfunction,
+                //         "PANCardNo": oFormData.panCardNumber,
+                //         "GSTIN": oFormData.gstinNumber,
+                //         "SFullName": oFormData.supplierFullName,
+                //         "STradeNameGST": oFormData.supplierTradeName,
+                //         "SAddress": oFormData.supplierAddress,
+                //         "SAddressGST": oFormData.supplierGstAddress,
+                //         "PriContactFName": oFormData.primaryFirstName,
+                //         "PriContactLName": oFormData.primaryLastName,
+                //         "PriContactEmail": oFormData.primaryEmail,
+                //         "PriContactMNumber": oFormData.primaryPhone
+                //     };
+
+
+                    var oNewEntry = {
+                        "DigressionVendorCodeVal": "2025-09-30",
+                        "IsRelPartyVCode": true,
+                        "SpendType": "Indirect",
+                        "NatureOfActivity": "Material",
+                        "Sector": ["IT", "Manufacturing"],
+                        "FunAndSubfun": ["Finance", "HR"],
+                        "PANCardNo": "ABCDE1234F",
+                        "GSTIN": "27ABCDE1234F1Z5",
+                        "SFullName": "ABC Corp Pvt. Ltd.",
+                        "STradeNameGST": "ABC Trade",
+                        "SAddress": "123, Example Street, City, State",
+                        "SAddressGST": "123, Example Street, City, State",
+                        "PriContactFName": "Sumit",
+                        "PriContactLName": "Doe",
+                        "PriContactEmail": "john.doe@example.com",
+                        "PriContactMNumber": "1234567890",
+                    }
+
+                    // Use the OData create method
+                    oModel.setUseBatch(false);
+                    var oView = this;
+                    oModel.create("/SavingsupplierReqSrv", oNewEntry, {
+                        method: "POST",
+                        success: function (oData) {
+
+                            MessageToast.show("Form Saved successfully." + oData.ID);
+                            console.log(oData.ID);
+                            this.onUploadFile(oData.ID);
+                            console.log("---------->Upload");
+                            oView.clearFormFields();
+
+                        }.bind(this),  // Ensure 'this' refers to the controller instance
+                        error: function () {
+                            MessageToast.show("Error while submitting the Form.");
+                        }
+                    });
+                
+               
+            },
+
         });
     });

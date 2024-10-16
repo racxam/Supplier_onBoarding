@@ -6,7 +6,7 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "@cap-js-community/odata-v2-adapter": "github:cap-js-community/odata-v2-adapter",
+        "@cap-js-community/odata-v2-adapter": "cap-js-community/odata-v2-adapter",
         "@cap-js/hana": "^1",
         "@sap-cloud-sdk/http-client": "^3.21.0",
         "@sap-cloud-sdk/resilience": "^3.21.0",
@@ -52,7 +52,7 @@
                     "csrf": true
                 }
             },
-            "auth": "xsuaa"
+            "auth": "mocked"
         }
     }
 }

@@ -1,0 +1,64 @@
+<core:FragmentDefinition
+  	xmlns="sap.suite.ui.commons"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:m="sap.m"
+>
+    <!-- <Label id="Remarks_Timeline2" text="Remarks Timeline" class="sapMLabelNoText"/> -->
+   
+        <Timeline
+            id="idTimeline"
+            enableDoubleSided="false"
+            content=""
+            showHeaderBar="false"
+            height="50vh"
+        >
+            <content>
+                <TimelineItem
+                    icon="sap-icon://checklist-item-2"
+                    id="idTemplateItem"
+                    userNameClicked="onUserNameClick"
+                    select="onPressItems"
+                    dateTime="10 jan"
+                    title="sumitracxam@gmail.com"
+                    text="approved by ED"
+                    userName="sumit"
+
+                />
+                <TimelineItem
+                 icon="sap-icon://checklist-item-2"
+                    id="idTemplateItem5"
+                    userNameClicked="onUserNameClick"
+                    select="onPressItems"
+                    dateTime="10 jan"
+                    title="sumitracxam@gmail.com"
+                    text="approved by ED"
+                    userName="sumit"
+
+                />
+                <TimelineItem
+                 icon="sap-icon://checklist-item-2"
+                    id="idTemplateItem2"
+                    userNameClicked="onUserNameClick"
+                    select="onPressItems"
+                    dateTime="10 jan"
+                    title="sumitracxam@gmail.com"
+                    text="approved by ED"
+                    userName="sumit"
+
+                />
+                <TimelineItem
+                 icon="sap-icon://checklist-item-2"
+                    id="idTemplateItem3"
+                    userNameClicked="onUserNameClick"
+                    select="onPressItems"
+                    dateTime="10 jan"
+                    title="sumitracxam@gmail.com"
+                    text="approved by ED"
+                    userName="sumit"
+
+                />
+            </content>
+            
+        </Timeline>
+</core:FragmentDefinition>

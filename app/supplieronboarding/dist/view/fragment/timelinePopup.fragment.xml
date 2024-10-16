@@ -1,0 +1,94 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:suite="sap.suite.ui.commons"
+
+>
+    <Dialog
+        contentWidth="40%"
+        class="sapUiContentPadding"
+    >
+        <customHeader>
+            <OverflowToolbar class="FragmentToolBar">
+                <ToolbarSpacer />
+                <core:Icon
+                    id="Msg_icon3"
+                    size="1.4em"
+                    class="size1"
+                    color="#ffffff"
+                >
+                    <core:layoutData>
+                        <FlexItemData growFactor="1" />
+                    </core:layoutData>
+                </core:Icon>
+                <Label
+                    text="{i18n>Timeline}"
+                    id="MessageViewTitleId3"
+                    class="headerText"
+                />
+                <ToolbarSpacer />
+            </OverflowToolbar>
+        </customHeader>
+        <content>
+            <!-- <Label id="Remarks_Timeline2" text="Remarks Timeline" class="sapMLabelNoText"/> -->
+          
+                <suite:Timeline
+                    id="idTimeline10"
+                    enableDoubleSided="false"
+                    showHeaderBar="false"
+                    height="50vh"
+                >
+
+                        <suite:TimelineItem
+                            icon="sap-icon://checklist-item-2"
+                            id="idTemplateItem9"
+                            userNameClicked="onUserNameClick"
+                            select="onPressItems"
+                            dateTime="10 jan"
+                            title="sumitracxam@gmail.com"
+                            text="approved by ED"
+                            userName="sumit"
+                        />
+                        <suite:TimelineItem
+                            icon="sap-icon://checklist-item-2"
+                            id="idTemplateItem7"
+                            userNameClicked="onUserNameClick"
+                            select="onPressItems"
+                            dateTime="10 jan"
+                            title="sumitracxam@gmail.com"
+                            text="approved by ED"
+                            userName="sumit"
+                        />
+                        <suite:TimelineItem
+                            icon="sap-icon://checklist-item-2"
+                            id="idTemplateItem6"
+                            userNameClicked="onUserNameClick"
+                            select="onPressItems"
+                            dateTime="10 jan"
+                            title="sumitracxam@gmail.com"
+                            text="approved by ED"
+                            userName="sumit"
+                        />
+                        <suite:TimelineItem
+                            icon="sap-icon://checklist-item-2"
+                            id="idTemplateItem50"
+                            userNameClicked="onUserNameClick"
+                            select="onPressItems"
+                            dateTime="10 jan"
+                            title="sumitracxam@gmail.com"
+                            text="approved by ED"
+                            userName="sumit"
+                        />
+                </suite:Timeline>
+        </content>
+        <beginButton>
+            <!-- <Button text="Save" id="onSaveReassign3" type="Accept" press="onokTimline" /> -->
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancel"
+                press="onCloseDialog"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

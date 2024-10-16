@@ -374,7 +374,7 @@
                 <Button
                     id="SaveButton"
                     text="Save"
-                    press="onSave"
+                    press="onFormSave"
                     width="100px"
                     type="Emphasized"
                 />

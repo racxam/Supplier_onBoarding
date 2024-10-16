@@ -1,7 +1,7 @@
 using {dbmedia as db} from '../db/schema';
 using {common.db as common} from '../db/master';
 
-service Attachments {
+service Attachments  {
 
 
     //transctions
@@ -18,8 +18,6 @@ service Attachments {
     entity SupplierSpendTypeSrv      as projection on common.master.SupplierSpendType;
     entity NatureOfActivitySrv       as projection on common.master.NatureOfActivity;
     entity SectorSrv                 as projection on common.master.Sector;
-
-
     function getStatus() returns Boolean;
 
 

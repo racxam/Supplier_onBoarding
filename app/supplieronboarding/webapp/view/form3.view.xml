@@ -1,4 +1,3 @@
-
 <mvc:View
     controllerName="com.sumo.supplieronboarding.controller.form3"
     xmlns:mvc="sap.ui.core.mvc"
@@ -12,7 +11,18 @@
     <Page
         id="page3"
         title="{i18n>title}"
+        titleAlignment="Center"
     >
+        <headerContent>
+            <Toolbar>
+                <Button
+                    icon="sap-icon://history"
+                    text="Approval Logs"
+                    press="onPressApprovalLogs"
+                    type="Emphasized"
+                />
+            </Toolbar>
+        </headerContent>
         <VBox
             id="wf-box"
             height="100%"
@@ -34,24 +44,23 @@
                 title="Request Form"
             >
                 <f:content>
-                   <Label
-                            id="ApproverEmail"
-                            text="Approver's Email"
-                        />
-                        <Text
-                            id="approverEmail"
-                            text="{context>/approveremail}"
-                        />
+                    <Label
+                        id="ApproverEmail"
+                        text="Approver's Email"
+                    />
+                    <Text
+                        id="approverEmail"
+                        text="{context>/approveremail}"
+                    />
 
-                        <Label
-                            id="requestLabel"
-                            text="RequestID"
-                        />
-                        <Text
-                            id="requestId"
-                            text="{context>/reqid}"
-                        />
-
+                    <Label
+                        id="requestLabel"
+                        text="RequestID"
+                    />
+                    <Text
+                        id="requestId"
+                        text="7303d9b7-b849-4345-ba1e-f7a38632783b"
+                    />
 
                     <Label
                         id="valid-dig"
@@ -215,6 +224,22 @@
                     />
                 </f:content>
             </f:SimpleForm>
+
+            <Panel
+                expandable="true"
+                headerText="REMARK LOGS"
+                width="auto"
+                height="50vh"
+                class="sapUiResponsiveMargin"
+            >
+                <content>
+                    <core:Fragment
+                        fragmentName="com.sumo.supplieronboarding.view.fragment.timeline"
+                        id="timelineFragment"
+                        type="XML"
+                    />
+                </content>
+            </Panel>
         </VBox>
     </Page>
 </mvc:View>

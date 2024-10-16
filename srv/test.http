@@ -1,5 +1,5 @@
 ###GET the request
-GET http://localhost:4004/odata/v2/attachments/SReqattachmentsSrv
+GET http://localhost:4004/odata/v2/attachments/SavingsupplierReqSrv
 
 
 ### Saving the request
