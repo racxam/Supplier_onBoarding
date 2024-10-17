@@ -1,0 +1,730 @@
+<mvc:View xmlns:odata="sap.ui.comp.odata"
+    controllerName="com.sumo.supplieronboarding.controller.PurchasingData"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:uxap="sap.uxap"
+    xmlns:sample="com.sumo.supplieronboarding.controller.blocks"
+    xmlns="sap.m"
+    xmlns:upload="sap.m.upload"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+>
+    <Page
+        id="page4"
+        title="{i18n>pdview}"
+    >
+        <content>
+    <uxap:ObjectPageLayout
+        id="ObjectPageLayout1"
+        upperCaseAnchorBar="false"
+    >
+        <uxap:sections>
+            <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="GSIsection"
+                title="Section 1"
+                class="custom-section-spacing"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="sectionSS1"
+                        title="General Supplier Information"
+                        titleUppercase="false"
+                    >
+                        <!-- <uxap:blocks>
+                            <sample:GSInfo id="bbt5" />
+                        </uxap:blocks> -->
+                        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="SimpleFormToolbar1"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="4"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="1"
+                emptySpanM="0"
+                emptySpanS="0" 
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="TB">
+                        <Title
+                            id="Title9"
+                            text="General Supplier Information"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        id="VendorcodeID"
+                        text="Vendor Code / Number"
+                    />
+                    <Input
+                        id="VendorcodeInput"
+                        type="Text"
+                        value="{/Vendorcode}"
+                    />
+
+                    <Label
+                        id="VendorcodeverifyID"
+                        text="Have you entered the correct Vendor Code"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="Vendorcodeverify"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item10"
+                                text="Yes"
+                                key="Yes"
+                            />
+                        </items>
+                    </ComboBox>
+
+
+                    <Label
+                        id="SelectgroupsupplierID"
+                        text="Select Group Supplier"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="Selectgroupsupplier"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item11"
+                                text="Yes"
+                                key="Yes"
+                            />
+                            <core:Item
+                                id="Item40"
+                                text="No"
+                                key="No"
+                            />
+                        </items>
+                    </ComboBox>
+
+                    <Label
+                        id="GroupavailableID"
+                        text="Is Group not available?"
+                        required="true"
+                    />
+                    <RadioButtonGroup
+                        id="Groupnotavailable"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton03"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButton04"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                    <Label
+                        id="NewgroupID"
+                        text="Enter new Group to be created"
+                        required="true"
+                    />
+                    <Input
+                        id="Newgroup"
+                        type="Text"
+                        value="{/Newgroup}"
+                        liveChange="handleLiveChange"
+                    />
+
+
+                    <Label
+                        id="SelectparentsupplierID"
+                        text="Select Parent Supplier"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="Selectparentsupplier"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item14"
+                                text="Yes"
+                                key="Yes"
+                            />
+                           <core:Item
+                                id="Item15"
+                                text="No"
+                                key="No"
+                            />
+
+                        </items>
+                    </ComboBox>
+
+                    <Label
+                        id="ParentnotavailableID"
+                        text="Is Parent not available?"
+                        required="true"
+                    />
+                    <RadioButtonGroup
+                        id="Parentnotavailable"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton05"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButton06"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                    <Label
+                        id="NewparentID"
+                        text="Enter new Parent to be created"
+                        required="true"
+                    />
+                    <Input
+                        id="Newparent"
+                        type="Text"
+                        value="{/Newparent}"
+                        liveChange="handleLiveChange"
+                    />
+
+                    <Label
+                        id="AccountGroupID"
+                        text="Account Group"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="AccountGroup"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item18"
+                                text="[LIEF] - Vendor (Ext. Number Assignment)"
+                                key="[LIEF] - Vendor (Ext. Number Assignment)"
+                            />
+                           <core:Item
+                                id="Item19"
+                                text="[SERV] - Service Vendors"
+                                key="[SERV] - Service Vendors"
+                            />
+                          <core:Item
+                                id="Item20"
+                                text="[IMP1] - Import Vendors"
+                                key="[IMP1] - Import Vendors"
+                            />
+                           <core:Item
+                                id="Item21"
+                                text="[ASSU]-Asso / Subs / Plants"
+                                key="[ASSU]-Asso / Subs / Plants"
+                            />
+
+                        </items>
+                    </ComboBox>
+
+                    <Label
+                        id="SupplierAssessmentID"
+                        text="Supplier Assessment"
+                    />
+                    <RadioButtonGroup
+                        id="SupplierAssessment"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton07"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButton08"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+
+                    <Label
+                        id="SupplierAssessmentFormID"
+                        text="Attach Supplier Assessment Form"
+
+                    />
+                    <unified:FileUploader
+                        id="SupplierAssessmentFormInput"
+                        fileType="jpg,png,pdf,docx,jpeg"
+                        change="onFileUpload"
+                        width="100%"
+                    />
+
+                    <Label
+                        id="SupplierSpendTypeID"
+                        text="Supplier Spend Type"
+                    />
+                    <Input
+                        id="supplierSpendType1"
+                        type="Text"
+                        value=""
+                        editable="false"
+                    />
+
+
+
+                      <Label
+                        id="SupplierTypeID"
+                        text="Supplier Type"
+                    />
+                     <Input
+                        id="SupplierType1"
+                        type="Text"
+                        value=""
+                        editable="false"
+                    />
+
+                    <Label
+                        id="NatureofActivityID"
+                        text="Nature of Activity"
+                    />
+                    <Input
+                        id="NatureofActivity1"
+                        type="Text"
+                        value=""
+                        editable="false"
+                    />
+
+
+                    <Label
+                        id="SectorID"
+                        text="Sector"
+                    />
+                    <Input
+                        id="sectorComboBox1"
+                        type="Text"
+                        value=""
+                        editable="false"
+                    />
+
+
+                    <Label
+                        id="DepartmentID"
+                        text="Department"
+                    />
+                    <Input
+                        id="Department"
+                        type="Text"
+                        value=""
+                        editable="false"
+                    />
+
+                    <Label
+                        id="Function"
+                        text="Function &amp; Subfunction"
+                    />
+                    <Input
+                        id="FunctionandSubfunctionComboBox1"
+                        type="Text"
+                        value=""
+                        editable="false"
+                    />
+
+                    <Label
+                        id="SearchTermID"
+                        text="Search Term 1"
+                        required="true"
+                    />
+                    <Input
+                        id="SearchTerm"
+                        type="Text"
+                        value="{/SearchTerm}"
+                        liveChange="handleLiveChange"
+                    />
+
+                    <Label
+                        id="VendorEvaluationID"
+                        text="Vendor Evaluation Form to be attached"
+                    />
+                    <unified:FileUploader
+                        id="VendorEvaluationInput"
+                        fileType="jpg,png,pdf,docx,jpeg"
+                        width="100%"
+                    />
+
+                    <Label
+                        id="SupplierDueID"
+                        text="Supplier Due Diligence check (e.g. Financial Check,3rd Party Ratings, Legal Check, Etc)"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="SupplierDue"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item38"
+                                text="Done"
+                                key="Done"
+                            />
+                           <core:Item
+                                id="Item39"
+                                text="Not Done"
+                                key="Not Done"
+                            />
+                        </items>
+                    </ComboBox>
+
+                     <Label
+                        id="SupplierDueAttachmentID"
+                        text="Attach Supporting Documents for Due Diligence"
+                         required="true"
+                    />
+                    <unified:FileUploader
+                        id="SupplierDueAttachment"
+                        fileType="jpg,png,pdf,docx,jpeg"
+                        width="100%"
+                        change="handleFileChange"
+                    />
+
+                    <Label
+                        id="RemarksDueDiligenceID"
+                        text="Remarks for Due Diligence"
+                        required="true"
+                    />
+                    <Input
+                        id="RemarksDueDiligence"
+                        type="Text"
+                        value="{/RemarksDueDiligence}"
+                        liveChange="handleLiveChange"
+                    />
+
+                     <Label
+                        id="SanctionDocumentID"
+                        text="International Sanction Document (PDF)"
+                         required="true"
+                    />
+                    <unified:FileUploader
+                        id="SanctionDocument"
+                        fileType="pdf"
+                        width="100%"
+                        change="handleFileChange"
+                    />
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="POIsection"
+                title="Purchasing Organization Information"
+                showTitle="false"
+                class="custom-section-spacing"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="section2SS1"
+                        title="Purchasing Organization Information"
+                        titleUppercase="false"
+                    >
+                        <!-- <uxap:blocks>
+                            <sample:POInfo id="bbt6" />
+                        </uxap:blocks> -->
+                        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="SimpleFormToolbar5"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="TB5">
+                        <Title
+                            id="Title91"
+                            text="Purchasing Organization Information"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                  <Label
+                        id="PurchasingOrgID"
+                        text="Purchasing Org"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="PurchasingOrg"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item41"
+                                text="[INPO] - M&amp;M Purch Org India"
+                                key="[INPO] - M&amp;M Purch Org India"
+                            />
+                        </items>
+                    </ComboBox>
+
+                    <Label
+                        id="PurchaseCurrCodeID"
+                        text="Purchase Order Currency Code"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="PurchaseCurrCode"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item42"
+                                text="[ADP]-Andoran peseta"
+                                key="[ADP]-Andoran peseta"
+                            />
+                           <core:Item
+                                id="Item43"
+                                text="[AED]-United Arab Emirates Dirham"
+                                key="[AED]-United Arab Emirates Dirham"
+                            />
+                            <core:Item
+                                id="Item44"
+                                text="[AFA]-Afghani (Old)"
+                                key="[AFA]-Afghani (Old)"
+                            />
+                           <core:Item
+                                id="Item45"
+                                text="[AFN]-Afghani"
+                                key="[AFN]-Afghani"
+                            />
+                        </items>
+                    </ComboBox>
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="AIsection"
+                title="Section 3"
+                showTitle="false"
+                class="custom-section-spacing"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="section3SS1"
+                        title="Additional Information"
+                        titleUppercase="false"
+                    >
+                        <!-- <uxap:blocks>
+                            <sample:AIInfo id="bbt7" />
+                        </uxap:blocks> -->
+                         <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="SimpleFormToolbar8"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="TB9">
+                        <Title
+                            id="Title60"
+                            text="Additional Information"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        id="vendorcoderegisteredID"
+                        text="Is the vendor code registered with another address"
+                        required="true"
+                    />
+                     <RadioButtonGroup
+                        id="vendorcoderegistered"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton01"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButton02"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                    <Label
+                        id="correspondingvendorcodeID"
+                        text="Please enter the corresponding vendor code"
+                        required="true"
+                    />
+                    <Input
+                        id="correspondingvendorcode"
+                        type="Text"
+                        value="{/correspondingvendorcode}"
+                        liveChange="handleLiveChange"
+                    />
+
+                    <Label
+                        id="DomesticSupplierID"
+                        text="Schema Group for Domestic Supplier"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="DomesticSupplier"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item53"
+                                text="[D1] - Domestic Schema"
+                                key="[D1] - Domestic Schema"
+                            />                      
+                        </items>
+                    </ComboBox>
+
+                     <Label
+                        id="ImportSupplierID"
+                        text="Schema Group for Import Supplier"
+                        required="true"
+                    />
+                   <ComboBox
+                        id="ImportSupplier"
+                        selectedKey=""
+                        change="handleComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item54"
+                                text="[I1] - Import Schema"
+                                key="[I1] - Import Schema"
+                            />                      
+                        </items>
+                    </ComboBox>
+
+                    <Label
+                        id="PurchasingBlockIndicatorID"
+                        text="Purchasing Block Indicator"
+                    />
+                    <RadioButtonGroup
+                        id="PurchasingBlockIndicator"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton09"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RadioButton010"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+
+                    <Label
+                        id="AdditionalattachmentID"
+                        text="Additional attachments if any"
+                    />
+                    <unified:FileUploader
+                        id="Additionalattachment"
+                        fileType="jpg,png,pdf,docx,jpeg"
+                        change="onFileUpload"
+                        width="100%"
+                    />
+
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</content>
+          <footer>
+<OverflowToolbar>
+<ToolbarSpacer />
+ <Button
+                    id="SaveButton1"
+                    text="Save"
+                    press="onPDFormSave"
+                    width="150px"
+                    type="Emphasized"
+                />
+                <Button
+                    id="SubmitButton1"
+                    text="Submit"
+                    press="onPDFormsubmit"
+                    width="150px"
+                    type="Emphasized"
+                />
+</OverflowToolbar>
+</footer>
+ 
+    </Page>
+</mvc:View>

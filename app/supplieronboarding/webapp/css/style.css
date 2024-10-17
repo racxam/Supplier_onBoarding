@@ -1,1 +1,21 @@
 /* Enter your custom styles here */
+.custom-section-spacing {
+    margin-top: 30px; /* Adjust as needed */
+}
+
+.sapUxAPObjectPageSection:focus, 
+.sapUxAPObjectPageSection:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.sapUxAPObjectPageSection *:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.customRadioButton {
+    border: none !important;
+    box-shadow: none !important;
+}
+
