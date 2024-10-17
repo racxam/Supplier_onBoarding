@@ -96,7 +96,32 @@ sap.ui.define(
         completeTask: function (approvalStatus) {
           this.getModel("context").setProperty("/approved", approvalStatus);
           this._patchTaskInstance();
+          
+          var SupplierReqID =this.getModel("context").getProperty("/reqid");
+
+          this.updateSupplierRequestStatus(SupplierReqID, approvalStatus);
+          
           this._refreshTaskList();
+
+
+
+        },
+        updateSupplierRequestStatus:function (SupplierReqID, approvalStatus) {
+          var oModel= this.getModel()
+          console.log(SupplierReqID);
+          oModel.setUseBatch(false);
+          updateData = {'Status':approvalStatus}
+          oModel.update("/supplierReqSrv("+SupplierReqID+")",updateData,{
+            success:function() {
+              console.log("Supplier Request Status is set to "+approvalStatus);
+            },
+            error:function(){
+              console.log("Supplier Request Staus is not set");
+
+            }
+          })
+
+          
         },
 
         _patchTaskInstance: function () {

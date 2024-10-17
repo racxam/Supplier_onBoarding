@@ -1,5 +1,4 @@
 using Attachments as service from '../../srv/service';
-
 annotate Attachments.supplierReqSrv with @(UI: {LineItem: [
     {
         $Type: 'UI.DataField',
@@ -15,12 +14,11 @@ annotate Attachments.supplierReqSrv with @(UI: {LineItem: [
     },
     {
         $Type: 'UI.DataField',
-        Value: PriContactMNumber
+        Value: PriContactEmail
     },
     {
         $Type: 'UI.DataField',
         Value: Status
     },
 
-],
-});
+]});
