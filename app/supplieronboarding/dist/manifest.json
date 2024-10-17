@@ -116,8 +116,8 @@
                     "viewType": "XML",
                     "transition": "slide",
                     "clearControlAggregation": false,
-                    "viewId": "RequestForm",
-                    "viewName": "RequestForm"
+                    "viewId": "SupplierTable",
+                    "viewName": "SupplierTable"
                 }
             }
         },

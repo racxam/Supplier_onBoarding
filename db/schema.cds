@@ -32,6 +32,7 @@ context transcation {
         PriContactEmail         : String(64); // It needs validation
         PriContactMNumber       : String(15); // Needs validation
         Status                  : common.StatusT default 'PENDING'; //Status
+        SupplierId:String;
 
 
     };

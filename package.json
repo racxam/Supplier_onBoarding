@@ -9,19 +9,24 @@
         "@cap-js-community/odata-v2-adapter": "cap-js-community/odata-v2-adapter",
         "@cap-js/hana": "^1",
         "@sap-cloud-sdk/http-client": "^3.21.0",
+        "@sap-cloud-sdk/openapi": "^3.22.2",
         "@sap-cloud-sdk/resilience": "^3.21.0",
         "@sap/cds": "^8",
         "@sap/xssec": "^4.2.4",
+        "chai": "^5.1.1",
         "express": "^4.21.0",
         "passport": "^0.7.0",
         "sap-cf-axios": "^1.0.2"
     },
     "devDependencies": {
-        "@cap-js/cds-types": "^0.6",
+        "@cap-js/cds-types": "^0.6.5",
         "@cap-js/sqlite": "^1",
+        "@sap-cloud-sdk/openapi-generator": "^3.22.2",
         "@sap/cds-dk": "^8",
         "@sap/ux-specification": "UI5-1.128",
-        "rimraf": "^5.0.5"
+        "@types/chai": "^5.0.0",
+        "rimraf": "^5.0.5",
+        "typescript": "^5.6.3"
     },
     "scripts": {
         "start": "cds-serve",

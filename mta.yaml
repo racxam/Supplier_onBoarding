@@ -84,8 +84,7 @@ modules:
       commands:
         - npm install
         - npm run build:cf
-      supported-platforms:
-        []
+      supported-platforms: []
   - name: comsumoprocesstaskuimodule
     type: html5
     path: processtask-ui-module
@@ -95,8 +94,7 @@ modules:
       commands:
         - npm install
         - npm run build:cf
-      supported-platforms:
-        []
+      supported-platforms: []
 resources:
   - name: SupplierOnboarding-db
     type: com.sap.xs.hdi-container
