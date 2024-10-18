@@ -92,35 +92,41 @@
         }
       ]
     },
+
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "com.sumo.supplieronboarding.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+          "routerClass": "sap.m.routing.Router",
+          "viewType": "XML",
+          "async": true,
+          "viewPath": "com.sumo.supplieronboarding.view",
+          "controlAggregation": "pages",
+          "controlId": "app",
+          "clearControlAggregation": false
       },
       "routes": [
-        {
-          "name": "RouteRequestForm",
-          "pattern": ":?query:",
-          "target": [
-            "TargetRequestForm"
-          ]
-        }
+          {
+              "pattern": "SupplierTable",
+              "name": "SupplierTable",
+              "target": "SupplierTable"
+          },
+          {
+              "pattern": "RequestForm",
+              "name": "RequestForm",
+              "target": "RequestForm"
+          }
       ],
       "targets": {
-        "TargetRequestForm": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "companycodedata",
-          "viewName": "companycodedata"
-        }
+          "SupplierTable": {
+              "viewName": "SupplierTable",
+              "viewLevel": 1
+          },
+          "RequestForm": {
+              "viewName": "RequestForm",
+              "viewLevel": 2
+          }
       }
-    },
+  },
+
     "rootView": {
       "viewName": "com.sumo.supplieronboarding.view.App",
       "type": "XML",

@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"],function(n){"use strict";return n.extend("com.sumo.supplieronboarding.controller.SupplierTable",{onInit:function(){}})});
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("com.sumo.supplieronboarding.controller.SupplierTable",{onInit:function(){},onCreateRequest:function(){var e=sap.ui.core.UIComponent.getRouterFor(this);e.navTo("RequestForm")}})});
 //# sourceMappingURL=SupplierTable.controller.js.map

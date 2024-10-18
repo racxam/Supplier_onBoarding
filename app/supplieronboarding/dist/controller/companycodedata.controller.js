@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller","sap/m/MessageToast"],function(o,n){"use strict";return o.extend("com.sumo.supplieronboarding.controller.companycodedata",{onInit:function(){}})});
+//# sourceMappingURL=companycodedata.controller.js.map

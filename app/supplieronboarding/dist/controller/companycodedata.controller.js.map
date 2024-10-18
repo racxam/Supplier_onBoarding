@@ -1,0 +1,1 @@
+{"version":3,"file":"companycodedata.controller.js","names":["sap","ui","define","Controller","MessageToast","extend","onInit"],"sources":["companycodedata-dbg.controller.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CACV,6BACA,sBAEA,SAAUC,EAAYC,GAClB,aAEA,OAAOD,EAAWE,OAAO,yDAA0D,CAC/EC,OAAQ,WAER,GAER","ignoreList":[]}

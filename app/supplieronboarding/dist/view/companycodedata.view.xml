@@ -1,0 +1,107 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.companycodedata"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:uxap="sap.uxap"
+    xmlns:sample="com.sumo.supplieronboarding.controller.companyblocks"
+    xmlns="sap.m"
+    xmlns:upload="sap.m.upload"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+>
+    <Page
+        id="page4"
+        title="{i18n>title}"
+    >
+        <content>
+            <uxap:ObjectPageLayout
+                id="ObjectPageLayout2"
+                upperCaseAnchorBar="false"
+                class="img-bg"
+            >
+                <uxap:sections>
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="comp-Section1"
+                        title="Section 1"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="section1_SS"
+                                title="Supplier Identification"
+                                titleUppercase="false"
+                                showTitle="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:SI id="comp-bbt22" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="comp-section2"
+                        title="Section 2"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="comp-section2_SS1"
+                                title="Company Code"
+                                titleUppercase="false"
+                                showTitle="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:CC id="comp-bbt2" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection
+                        titleUppercase="false"
+                        id="comp-section3"
+                        title="Section 3"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="comp-section3_SS1"
+                                title="Withholding Tax Information"
+                                titleUppercase="false"
+                                showTitle="false"
+                            >
+                                <uxap:blocks>
+                                    <sample:WTI id="comp-bbt3" />
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>  
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
+            <FlexBox
+                id="comp-_IDGenFlexBox1"
+                height="100px"
+                alignItems="Start"
+                justifyContent="Center"
+            >
+                <Button
+                    id="comp-_IDGenButton1"
+                    width="200px"
+                    class="sapUiSmallMargin"
+                    text="Submit"
+                    press="SubmitSupplieronBoardForm"
+                />
+                <Button
+                    id="comp-save_btn"
+                    width="200px"
+                    class="sapUiSmallMargin"
+                    text="Save"
+                    press="onFormsubmit"
+                />
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

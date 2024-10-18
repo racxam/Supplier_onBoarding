@@ -8,9 +8,23 @@
     <Page id="page-SupplierTable" title="{i18n>title}">
     <content>
      	<VBox fitContainer="true">
+			   <FlexBox
+                id="comp-btn"
+                height="50px"
+                alignItems="Start"
+                justifyContent="End"
+            >
+                 <Button
+                    id="comp-req_btn"
+                    width="200px"
+                    class="sapUiSmallMargin sapUiNoMarginBottom"
+                    text="Create Request"
+                    press="onCreateRequest"
+                />
+            </FlexBox>
 
-
-			<!-- <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="LineItemsSet" persistencyKey="SmartFilter_Explored" basicSearchFieldName="Bukrs" enableBasicSearch="true" >
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="LineItemsSet" 
+			persistencyKey="SmartFilter_Explored" basicSearchFieldName="Bukrs" enableBasicSearch="true" >
 				<smartFilterBar:controlConfiguration>
 					<smartFilterBar:ControlConfiguration key="SupplierId">
 					<smartFilterBar:defaultFilterValues>
@@ -35,16 +49,16 @@
 				<smartFilterBar:layoutData>
 					<FlexItemData shrinkFactor="0"/>
 				</smartFilterBar:layoutData>
-			</smartFilterBar:SmartFilterBar> -->
+			</smartFilterBar:SmartFilterBar>
 
             
 			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="supplierReqSrv" 
-			smartFilterId="smartFilterBar" tableType="Table" enableExport="true" beforeExport="onBeforeExport" useVariantManagement="true"
+			smartFilterId="smartFilterBar" tableType="Table" enableExport="true"
+			 beforeExport="onBeforeExport" useVariantManagement="true"
              useTablePersonalisation="true" header="Line Items" showRowCount="true" 
              persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" 
              class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="true"
               >
-				<!-- layout data used to make the table growing but the filter bar fixed -->
 				<smartTable:layoutData>
 					<FlexItemData growFactor="1" baseSize="0%"/>
 				</smartTable:layoutData>

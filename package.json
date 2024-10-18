@@ -31,7 +31,6 @@
   },
   "cds": {
     "requires": {
-      
       "auth": "mocked"
     }
   }

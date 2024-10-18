@@ -5,32 +5,30 @@ annotate Attachments.supplierReqSrv with @(
     UI: {
         LineItem: [
             {
-                $Type:'UI.DataField',
-                Value: SupplierId
-            },
-           {
-                $Type:'UI.DataField',
-                Value: SFullName 
+                $Type: 'UI.DataField',
+                Value: SupplierId,
+                Label: 'Supplier ID' // Optional: Add label if needed
             },
             {
-                $Type:'UI.DataField',
-                Value: SpendType
+                $Type: 'UI.DataField',
+                Value: SFullName,
+                Label: 'Supplier Full Name'
             },
             {
-                $Type:'UI.DataField',
-                Value: PriContactMNumber 
+                $Type: 'UI.DataField',
+                Value: SpendType,
+                Label: 'Spend Type'
             },
-          {
-                $Type:'UI.DataField',
-                Value: Status
+            {
+                $Type: 'UI.DataField',
+                Value: PriContactEmail,
+                Label: 'Primary Contact Email'
             },
-        
-        ],
-        // HeaderInfo: {
-        //     TypeName: ,
-        //     TypeNamePlural: ,
-        //     Title: ,
-        //     Description: 
-        // }
+            {
+                $Type: 'UI.DataField',
+                Value: Status,
+                Label: 'Status'
+            }
+        ]
     }
 );

@@ -104,20 +104,24 @@
             },
             "routes": [
                 {
-                    "name": "RouteRequestForm",
-                    "pattern": ":?query:",
-                    "target": [
-                        "TargetRequestForm"
-                    ]
+                    "pattern": "SupplierTable",
+                    "name": "SupplierTable",
+                    "target": "SupplierTable"
+                },
+                {
+                    "pattern": "RequestForm",
+                    "name": "RequestForm",
+                    "target": "RequestForm"
                 }
             ],
             "targets": {
-                "TargetRequestForm": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "SupplierTable",
-                    "viewName": "SupplierTable"
+                "SupplierTable": {
+                    "viewName": "SupplierTable",
+                    "viewLevel": 1
+                },
+                "RequestForm": {
+                    "viewName": "RequestForm",
+                    "viewLevel": 2
                 }
             }
         },
