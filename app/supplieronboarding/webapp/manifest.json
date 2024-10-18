@@ -23,6 +23,14 @@
           "annotations": [],
           "odataVersion": "2.0"
         }
+      },
+      "V4odataService": {
+        "uri": "/odata/v4/attachments/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -76,7 +84,18 @@
         }
       },
       "": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
         "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "V4odataService": {
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "dataSource": "V4odataService",
         "preload": true,
         "settings": {
           "operationMode": "Server",
@@ -133,3 +152,4 @@
     "service": "supplier_creation"
   }
 }
+ 

@@ -10,7 +10,7 @@ sap.ui.define([
     "sap/m/Button",
     "sap/m/Text"
 ],
-    function (Controller, MessageToast, Icon, JSONModel, Fragment, Dialog, Button, Text) {
+    function (Controller, MessageToast, MessageBox,Icon, JSONModel, Fragment, Dialog, Button, Text) {
         "use strict";
 
         return Controller.extend("com.sumo.supplieronboarding.controller.RequestForm", {
@@ -135,57 +135,36 @@ sap.ui.define([
                     MessageToast.show("Please enter a valid PAN Card number.");
                 }
             },
+            onSubmitgst: function () {
+                var gstin = this.getView().byId("gstinInput").getValue();
 
-            // onSubmitgst: function () {
-            //     var oGSTINInput = this.byId("gstinInput");
-            //     var sGSTINValue = oGSTINInput.getValue();
+                if (gstin) {
+                    this.verifyGST(gstin);
+                } else {
+                    MessageBox.error("Please enter a valid GSTIN.");
+                }
+            },
+            verifyGST: function (gstin) {
+                var oModel = this.getView().getModel("V4odataService");
 
-            //     if (oGSTINInput.getValueState() === "Success") {
-            //         MessageToast.show("GSTIN are valid:" + sGSTINValue);
-            //     } else {
-            //         MessageToast.show("Please enter a valid GSTIN or Please ensure both PAN and GSTIN are valid and matching.");
-            //     }
-            // },
+                oModel.bindContext("/getStatus()", {
+                    urlParameters: {
+                        gstin: gstin
+                    }
+                }).requestObject().then(function (oData) {
+                    this._onpopulate(oData);
+                    console.log("API data:", oData);
+                }.bind(this)).catch(function (oError) {
+                    console.error("Error calling backend API:", oError);
+                    MessageBox.error("Error fetching GST details. Please try again.");
+                }.bind(this));
+            },
 
-            // onSubmitgst: function () {
-            //     // Get the input value from the user
-            //     var sGstinInput = this.byId("gstinInput").getValue().trim();
+            _onpopulate: function (oData) {
+                this.getView().byId("SupplierNameInput").setValue(oData.value.data.lgnm);
+                this.getView().byId("SuppliertradeNameInput").setValue(oData.value.data.tradeNam);
+            },
 
-            //     // Access the model with customer data
-            //     var oModel = this.getView().getModel("customerModel");
-            //     var oData = oModel.getProperty("/customers");
-
-            //     // Find customer based on GSTIN
-            //     var oCustomer = oData.find(function (customer) {
-            //         return customer.GSTIN === sGstinInput;
-            //     });
-
-            //     if (oCustomer) {
-            //         // GSTIN found, show details in a dialog
-            //         var oDialog = new sap.m.Dialog({
-            //             title: "Customer Details",
-            //             content: new sap.m.Text({
-            //                 text: "  Name: " + oCustomer.Name + "\n" +
-            //                     "  Address: " + oCustomer.Address + "\n" +
-            //                     "  Contact Number: " + oCustomer.ContactNumber
-            //             }),
-            //             beginButton: new sap.m.Button({
-            //                 text: "OK",
-            //                 press: function () {
-            //                     oDialog.close();
-            //                 }
-            //             }),
-            //             afterClose: function () {
-            //                 oDialog.destroy();
-            //             }
-            //         });
-
-            //         oDialog.open();
-            //     } else {
-            //         // GSTIN not found, show message toast
-            //         MessageToast.show("GSTIN not found!");
-            //     }
-            // },
 
             onEmailChange: function (oEvent) {
                 var oInput = oEvent.getSource();
