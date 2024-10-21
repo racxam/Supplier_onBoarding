@@ -310,12 +310,30 @@
                         id="SupplierTypeID"
                         text="Supplier Type"
                     />
-                     <Input
+                    <ComboBox
+                        id="SupplierType1"
+                        selectedKey=""
+                        change="onSelectionSupplierType"
+                    >
+                        <items>
+                            <core:Item
+                                id="Item021"
+                                text="Import"
+                                key="Import"
+                            />
+                            <core:Item
+                                id="Item022"
+                                text="LocalGST"
+                                key="LocalGST"
+                            />
+                        </items>
+                    </ComboBox>
+                     <!-- <Input
                         id="SupplierType1"
                         type="Text"
                         value=""
                         editable="false"
-                    />
+                    /> -->
 
                     <Label
                         id="NatureofActivityID"
@@ -446,6 +464,7 @@
                         fileType="pdf"
                         width="100%"
                         change="handleFileChange"
+                        visible="false"
                     />
                 </f:content>
             </f:SimpleForm>
@@ -652,6 +671,7 @@
                         id="DomesticSupplier"
                         selectedKey=""
                         change="handleComboBoxChange"
+                        visible="false"
                     >
                         <items>
                             <core:Item
@@ -671,6 +691,7 @@
                         id="ImportSupplier"
                         selectedKey=""
                         change="handleComboBoxChange"
+                        visible="false"
                     >
                         <items>
                             <core:Item

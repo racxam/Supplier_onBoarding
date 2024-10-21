@@ -11,11 +11,13 @@ sap.ui.define([
     "sap/m/Text",
     "sap/ui/model/odata/v4/ODataModel"
 ],
-    function (Controller, MessageToast, Icon, JSONModel, Fragment, Dialog, Button, Text) {
+    function (Controller, MessageToast, MessageBox, Icon, JSONModel, Fragment, Dialog, Button, Text) {
         "use strict";
 
         return Controller.extend("com.sumo.supplieronboarding.controller.RequestForm", {
             onInit: function () {
+                //this.uploadfile = sap.ui.xmlfragment("com/sumo/supplieronboarding/Fragments/uploadfile", this);
+                //this.getView().addDependent(this.uploadfile);
                 var oModel = new sap.ui.model.json.JSONModel({ documentfiles: [] });
                 this.getView().setModel(oModel);
                 this.onReadSupplierSpendType();
@@ -143,8 +145,6 @@ sap.ui.define([
                 this.getView().byId("SuppliertradeNameInput").setValue(oData.value.data.tradeNam);
             },
 
-
-
             onEmailChange: function (oEvent) {
                 var oInput = oEvent.getSource();
                 var sEmail = oInput.getValue();
@@ -246,55 +246,55 @@ sap.ui.define([
                 MessageToast.show("File deleted successfully.");
             },
 
-            onFileUploadpan: function (oEvent) {
-                var oFileUploader = oEvent.getSource();
-                var oFile = oFileUploader.oFileUpload.files[0];
-                if (oFile) {
-                    var sFileName = oFile.name;
-                    var oReader = new FileReader();
-                    var that = this;
-                    oReader.onload = function (e) {
-                        var sFileUrl = e.target.result; 
-                        var oModel = that.getView().getModel();
-                        var aFiles = oModel.getProperty("/pan");  
+            // onFileUploadpan: function (oEvent) {
+            //     var oFileUploader = oEvent.getSource();
+            //     var oFile = oFileUploader.oFileUpload.files[0];
+            //     if (oFile) {
+            //         var sFileName = oFile.name;
+            //         var oReader = new FileReader();
+            //         var that = this;
+            //         oReader.onload = function (e) {
+            //             var sFileUrl = e.target.result; 
+            //             var oModel = that.getView().getModel();
+            //             var aFiles = oModel.getProperty("/pan");  
 
-                        aFiles.push({
-                            fileName: sFileName,
-                            fileUrl: sFileUrl
-                        });
-                        oModel.setProperty("/pan", aFiles);
-                        console.log("Updated /Pan attachment:", oModel.getProperty("/pan"));
-                        MessageToast.show("File " + sFileName + " uploaded successfully.");
-                        oModel.refresh(true);
-                    };
-                    oReader.readAsDataURL(oFile);
-                }
-            },
+            //             aFiles.push({
+            //                 fileName: sFileName,
+            //                 fileUrl: sFileUrl
+            //             });
+            //             oModel.setProperty("/pan", aFiles);
+            //             console.log("Updated /Pan attachment:", oModel.getProperty("/pan"));
+            //             MessageToast.show("File " + sFileName + " uploaded successfully.");
+            //             oModel.refresh(true);
+            //         };
+            //         oReader.readAsDataURL(oFile);
+            //     }
+            // },
 
-            formatAttachmentButtonTextpan: function (pan) {
-                if (pan && pan.length > 0) {
-                    return "View Attachments (" + pan.length + ")";
-                } else {
-                    return "View Attachments (0)";
-                }
-            },
+            // formatAttachmentButtonTextpan: function (pan) {
+            //     if (pan && pan.length > 0) {
+            //         return "View Attachments (" + pan.length + ")";
+            //     } else {
+            //         return "View Attachments (0)";
+            //     }
+            // },
 
-            onOpenDialogpan: function () {
-                if (!this._oPanDialog) {
-                    this._oPanDialog = this.getView().byId("panDialog");
-                    if (!this._oPanDialog) {
-                        this._oPanDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.uploadfile", this);
-                        this.getView().addDependent(this._oPanDialog);
-                    }
-                }
-                this._oPanDialog.open();
-            },
+            // onOpenDialogpan: function () {
+            //     if (!this._oPanDialog) {
+            //         this._oPanDialog = this.getView().byId("panDialog");
+            //         if (!this._oPanDialog) {
+            //             this._oPanDialog = sap.ui.xmlfragment("com.sumo.supplieronboarding.view.fragment.uploadfile", this);
+            //             this.getView().addDependent(this._oPanDialog);
+            //         }
+            //     }
+            //     this._oPanDialog.open();
+            // },
 
-            onCloseDialogpan: function () {
-                if (this._oPanDialog) {
-                    this._oPanDialog.close();
-                }
-            },
+            // onCloseDialogpan: function () {
+            //     if (this._oPanDialog) {
+            //         this._oPanDialog.close();
+            //     }
+            // },
 
             onFormsubmit: function () {
                 var oView = this.getView();
@@ -473,18 +473,18 @@ sap.ui.define([
                         method: "POST",
                         success: function (oData) {
 
-                            MessageToast.show("Form submitted successfully." + oData.ID);
+                            MessageBox.success("Form submitted successfully." + oData.ID);
                             this.onUploadFile(oData.ID);
                             oView.clearFormFields();
 
                         }.bind(this), 
                         error: function () {
-                            MessageToast.show("Error while submitting the Form.");
+                            MessageBox.error("Error while submitting the Form.");
                         }
                     });
                 }
                 else {
-                    sap.m.MessageToast.show("Please fill All The Required fields.");
+                      MessageBox.error("Please fill All The Required fields.");
                 }
             },
 
@@ -629,6 +629,7 @@ sap.ui.define([
                 } else {
                     MessageToast.show("File not found or missing content.");
                 }
+               
             },
 
 
@@ -644,6 +645,13 @@ sap.ui.define([
                             const updatedDocumentFiles = aDocumentFiles.filter(file => file.fileName !== sFileName);
                             oModel.setProperty("/documentFiles/" + documentType, updatedDocumentFiles);
                             MessageToast.show(`File "${sFileName}" deleted successfully.`);
+
+                            if (documentType === "pan") {
+                                this.byId("fileUploaderPan").setValue(""); 
+                            } else if (documentType === "gst") {
+                                this.byId("fileUploaderGst").setValue("");
+                            }
+            
                             this.onCloseDialog();
                         }
                     }.bind(this)

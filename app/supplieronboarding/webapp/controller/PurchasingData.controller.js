@@ -25,6 +25,9 @@ sap.ui.define([
                 var oCorvencodeInput = oView.byId("correspondingvendorcode");
                 var oFileUploaderContainer = this.byId("SupplierDueAttachment");
                 var oRemarksField = this.byId("RemarksDueDiligence");
+                var SacDocument = this.byId("SanctionDocument");
+                var DomSupplier = this.byId("DomesticSupplier");
+                var ImpSupplier = this.byId("ImportSupplier");
               
                 var oPDFormData = {
                     Vendorcodeverify: oView.byId("Vendorcodeverify").getSelectedKey(),
@@ -98,6 +101,33 @@ sap.ui.define([
                         bValid = false;
                     } else {
                         oRemarksField.setValueState(sap.ui.core.ValueState.None);
+                    }
+                }
+                if (SacDocument.getVisible()) {
+                    if (!oPDFormData.SanctionDocument || oPDFormData.SanctionDocument .trim() === "") {
+                        SacDocument.setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("Attach Supporting Documents for Due Diligence.");
+                        bValid = false;
+                    } else {
+                        SacDocument.setValueState(sap.ui.core.ValueState.None);
+                    }
+                }
+                if (DomSupplier.getVisible()) {
+                    if (!oPDFormData.DomesticSupplier || oPDFormData.DomesticSupplier .trim() === "") {
+                        DomSupplier.setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("Attach Supporting Documents for Due Diligence.");
+                        bValid = false;
+                    } else {
+                        DomSupplier.setValueState(sap.ui.core.ValueState.None);
+                    }
+                }
+                if (ImpSupplier.getVisible()) {
+                    if (!oPDFormData.ImportSupplier || oPDFormData.ImportSupplier .trim() === "") {
+                        ImpSupplier.setValueState(sap.ui.core.ValueState.Error)
+                            .setValueStateText("Attach Supporting Documents for Due Diligence.");
+                        bValid = false;
+                    } else {
+                        ImpSupplier.setValueState(sap.ui.core.ValueState.None);
                     }
                 }
                 
@@ -250,6 +280,23 @@ sap.ui.define([
                                 oInput.setValueStateText("Invalid Number. Please enter a valid Vender Code.");
                             }
                         }, 1000);
+                    },
+                    onSelectionSupplierType: function() {
+                        var oComboBox = this.byId("SupplierType1");
+                        var sSelectedKey = oComboBox.getSelectedKey();
+                        var oInput5=this.byId("SanctionDocument");
+                        var oInput6=this.byId("ImportSupplier");
+                        var oInput7=this.byId("DomesticSupplier");
+                        
+                        if (sSelectedKey === "Import") {
+                            oInput5.setVisible(true);
+                            oInput6.setVisible(true);
+                            oInput7.setVisible(false)
+                        } else if (sSelectedKey === "LocalGST") {
+                            oInput7.setVisible(true);
+                            oInput5.setVisible(false);
+                            oInput6.setVisible(false);
+                        }
                     },
            
             onPDFormSave: function () {

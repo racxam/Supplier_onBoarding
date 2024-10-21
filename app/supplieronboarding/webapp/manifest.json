@@ -136,8 +136,8 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "PurchasingData",
-          "viewName": "PurchasingData"
+          "viewId": "RequestForm",
+          "viewName": "RequestForm"
         }
       }
     },

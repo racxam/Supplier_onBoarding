@@ -347,8 +347,7 @@
                         id="MobilenoLabel"
                         text="Primary Contact Mobile Number"
                         required="true"
-                    />
-                    
+                    /> 
                     <Input
                         id="numberInput"
                         placeholder="Enter your Mobile number"
@@ -364,11 +363,11 @@
                 </f:content>
             </f:SimpleForm>
 
-            <core:Fragment
+            <!-- <core:Fragment
                 fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
                 id="fileListFragment1"
                 type="XML"
-            />
+            /> -->
 
             <Toolbar id="Toolbar1">
                 <ToolbarSpacer id="ToolbarSpacer" />
