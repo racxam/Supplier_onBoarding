@@ -73,8 +73,9 @@
                     />
                     <Input
                         id="VendorcodeInput"
-                        type="Text"
+                        type="Number"
                         value="{/Vendorcode}"
+                        liveChange="onNumberChange"
                     />
 
                     <Label
@@ -129,7 +130,8 @@
                     <RadioButtonGroup
                         id="Groupnotavailable"
                         columns="2"
-                        selectedIndex="0"
+                        select="onSelectNewgroup"
+                        selectedIndex="1"
                     >
                         <buttons>
                             <RadioButton
@@ -153,6 +155,8 @@
                         type="Text"
                         value="{/Newgroup}"
                         liveChange="handleLiveChange"
+                        maxLength="150"
+                        visible="false"
                     />
 
 
@@ -189,7 +193,8 @@
                     <RadioButtonGroup
                         id="Parentnotavailable"
                         columns="2"
-                        selectedIndex="0"
+                        selectedIndex="1"
+                        select="onSelectNewparent"
                     >
                         <buttons>
                             <RadioButton
@@ -213,6 +218,8 @@
                         type="Text"
                         value="{/Newparent}"
                         liveChange="handleLiveChange"
+                        maxLength="150"
+                        visible="false"
                     />
 
                     <Label
@@ -257,7 +264,8 @@
                     <RadioButtonGroup
                         id="SupplierAssessment"
                         columns="2"
-                        selectedIndex="0"
+                        select="onSelectSupplierAssessment"
+                        selectedIndex="1"
                     >
                         <buttons>
                             <RadioButton
@@ -278,9 +286,10 @@
 
                     />
                     <unified:FileUploader
-                        id="SupplierAssessmentFormInput"
+                        id="SupplierAssessmentForm"
                         fileType="jpg,png,pdf,docx,jpeg"
                         change="onFileUpload"
+                        visible="false"
                         width="100%"
                     />
 
@@ -364,6 +373,7 @@
                         type="Text"
                         value="{/SearchTerm}"
                         liveChange="handleLiveChange"
+                        maxLength="150"
                     />
 
                     <Label
@@ -381,24 +391,23 @@
                         text="Supplier Due Diligence check (e.g. Financial Check,3rd Party Ratings, Legal Check, Etc)"
                         required="true"
                     />
-                   <ComboBox
+                     <RadioButtonGroup
                         id="SupplierDue"
-                        selectedKey=""
-                        change="handleComboBoxChange"
+                        columns="2"
+                        select="onSelectChange"
+                        selectedIndex="0"
                     >
-                        <items>
-                            <core:Item
-                                id="Item38"
+                        <buttons>
+                            <RadioButton
+                                id="RadioButton011"
                                 text="Done"
-                                key="Done"
                             />
-                           <core:Item
-                                id="Item39"
+                            <RadioButton
+                                id="RadioButton012"
                                 text="Not Done"
-                                key="Not Done"
                             />
-                        </items>
-                    </ComboBox>
+                        </buttons>
+                    </RadioButtonGroup>
 
                      <Label
                         id="SupplierDueAttachmentID"
@@ -410,6 +419,7 @@
                         fileType="jpg,png,pdf,docx,jpeg"
                         width="100%"
                         change="handleFileChange"
+                        visible="true"
                     />
 
                     <Label
@@ -422,6 +432,8 @@
                         type="Text"
                         value="{/RemarksDueDiligence}"
                         liveChange="handleLiveChange"
+                        maxLength="150"
+                        visible="false"
                     />
 
                      <Label
@@ -601,16 +613,18 @@
                      <RadioButtonGroup
                         id="vendorcoderegistered"
                         columns="2"
-                        selectedIndex="0"
+                        select="onSelectcorrespond"
                     >
                         <buttons>
                             <RadioButton
                                 id="RadioButton01"
                                 text="Yes"
+                                selected="false"
                             />
                             <RadioButton
                                 id="RadioButton02"
                                 text="No"
+                                selected="true"
                             />
                         </buttons>
                     </RadioButtonGroup>
@@ -625,6 +639,8 @@
                         type="Text"
                         value="{/correspondingvendorcode}"
                         liveChange="handleLiveChange"
+                        maxLength="150"
+                        visible="false"
                     />
 
                     <Label
