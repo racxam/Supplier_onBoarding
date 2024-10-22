@@ -32,14 +32,16 @@ Content-Type: application/json
     "FunAndSubfun": ["Finance", "HR"],                
     "PANCardNo": "ABCDE1234F",                        
     "GSTIN": "27ABCDE1234F1Z5",                       
-    "SFullName": "Sumo digi tech Pvt. Ltd.",                
+    "SFullName": "sumit digi tech Pvt. Ltd.",                
     "STradeNameGST": "ABC Trade",                     
     "SAddress": "abc, Example Street, City, State",   
     "SAddressGST": "123, Example Street, City, State",
-    "PriContactFName": "Ravi",                        
+    "PriContactFName": "sumit",                        
     "PriContactLName": "Doe",                         
-    "PriContactEmail": "john.doe@example.com",        
-    "PriContactMNumber": "1234567890"                 
+    "PriContactEmail": "sumit.doe@example.com",        
+    "PriContactMNumber": "1234567890",
+    "Status": "PENDING",
+    "SupplierId": "s101"               
 }
 
 ####
