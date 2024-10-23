@@ -2,21 +2,12 @@
 .custom-section-spacing {
     margin-top: 30px; /* Adjust as needed */
 }
-.sapMBarTitleAlignAuto .sapMBarPH {
-    justify-content: center;
-}
- 
+
 .sapUxAPObjectPageSection:focus, 
 .sapUxAPObjectPageSection:active {
     outline: none !important;
     border: none !important;
     box-shadow: none !important;
-}
-.fixedToolbar {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: white; 
 }
 .sapUxAPObjectPageSection *:focus {
     outline: none !important;
@@ -27,9 +18,4 @@
     border: none !important;
     box-shadow: none !important;
 }
-.sapFDynamicPageHeaderPinButton.sapMBtn .sapMBtnInner {
-    visibility: hidden;
-}
-span.sapMBtnInner.sapMBtnEmphasized {
-    visibility: hidden;
-}
+

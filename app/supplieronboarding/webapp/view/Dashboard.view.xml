@@ -1,0 +1,162 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.Dashboard"
+    xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:card="sap.f.cards"
+	xmlns:core="sap.ui.core"
+	displayBlock="true"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+	height="100%"
+>
+    <Page
+        id="page7"
+        title="{i18n>Dashboard}"
+    >
+<f:Card class="sapUiMediumMargin" height="100%" width="90%">
+		<f:header>
+			<!-- <card:Header
+				title="Dashboard"
+			 />  -->
+          
+		</f:header> 
+        
+		<f:content>
+		<f:DynamicPage headerExpanded="{/headerExpanded}">
+        
+        <f:title>
+        
+        </f:title>
+        <f:header>
+        
+            <f:DynamicPageHeader class="fixedToolbar">
+                <f:content>
+                   <HBox justifyContent="End" width="">
+                    <Button class="sapUiMediumMarginEnd sapUiTinyMarginBottom sapUiTinyMarginTop"
+                        id="createRequestButton"
+                        text="Create Request"
+                        press="onCreateRequest"
+                        width="150px"
+                        type="Default"/>
+                </HBox>
+               
+                    <fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems >
+                            <fb:FilterGroupItem name="Name" label="Supplier ID" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox
+                                        name="SupplierId"
+                                        selectionChange=".onSelectionChange"
+                                        items="{
+                                            path: '/supplierReqSrv',
+                                            templateShareable: true
+                                        }">
+                                        <core:Item key="{SupplierId}" text="{SupplierId}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+ 
+                            <fb:FilterGroupItem name="Category" label="Supplier Type" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox
+                                    id="ComboBoxSpendsTypesID"
+                                        selectionChange="onFilterStatusChange"
+                                        items="{
+                                            path: '/SupplierSpendTypeSrv'
+                                        }">
+                                        <items>
+                                        <core:Item key="{SpendsTypes}" text="{SpendsTypes}" />
+                                        </items>
+                                    </MultiComboBox>
+                                    <!-- <MultiComboBox
+                                        id="ComboBoxSpendsTypesID"
+                                        selectionChange="onFilterStatusChange"
+                                        >
+                                        <items>
+                                        <core:Item key="Indirect" text="Indirect" />
+                                        <core:Item key="Direct" text="Direct" />
+                                        <core:Item key="Capital" text="Capital" />
+                                        <core:Item key="Tooling" text="Tooling" />
+                                        <core:Item key="ValueFit" text="ValueFit" />
+                                        <core:Item key="Proto" text="Proto" />
+                                        <core:Item key="Accessories" text="Accessories" />
+                                        </items>
+                                    </MultiComboBox> -->
+                                </fb:control>
+                            </fb:FilterGroupItem>
+ 
+                            <fb:FilterGroupItem name="SupplierName" label="Supplier Status" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <!-- <MultiComboBox
+                                        name="SupplierStatus"
+                                        selectionChange=".onSelectionChange"
+                                        items="{
+                                            path: '/supplierReqSrv',
+                                            templateShareable: true
+                                        }">
+                                        <core:Item key="{Status}" text="{Status}" />
+                                    </MultiComboBox> -->
+                                    <MultiComboBox
+                                        id="filterstatusid"
+                                        name="SupplierStatus"
+                                        selectionChange="onFilterStatusChange"
+                                        >
+                                        <items>
+                                        <core:Item key="PENDING" text="PENDING" />
+                                        <core:Item key="DRAFT" text="DRAFT" />
+                                        <core:Item key="ACCPECTED" text="ACCPECT" />
+                                        <core:Item key="REJECTED" text="REJECT" />
+                                        <core:Item key="ONBOARDED" text="ONBOARD" />
+                                        </items>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem> 
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table
+                id="table"
+                inset="false"
+                items="{
+                    path: '/supplierReqSrv'
+                }" width="100%">
+                <columns>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Supplier ID" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Supplier Name" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Type" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Contact" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Status" />
+                    </Column>
+                </columns>
+ 
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{SupplierId}" />
+                            <Text text="{SFullName}" />
+                            <Text text="{SpendType}" />
+                            <Text text="{PriContactEmail}" />
+                            <Text text="{Status}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+		</f:content>
+	</f:Card>
+    </Page>
+</mvc:View>

@@ -1,0 +1,1 @@
+{"version":3,"file":"myBlock.js","names":["sap","ui","define","BlockBase","extend","metadata"],"sources":["myBlock-dbg.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CAAC,sBAAuB,SAAUC,GAC/C,aACA,OAAOA,EAAUC,OAAO,kDAAmD,CAC1EC,SAAU,CAEV,GAEF","ignoreList":[]}

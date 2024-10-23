@@ -127,17 +127,31 @@
           "name": "RouteRequestForm",
           "pattern": ":?query:",
           "target": [
-            "TargetRequestForm"
+            "Dashboard"
           ]
+        },
+        {
+          "name": "Dashboard",
+          "pattern": "Dashboard",
+          "target": "Dashboard"
+        },
+        {
+          "pattern": "RequestForm",
+          "name": "RequestForm",
+          "target": "RequestForm"
         }
       ],
       "targets": {
-        "TargetRequestForm": {
+        "Dashboard": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "RequestForm",
-          "viewName": "RequestForm"
+          "viewId": "Dashboard",
+          "viewName": "Dashboard"
+        },
+        "RequestForm": {
+          "viewName": "RequestForm",
+          "viewLevel": 2
         }
       }
     },

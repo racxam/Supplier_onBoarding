@@ -1,0 +1,258 @@
+<mvc:View
+ 		controllerName="com.sumo.supplieronboarding.controller.RegistrationForm"
+		xmlns:forms="sap.ui.layout.form"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		xmlns="sap.m"
+	xmlns:m="sap.m" 
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+ 	xmlns:unified="sap.ui.unified"
+		width="100%">
+	<html:div style="font-size: 0.875rem;">
+	 <VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormToolbar4"
+			editable="true"
+			layout="ColumnLayout"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false"
+			ariaLabelledBy="Title1" >
+			<f:toolbar>
+				<Toolbar id="TB4">
+					<Title id="Title4" text="Payment Terms"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+
+				<Label text="SIMS" required='true' />
+				<Select id="pay-list1" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</Select>
+				<Label text="SSU" required='true' />
+				<Select id="pay-list2" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</Select>
+
+				<m:Label text="CIS  &amp; MDE" required='true' />
+				<m:Select id="pay-list3" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</m:Select>
+				<m:Label text="AM  &amp; IL" required='true' />
+				<m:Select id="pay-list4" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</m:Select>
+
+				<Label text="SD" required='true' />
+				<Select id="pay-list5" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</Select>
+				<Label text="FD" required='true' />
+				<Select id="pay-list6" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</Select>
+         
+		 	<Label text="Incoterms Code" required='true' />
+				<Select id="pay-list7" selectedKey="gstr" >
+					<items>
+						<core:Item text="[001]-Ex-Works Freight to pay" key="[001]-Ex-Works Freight to pay"/>
+						<core:Item text="[002]-F.O.R.tptr.godown-yr end FTPay" key="[002]-F.O.R.tptr.godown-yr end FTPay"/>
+					</items>
+				</Select>
+		
+		<Label text="Incoterms Location" />
+		<Input placeholder="Incoterms Location"></Input>
+
+		<Label text="Supplier Legal Full Name" />
+		<m:Text text="Note - Should be the same as the legal name mentioned earlier" />
+
+		<Label text="Bank Country" required='true' />
+				<Select id="pay-list8" selectedKey="gstr" >
+					<items>
+						<core:Item text="[IN] - INDIA" key="[IN] - INDIA"/>
+						<core:Item text="[US] UNITED STATES" key=" UNITED STATES"/>
+					</items>
+				</Select>
+
+		<Label text="Bank Name" />
+		<Input placeholder="Bank Name"></Input>
+
+		<Label text="Bank Key (IFSC Code)" />
+		<Input placeholder="Bank Key (IFSC Code)"></Input>
+		<m:Text text="Note - (Please make sure IFSC Code matches with the Cancelled Cheque  you have attached)" />
+
+		<Label text="IBAN Code / SWIFT Code " />
+		<Input placeholder="IBAN Code / SWIFT Code "></Input>
+		<m:Text text="Note - (Please make sure SWIFT Code matches with the Cancelled Cheque  you have attached)" />
+
+		<Label text="Bank Street Address" />
+		<Input placeholder="Bank Street Address"></Input>
+
+		<Label text="Bank Account Number" />
+		<Input placeholder="Bank Account Number"></Input>
+		<m:Text text="Note - (Please make sure Bank Account Number matches with the Cancelled Cheque you have attached)" />
+
+		<Label text="Re Confirm Bank Account Number" />
+		<Input placeholder="Re Confirm Bank Account Number"></Input>
+		<m:Text text="Note - (Please make sure Bank Account Number matches with the Cancelled Cheque you have attached)" />
+
+		<Label text="Bank Account Type (Control Key)" required='true' />
+				<Select id="pay-list9" selectedKey="gstr" >
+					<items>
+						<core:Item text="[11]- Savings Account" key="[11]- Savings Account"/>
+						<core:Item text="[13]- Current Account" key="[13]- Current Account"/>
+					</items>
+				</Select>
+
+		<Label text="Postal Code" />
+		<Input placeholder="Postal Code"></Input>
+
+		<Label text="City / Village" />
+		<Input placeholder="City / Village"></Input>
+
+		<Label text="Branch Name" required='true' />
+				<Select id="pay-list10" selectedKey="gstr" >
+					<items>
+						<core:Item text="[11]- Savings Account" key="[11]- Savings Account"/>
+						<core:Item text="[13]- Current Account" key="[13]- Current Account"/>
+					</items>
+				</Select>
+
+		<Label text="State" required='true' />
+				<Select id="pay-list11" selectedKey="gstr" >
+					<items>
+						<core:Item text="[11]- Savings Account" key="[11]- Savings Account"/>
+						<core:Item text="[13]- Current Account" key="[13]- Current Account"/>
+					</items>
+				</Select>
+
+		<Label text="Region Code for Foreign Account" />
+		<Input placeholder="Region Code for Foreign Account"></Input>
+
+		<Label text="Please print the Bank Mandate Form on your official letter Head &amp; attach it. (Bank Mandate Form is attached for your reference)." required='true' />
+         <unified:FileUploader
+            id="fileUploader19"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+		<Label text="Please Upload/Attach Copy of Cancelled Cheque" required='true' />
+         <unified:FileUploader
+            id="fileUploader20"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+<m:Text text="Note - If cancel cheque not there –provide Passbook copy/Bank letter where account number, name and IFSC code is mentioned with Bank stamp and Sign on Bank letter head" />
+
+<Label text="Company Registration Certificate" required='true' />
+         <unified:FileUploader
+            id="fileUploader21"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+<Label text="Export License" required='true' />
+         <unified:FileUploader
+            id="fileUploader22"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+		<Label text="Memorandum of Association (MOA)" required='true' />
+         <unified:FileUploader
+            id="fileUploader23"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+			<Label text="Article of Association" required='true' />
+         <unified:FileUploader
+            id="fileUploader24"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+
+			<Label text="International Sanction Document (PDF)" required='true' />
+         <unified:FileUploader
+            id="fileUploader25"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+
+			<Label text="Please Attach the ITR form for 02 years" required='true' />
+         <unified:FileUploader
+            id="fileUploader26"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+			</f:content> 
+		</f:SimpleForm>
+	</VBox>
+
+	</html:div>
+</mvc:View>

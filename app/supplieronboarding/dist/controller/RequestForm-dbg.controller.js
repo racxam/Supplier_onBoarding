@@ -44,15 +44,6 @@ sap.ui.define([
                 });
                 this.getView().setModel(oModel);
             },
-            onNavBack: function () {
-                //   const oRouter = this.getOwnerComponent().getRouter();
-                //   oRouter.navTo("Dashboard", {}, true);
-                  var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                  oRouter.navTo("Dashboard");
-              },
-            // onNavBack: function () {
-            //     window.history.back();
-            //   },
             onPanCardChange: function (oEvent) {
                 var oInput = oEvent.getSource();
                 var sValue = oInput.getValue().toUpperCase(); 

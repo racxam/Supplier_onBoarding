@@ -17,7 +17,7 @@ module.exports = async function () {
     // request atttachments
     this.before('CREATE', supplierReqSrv, BeforeSupReqFun);
     this.before('CREATE', SavingsupplierReqSrv, BeforeSavingSupReqFun);
-    this.after('CREATE', supplierReqSrv, AfterSupReqFun);
+    // this.after('CREATE', supplierReqSrv, AfterSupReqFun);
 
     this.on('getStatus', onGSTValidation);
 

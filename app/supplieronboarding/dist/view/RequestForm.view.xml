@@ -12,8 +12,6 @@
     <Page
         id="page1"
         title="{i18n>title}"
-        showNavButton="true"
-		navButtonPress="onNavBack"
     >
         <VBox
             id="VBox1"
@@ -364,27 +362,32 @@
                     />
                 </f:content>
             </f:SimpleForm>
-        </VBox>
 
- <footer>
-            <OverflowToolbar>
-            <ToolbarSpacer />
-            <Button
+            <!-- <core:Fragment
+                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
+                id="fileListFragment1"
+                type="XML"
+            /> -->
+
+            <Toolbar id="Toolbar1">
+                <ToolbarSpacer id="ToolbarSpacer" />
+                <Button
                     id="SaveButton"
                     text="Save"
                     press="onSave"
                     width="100px"
-                    type="Accept"
+                    type="Emphasized"
                 />
                 <Button
                     id="SubmitButton"
                     text="Submit"
                     press="onFormsubmit"
                     width="100px"
-                    type="Success"
+                    type="Emphasized"
                 />
-            </OverflowToolbar>
-</footer>
 
+                <ToolbarSpacer id="ToolbarSpacer1" />
+            </Toolbar>
+        </VBox>
     </Page>
 </mvc:View>

@@ -1,0 +1,145 @@
+<mvc:View
+ 		 controllerName="com.sumo.supplieronboarding.controller.RegistrationForm"
+		xmlns:forms="sap.ui.layout.form"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		xmlns="sap.m"
+	xmlns:m="sap.m" 
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+ 	xmlns:unified="sap.ui.unified"
+		width="100%">
+	<html:div style="font-size: 0.875rem;">
+		     <VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormToolbar2"
+			editable="true"
+			layout="ColumnLayout"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false"
+			ariaLabelledBy="Title1" >
+			<f:toolbar>
+				<Toolbar id="TB2">
+					<Title id="Title2" text="Company Identification and Regulatory Details"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+
+                <Label text="GSTIN Type" required='true' />
+				<Select id="gstin-type" selectedKey="gstin" >
+					<items>
+						<core:Item text="Registered" key="Registered"/>
+						<core:Item text="Composition scheme" key=" Composition scheme"/>
+                        <core:Item text="Special economic zone" key="Special economic zone"/>
+						<core:Item text="SEZ developer" key="SEZ developer"/>
+                        <core:Item text="SEZ unit" key="SEZ unit"/>
+						<core:Item text="PSU / Government Registration" key="PSU / Government Registration"/>
+					</items>
+				</Select>
+				  <Label text="E-Invoice Applicability" required='true'/>
+                    <RadioButtonGroup id="radioGroup2" columns="2" selectedIndex="0">
+                        <buttons>
+                            <RadioButton id="RadioButton1" text="Yes" />
+                            <RadioButton id="RadioButton2" text="No" />
+                        </buttons>
+                    </RadioButtonGroup>
+				
+				<Label text="GSTR-3B/ GSTR-1 Filer" required='true' />
+				<Select id="gstr" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</Select>
+
+
+
+         <Label text="CIN Attachment (Certificate)" required='true' />
+         <unified:FileUploader
+            id="fileUploader1"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+
+		<Label text="CIN No. (Corporate or Company Identification No.) / LLP Number / Partnership Registration Number " />
+		<Input id="cinInput" placeholder="Enter CIN Number" change=".onValidateCIN"/>
+		<Button text="Validate CIN" press=".onValidateCIN"/>
+
+
+
+        <Label text="Registration / Tax ID (applicable for international suppliers)" />
+		<Input value=""></Input>
+         <Label text="Registration / Tax ID Attachment" required='true' />
+         <unified:FileUploader
+            id="fileUploader2"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+        <Label text="TAN Number" required='true' />
+		<Input placeholder="TAN Number"></Input>
+
+
+
+
+        <Label text="EPFO Number" required='true' />
+		<Input id="epfoInput" placeholder="Enter EPFO Number" valueState="None"/>
+		<Button text="Validate EPFO" press=".onValidateEPFONumber"/>
+
+
+         <Label text="EPFO Certificate" required='true' />
+         <unified:FileUploader
+            id="fileUploader3"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+ <Label text="DUNS Number" required='true' />
+<Input id="dunsInput" placeholder="Enter DUNS Number" valueState="None"/>
+<Button text="Validate DUNS" press=".onValidateDUNSNumber"/>
+
+<Label text="LEI Number" required='true' />
+<Input id="leiInput" placeholder="Enter LEI Number" valueState="None"/>
+<Button text="Validate LEI" press=".onValidateLEINumber"/>       
+
+
+        <Label text="LEI Certificate" required='true' />
+         <unified:FileUploader
+            id="fileUploader4"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            />
+        <Label text="Main Telephone Number" required='true' />
+		<Input placeholder="Main Telephone Number"></Input>
+
+			</f:content> 
+		</f:SimpleForm>
+	</VBox>
+	</html:div>
+</mvc:View>

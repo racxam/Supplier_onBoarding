@@ -1,0 +1,200 @@
+<mvc:View
+    controllerName="com.sumo.supplieronboarding.controller.RegistrationForm"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    width="100%"
+>
+    <html:div style="font-size: 0.875rem;">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="SimpleFormToolbar"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
+            >
+                <f:toolbar>
+                    <Toolbar id="TB1">
+                        <Title
+                            id="Title1"
+                            text="Supplier Registration Questionnaire Form"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        text="Supplier Legal Full Name"
+                        required='true'
+                        id="supname"
+                    />
+                    <Input value="{/SupplierNameValue}" />
+
+                    <Label
+                        text="Supplier Organization Type"
+                        required='true'
+                    />
+                    <Select
+                        id="country"
+                        selectedKey="Country"
+                    >
+                        <items>
+                            <core:Item
+                                text="Individual"
+                                key="Individual"
+                            />
+                            <core:Item
+                                text="Company"
+                                key="Company"
+                            />
+                            <core:Item
+                                text="Partnership Firms"
+                                key="Partnership Firms"
+                            />
+                            <core:Item
+                                text="HUF"
+                                key="HUF"
+                            />
+                            <core:Item
+                                text="Trust"
+                                key="Trust"
+                            />
+                            <core:Item
+                                text="LLP"
+                                key="LLP"
+                            />
+                            <core:Item
+                                text="Local Authority"
+                                key="Local Authority"
+                            />
+                            <core:Item
+                                text="Government"
+                                key="Government"
+                            />
+                            <core:Item
+                                text="Body of individuals"
+                                key="Body of individuals"
+                            />
+                        </items>
+                    </Select>
+                    <Label text="Main Telephone Number" />
+                    <Input placeholder="Street" />
+                    <Label
+                        id="_IDGenLabel1"
+                        text="Do you accept the Mahindra code of business conduct?"
+                    />
+                    <RadioButtonGroup
+                        id="radioGroup_id"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="_IDGenRadioButton1"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="_IDGenRadioButton2"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+                    <Label
+                        displayOnly="true"
+                        wrapping="true"
+                        text="Please upload the Signed Copy of Accepted Supplier Code of Conduct Declaration."
+                    />
+
+                    <Label
+                        text="Vendor Evaluation"
+                        required="true"
+                    />
+                    <unified:FileUploader
+                        id="fileUploader"
+                        fileType="jpg,png,pdf,docx"
+                        change="onFileUpload"
+                        width="100%"
+                    />
+                    <Button
+                        text="{path: '/documentfiles', formatter: '.formatAttachmentButtonText'}"
+                        press="onOpenDialog"
+                    />
+                </f:content>
+            </f:SimpleForm>
+
+            <core:Fragment
+                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
+                id="fileListFragment2"
+                type="XML"
+            />
+
+            <VBox>
+                <!-- List to display uploaded files -->
+                <Dialog
+                    id="fileUploader-box"
+                    title="Upload Attachment Files"
+                    class="sapUiResponsivePadding"
+                >
+                    <content>
+                        <List
+                            id="fileList"
+                            items="{/files}"
+                            headerText=""
+                        >
+                            <CustomListItem id="_IDGenCustomListItem">
+                                <HBox
+                                    id="_IDGenHBox"
+                                    justifyContent="SpaceBetween"
+                                    alignItems="Center"
+                                    width="100%"
+                                >
+                                    <!-- File name and download link -->
+                                    <Link
+                                        id="_IDGenLink"
+                                        text="{fileName}"
+                                        press="onDownload"
+                                    >
+                                        <customData>
+                                            <core:CustomData
+                                                key="fileUrl"
+                                                value="{fileUrl}"
+                                            />
+                                        </customData>
+                                    </Link>
+
+                                    <!-- Delete button -->
+                                    <Button
+                                        id="_IDGenButton"
+                                        icon="sap-icon://delete"
+                                        type="Transparent"
+                                        press="onDeleteFile"
+                                    />
+                                </HBox>
+                            </CustomListItem>
+                        </List>
+                    </content>
+                </Dialog>
+            </VBox>
+        </VBox>
+    </html:div>
+</mvc:View>
