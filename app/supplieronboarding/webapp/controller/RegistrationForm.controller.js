@@ -12,6 +12,11 @@ sap.ui.define([
                 this.getView().setModel(oModel);
                 // You can load the fragment during initialization or as needed (e.g., in an event)
                 this._loadMyFragment();
+
+            },
+            onFormsubmit: function () {
+                var odata = this.getView().byId("_SupplierNameValue").getValue();
+                console.log(odata)
             },
             _loadMyFragment: function () {
                 // Dynamically load the fragment

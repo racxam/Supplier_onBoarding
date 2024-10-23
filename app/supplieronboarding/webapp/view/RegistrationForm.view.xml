@@ -14,7 +14,7 @@
 >
     <Page
         id="page2"
-        title="{i18n>title}"
+        title="Registration Form"
     >
         <content>
             <uxap:ObjectPageLayout

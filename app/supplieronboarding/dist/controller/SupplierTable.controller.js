@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("com.sumo.supplieronboarding.controller.SupplierTable",{onInit:function(){},onCreateRequest:function(){var e=sap.ui.core.UIComponent.getRouterFor(this);e.navTo("RequestForm")}})});
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(o){"use strict";return o.extend("com.sumo.supplieronboarding.controller.SupplierTable",{onInit:function(){},onCreateRequest:function(){console.log("hii hello");var o=sap.ui.core.UIComponent.getRouterFor(this);console.log(o);o.navTo("RequestForm")}})});
 //# sourceMappingURL=SupplierTable.controller.js.map

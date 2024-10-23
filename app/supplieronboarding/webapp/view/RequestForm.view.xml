@@ -13,11 +13,7 @@
         id="page1"
         title="{i18n>title}"
     >
-        <VBox
-            id="VBox1"
-            height="100%"
-            width="100%"
-        >
+      
             <f:SimpleForm
                 id="SimpleForm"
                 maxContainerCols="2"
@@ -388,6 +384,6 @@
 
                 <ToolbarSpacer id="ToolbarSpacer1" />
             </Toolbar>
-        </VBox>
+        
     </Page>
 </mvc:View>

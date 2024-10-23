@@ -128,15 +128,33 @@
           "target": [
             "TargetRequestForm"
           ]
+        },
+        {
+          "name": "SupplierTable",
+          "pattern": "SupplierTable",
+          "target": "SupplierTable"
+        },
+        {
+          "pattern": "RequestForm",
+          "name": "RequestForm",
+          "target": "RequestForm"
         }
       ],
       "targets": {
+        "SupplierTable": {
+          "viewName": "SupplierTable",
+          "viewLevel": 1
+        },
         "TargetRequestForm": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "RequestForm",
-          "viewName": "RequestForm"
+          "viewId": "RegistrationForm",
+          "viewName": "RegistrationForm"
+        },
+        "RequestForm": {
+          "viewName": "RequestForm",
+          "viewLevel": 2
         }
       }
     },
@@ -152,4 +170,3 @@
     "service": "supplier_creation"
   }
 }
- 

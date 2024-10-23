@@ -48,7 +48,10 @@
                         required='true'
                         id="supname"
                     />
-                    <Input value="{/SupplierNameValue}" />
+                    <Input
+                        id="_SupplierNameValue"
+                        value="{/SupplierNameValue}"
+                    />
 
                     <Label
                         text="Supplier Organization Type"

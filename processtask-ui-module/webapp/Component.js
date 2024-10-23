@@ -110,7 +110,10 @@ sap.ui.define(
           var oModel= this.getModel()
           console.log(SupplierReqID);
           oModel.setUseBatch(false);
-          updateData = {'Status':approvalStatus}
+          let updatedStatus = approvalStatus ? 'ACCPECTED' : 'REJECTED'
+          console.log(updatedStatus);
+          let updateData = {'Status':updatedStatus}
+          console.log(updateData)
           oModel.update("/supplierReqSrv("+SupplierReqID+")",updateData,{
             success:function() {
               console.log("Supplier Request Status is set to "+approvalStatus);

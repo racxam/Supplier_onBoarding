@@ -193,10 +193,9 @@ module.exports = async function () {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
             return response.data;
         } catch (error) {
-            console.error('Error calling GST API:', error.message);
+            console.error('Error calling GST API:', error);
             return false;
         }
 
