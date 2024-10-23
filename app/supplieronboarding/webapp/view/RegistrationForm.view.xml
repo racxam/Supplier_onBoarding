@@ -1,122 +1,969 @@
-<mvc:View
+<mvc:View xmlns:odata="sap.ui.comp.odata"
     controllerName="com.sumo.supplieronboarding.controller.RegistrationForm"
+     xmlns:sample="com.sumo.supplieronboarding.controller.blocks"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns:uxap="sap.uxap"
-    xmlns:sample="com.sumo.supplieronboarding.controller.blocks"
     xmlns="sap.m"
     xmlns:upload="sap.m.upload"
-    xmlns:m="sap.m"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns:unified="sap.ui.unified"
 >
     <Page
-        id="page2"
-        title="{i18n>title}"
+        id="page6"
+        title="{i18n>SRegisForm}"
     >
         <content>
-            <uxap:ObjectPageLayout
-                id="ObjectPageLayout"
-                upperCaseAnchorBar="false"
-                class="img-bg"
+    <uxap:ObjectPageLayout
+        id="ObjectPageLayout2"
+        upperCaseAnchorBar="false"
+    >
+        <uxap:sections>
+            <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="SRQFsection"
+                title="Section 1"
+                class="custom-section-spacing"
             >
-                <uxap:sections>
-                    <uxap:ObjectPageSection
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="section_SS1"
+                        title="Supplier Registration Questionnaire Form"
                         titleUppercase="false"
-                        id="section1"
-                        title="Section 1"
                     >
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection
-                                id="section1_SS1"
-                                title="Supplier Registration Questionnaire Form"
-                                titleUppercase="false"
-                            >
-                                <uxap:blocks>
-                                    <sample:SRQF id="bbt1" />
-                                </uxap:blocks>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
-
-                    <uxap:ObjectPageSection
-                        titleUppercase="false"
-                        id="section2"
-                        title="Section 2"
-                    >
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection
-                                id="section2_SS1"
-                                title="Company Identification and Regulatory Details"
-                                titleUppercase="false"
-                            >
-                                <uxap:blocks>
-                                    <sample:CIRD id="bbt2" />
-                                </uxap:blocks>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
-
-                    <uxap:ObjectPageSection
-                        titleUppercase="false"
-                        id="section3"
-                        title="Section 3"
-                    >
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection
-                                id="section3_SS1"
-                                title="Compliance and Certification Documents"
-                                titleUppercase="false"
-                            >
-                                <uxap:blocks>
-                                    <sample:CCD id="bbt3" />
-                                </uxap:blocks>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
-
-                    <uxap:ObjectPageSection
-                        titleUppercase="false"
-                        id="section4"
-                        title="Section 4"
-                    >
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection
-                                id="section5_SS1"
-                                title="Payment Terms "
-                                titleUppercase="false"
-                            >
-                                <uxap:blocks>
-                                    <sample:payment id="bbt5" />
-                                </uxap:blocks>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
-                </uxap:sections>
-            </uxap:ObjectPageLayout>
-            <FlexBox
-                id="_IDGenFlexBox1"
-                height="100px"
-                alignItems="Start"
-                justifyContent="Center"
+                        <!-- <uxap:blocks>
+                            <sample:SRQF id="bbt4" />
+                        </uxap:blocks> -->
+         <VBox class="sapUiSmallMargin SRFForm">
+            <f:SimpleForm
+                id="SimpleFormSRQF"
+                editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="3"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1"
             >
-                <Button
-                    id="_IDGenButton1"
-                    width="200px"
-                    class="sapUiSmallMargin"
-                    text="Submit"
-                    press="SubmitSupplieronBoardForm"
-                />
-                <Button
-                    id="save_btn"
-                    width="200px"
+                <f:toolbar>
+                    <Toolbar id="TB6">
+                        <Title
+                            id="Title5"
+                            text="Supplier Registration Questionnaire Form"
+                        />
+                        <ToolbarSpacer />
+                    </Toolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label
+                        text="Supplier Legal Full Name"
+                        required='true'
+                        id="SupplierNameID"
+                    />
+                    <Input value="{/SupplierNameValue}" />
+
+                    <Label
+                        text="Supplier Organization Type"
+                        required='true'
+                    />
+                    <ComboBox
+                        id="CountryID"
+                        selectedKey="Country"
+                    >
+                        <items>
+                            <core:Item
+                                text="Individual"
+                                key="Individual"
+                            />
+                            <core:Item
+                                text="Company"
+                                key="Company"
+                            />
+                            <core:Item
+                                text="Partnership Firms"
+                                key="Partnership Firms"
+                            />
+                            <core:Item
+                                text="HUF"
+                                key="HUF"
+                            />
+                            <core:Item
+                                text="Trust"
+                                key="Trust"
+                            />
+                            <core:Item
+                                text="LLP"
+                                key="LLP"
+                            />
+                            <core:Item
+                                text="Local Authority"
+                                key="Local Authority"
+                            />
+                            <core:Item
+                                text="Government"
+                                key="Government"
+                            />
+                            <core:Item
+                                text="Body of individuals"
+                                key="Body of individuals"
+                            />
+                        </items>
+                    </ComboBox>
+                    <Label text="Main Telephone Number" />
+                    <Input placeholder="Street" />
+                    <Label
+                        id="MahindracodeofbusinessID"
+                        text="Do you accept the Mahindra code of business conduct?"
+                    />
+                    <RadioButtonGroup
+                        id="RadioGroup_ID"
+                        columns="2"
+                        selectedIndex="0"
+                    >
+                        <buttons>
+                            <RadioButton
+                                id="RB1ID"
+                                text="Yes"
+                            />
+                            <RadioButton
+                                id="RB2ID"
+                                text="No"
+                            />
+                        </buttons>
+                    </RadioButtonGroup>
+                    <Label
+                    id="AcceptedSupplierCodeID"
+                        displayOnly="true"
+                        wrapping="true"
+                        text="Please upload the Signed Copy of Accepted Supplier Code of Conduct Declaration."
+                    />
+
+                    <Label
+                    id="VendorEvaluation_ID"
+                        text="Vendor Evaluation"
+                        required="true"
+                    />
+                    <unified:FileUploader
+                        id="VendorEvafileUploader"
+                        fileType="jpg,png,pdf,docx"
+                        change="onFileUpload"
+                        width="100%"
+                    />
+                    <Button
+                        text="{path: '/documentfiles', formatter: '.formatAttachmentButtonText'}"
+                        press="onOpenDialog"
+                    />
+                </f:content>
+            </f:SimpleForm>
+
+            <core:Fragment
+                fragmentName="com.sumo.supplieronboarding.view.fragment.uploadfile"
+                id="fileListFragment5"
+                type="XML"
+            />
+
+            <VBox>
+                <!-- List to display uploaded files -->
+                <Dialog
+                    id="fileUploader_box"
+                    title="Upload Attachment Files"
+                    class="sapUiResponsivePadding"
+                >
+                    <content>
+                        <List
+                            id="fileList2"
+                            items="{/files}"
+                            headerText=""
+                        >
+                            <CustomListItem id="ListItemID">
+                                <HBox
+                                    id="HBox1"
+                                    justifyContent="SpaceBetween"
+                                    alignItems="Center"
+                                    width="100%"
+                                >
+                                    <!-- File name and download link -->
+                                    <Link
+                                        id="Link1"
+                                        text="{fileName}"
+                                        press="onDownload"
+                                    >
+                                        <customData>
+                                            <core:CustomData
+                                                key="fileUrl"
+                                                value="{fileUrl}"
+                                            />
+                                        </customData>
+                                    </Link>
+
+                                    <!-- Delete button -->
+                                    <Button
+                                        id="DELButtonID"
+                                        icon="sap-icon://delete"
+                                        type="Transparent"
+                                        press="onDeleteFile"
+                                    />
+                                </HBox>
+                            </CustomListItem>
+                        </List>
+                    </content>
+                </Dialog>
+            </VBox>
+        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="CIRDsection"
+                title="Company Identification and Regulatory Details"
+                showTitle="false"
+                class="custom-section-spacing"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="section_SS2"
+                        title="Company Identification and Regulatory Details"
+                        titleUppercase="false"
+                    >
+                        <!-- <uxap:blocks>
+                            <sample:CIRD id="bbt5" />
+                        </uxap:blocks> -->
+        <VBox class="sapUiSmallMargin SRFForm">
+		<f:SimpleForm id="SimpleFormCIRD"
+			editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="4"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="1"
+                emptySpanM="0"
+                emptySpanS="0" 
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+                >
+			<f:toolbar>
+				<Toolbar id="TB7">
+					<Title id="Title6" text="Company Identification and Regulatory Details"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+
+                <Label text="GSTIN Type" required='true' />
+				<ComboBox id="GstintypeID" selectedKey="gstin" >
+					<items>
+						<core:Item text="Registered" key="Registered"/>
+						<core:Item text="Composition scheme" key=" Composition scheme"/>
+                        <core:Item text="Special economic zone" key="Special economic zone"/>
+						<core:Item text="SEZ developer" key="SEZ developer"/>
+                        <core:Item text="SEZ unit" key="SEZ unit"/>
+						<core:Item text="PSU / Government Registration" key="PSU / Government Registration"/>
+					</items>
+				</ComboBox>
+				  <Label text="E-Invoice Applicability" required='true'/>
+                    <RadioButtonGroup id="RadioGroup_2" columns="2" selectedIndex="0">
+                        <buttons>
+                            <RadioButton id="RB_1ID" text="Yes" />
+                            <RadioButton id="RB_2ID" text="No" />
+                        </buttons>
+                    </RadioButtonGroup>
+				
+				<Label text="GSTR-3B/ GSTR-1 Filer" required='true' />
+				<ComboBox id="GstrID" selectedKey="gstr" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+
+
+
+         <Label text="CIN Attachment (Certificate)" required='true' />
+         <unified:FileUploader
+            id="CINfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+
+		<Label text="CIN No. (Corporate or Company Identification No.) / LLP Number / Partnership Registration Number " />
+		<Input id="CINInput" placeholder="Enter CIN Number" change=".onValidateCIN"/>
+		<Button text="Validate CIN" press=".onValidateCIN"/>
+
+
+
+        <Label text="Registration / Tax ID (applicable for international suppliers)" />
+		<Input value=""></Input>
+         <Label text="Registration / Tax ID Attachment" required='true' />
+         <unified:FileUploader
+            id="TaxIDfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+        <Label text="TAN Number" required='true' />
+		<Input placeholder="TAN Number"></Input>
+
+
+
+
+        <Label text="EPFO Number" required='true' />
+		<Input id="EPFOInput" placeholder="Enter EPFO Number" valueState="None"/>
+		<Button text="Validate EPFO" press=".onValidateEPFONumber"/>
+
+
+         <Label text="EPFO Certificate" required='true' />
+         <unified:FileUploader
+            id="EPFOfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+ <Label text="DUNS Number" required='true' />
+<Input id="DUNSInput" placeholder="Enter DUNS Number" valueState="None"/>
+<Button text="Validate DUNS" press=".onValidateDUNSNumber"/>
+
+<Label text="LEI Number" required='true' />
+<Input id="LEIInput" placeholder="Enter LEI Number" valueState="None"/>
+<Button text="Validate LEI" press=".onValidateLEINumber"/>       
+
+
+        <Label text="LEI Certificate" required='true' />
+         <unified:FileUploader
+            id="LEIfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+        <Label text="Main Telephone Number" required='true' />
+		<Input placeholder="Main Telephone Number"></Input>
+
+			</f:content> 
+		</f:SimpleForm>
+	</VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="CCDsection"
+                title="Compliance and Certification Documents"
+                showTitle="false"
+                class="custom-section-spacing"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="section_SS3"
+                        title="Compliance and Certification Documents"
+                        titleUppercase="false"
+                    >
+                        <!-- <uxap:blocks>
+                            <sample:CCD id="bbt6" />
+                        </uxap:blocks> -->
+        <VBox class="sapUiSmallMargin SRFForm">
+		<f:SimpleForm id="CCDSimpleForm"
+			editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="4"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="1"
+                emptySpanM="0"
+                emptySpanS="0" 
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+             >
+			<f:toolbar>
+				<Toolbar id="TB8">
+					<Title id="Title7" text="Compliance and Certification Documents"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+        <Label text="UDYAM Number " required='true' />
+		<Input placeholder="UDYAM Number"></Input>
+         <Label text="Type of Industry" required='true' />
+			<ComboBox id="TypeIndustryID" selectedKey="" >
+				<items>
+						<core:Item text="Manufacturing" key="Manufacturing"/>
+						<core:Item text="Service" key="Service"/>
+					</items>
+			</ComboBox>
+         <Label text="MSME Type" required='true' />
+			<ComboBox id="MSMETypeID" selectedKey="" >
+				<items>
+						<core:Item text="Medium" key="Medium"/>
+						<core:Item text="Micro" key="Micro"/>
+                        <core:Item text="Small" key="Small"/>
+					</items>
+			</ComboBox>
+         <Label text="Please provide attachment of MSME Certificate." required='true' />
+         <unified:FileUploader
+            id="MSMEfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />  
+         <Label text="Country Code" required='true' />
+			<ComboBox id="CountryCodeID" selectedKey="" >
+				<items>
+						<core:Item text="[IN] - INDIA" key="india"/>
+						<core:Item text="Micro" key="Micro"/>
+                        <core:Item text="Small" key="Small"/>
+					</items>
+			</ComboBox>
+        <Label text="Kindly upload DSA - Development and Supply Agreement (Only applicable for Direct)" required='true' />
+         <unified:FileUploader
+            id="DSAfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+           /> 
+         <Label text="Kindly upload the Signed copy of the Accepted Non Disclosure Agreement (NDA)" required='true' />
+         <unified:FileUploader
+            id="NDAfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            /> 
+		 <Label text="Kindly upload the Copy of the ISO/TS Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="ISOfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            /> 
+        <Label text="Enter certificate number of the ISO/TS Certificate" required='true' />
+		<Input placeholder="Enter certificate number of the ISO/TS Certificate"></Input>  
+		<Label text="Enter expiry date of the ISO/TS Certificate" required='true' />
+		<DatePicker
+					id="Datepicker1"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+	 
+		<Label text="Kindly upload the Copy of the ISO 9001 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="ISO9001fileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            /> 
+		<Label text="Enter ISO 9001 certificate number" required='true' />
+		<Input placeholder="Enter ISO 9001 certificate number"></Input>  
+		<Label text="Enter expiry date of the ISO 9001 Certificate" required='true' />
+				<DatePicker
+					id="DatePicker2"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the ISO 16949 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="ISO16949fileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+           /> 
+		 <Label text="Enter ISO 16949 certificate number" required='true' />
+		<Input placeholder="EEnter ISO 16949 certificate number"></Input>  
+		<Label text="Enter expiry date of the ISO 16949 Certificate" required='true' />
+				<DatePicker
+					id="DatePicker3"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the ISO 14001 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="ISO14001fileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            /> 
+		 <Label text="Enter ISO 14001 certificate number" required='true' />
+		<Input placeholder="Enter ISO 14001 certificate number"></Input>  
+
+		<Label text="Enter expiry date of the ISO 14001 Certificate" required='true' />
+		<DatePicker
+					id="DatePicker4"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		
+		<Label text="Kindly upload the Copy of the ISO 45001 Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="ISO45001fileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            /> 
+		 <Label text="Enter ISO 45001 certificate number" required='true' />
+		<Input placeholder="Enter ISO 45001 certificate number"></Input>  
+		<Label text="Enter expiry date of the ISO 45001 Certificate" required='true' />
+				<DatePicker
+					id="DatePicker5"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the Factory License as applicable" required='true' />
+         <unified:FileUploader
+            id="FactoryLicensefileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            /> 
+	
+		<Label text="Enter Factory License number" required='true' />	
+		<Input placeholder="Enter Factory License number" ></Input>  
+
+		<Label text="Enter expiry date of the Factory License" required='true' />
+				<DatePicker
+					id="DatePicker6"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+				
+		<Label text="Kindly upload the Copy of the Consent to Operate Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="OperatefileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+
+		<Label text="Enter Consent to Operate certificate number" required='true' />	
+		<Input placeholder="Enter Consent to Operate certificate number" ></Input>
+		
+		<Label text="Enter expiry date of the Consent to Operate Certificate" required='true' />
+				<DatePicker
+					id="DatePicker7"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+		<Label text="Kindly upload the Copy of the Fire NOC Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="FireNOCfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+		
+		<Label text="Enter Fire NOC certificate number" required='true' />
+		<Input placeholder="Enter Fire NOC certificate number"></Input>  
+		
+		<Label text="Enter expiry date of the Fire NOC Certificate" required='true' />
+				<DatePicker
+					id="DatePicker8"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+
+
+		<Label text="Kindly upload the Wage Agreement Certificate as applicable" required='true' />
+         <unified:FileUploader
+            id="AgreementfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+		
+		<Label text="Enter Wage Agreement certificate number" required='true' />
+		<Input placeholder="Enter Wage Agreement certificate number"></Input>
+
+		<Label text="Enter Wage Agreement certificate number" required='true' />
+				<DatePicker
+					id="DatePicker"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+			</f:content> 
+		</f:SimpleForm>
+	</VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+                        <uxap:ObjectPageSection
+                titleUppercase="false"
+                id="paymentsection"
+                title="Payment Terms"
+                showTitle="false"
+                class="custom-section-spacing"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="section_SS4"
+                        title="Payment Terms"
+                        titleUppercase="false"
+                    >
+                        <!-- <uxap:blocks>
+                            <sample:payment id="bbt7" />
+                        </uxap:blocks> -->
+        <VBox class="sapUiSmallMargin SRFForm">
+		<f:SimpleForm id="PaymentSimpleForm"
+			editable="true"
+                layout="ColumnLayout"
+                labelSpanXL="6"
+                labelSpanL="4"
+                labelSpanM="6"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="1"
+                emptySpanM="0"
+                emptySpanS="0" 
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+			>
+			<f:toolbar>
+				<Toolbar id="TB10">
+					<Title id="Title8" text="Payment Terms"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+
+				<Label text="SIMS" required='true' />
+				<ComboBox id="SIMSlist" selectedKey="" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+				<Label text="SSU" required='true' />
+				<ComboBox id="SSUlist" selectedKey="" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+
+				<Label text="CIS  &amp; MDE" required='true' />
+				<ComboBox id="CISlist" selectedKey="" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+				<Label text="AM  &amp; IL" required='true' />
+				<ComboBox id="AMlist" selectedKey="" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+
+				<Label text="SD" required='true' />
+				<ComboBox id="SDlist" selectedKey="" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+				<Label text="FD" required='true' />
+				<ComboBox id="FDlist" selectedKey="" >
+					<items>
+						<core:Item text="Monthly" key="Monthly"/>
+						<core:Item text="Quarterly" key="Quarterly"/>
+					</items>
+				</ComboBox>
+         
+		 	<Label text="Incoterms Code" required='true' />
+				<ComboBox id="Incotermslist" selectedKey="" >
+					<items>
+						<core:Item text="[001]-Ex-Works Freight to pay" key="[001]-Ex-Works Freight to pay"/>
+						<core:Item text="[002]-F.O.R.tptr.godown-yr end FTPay" key="[002]-F.O.R.tptr.godown-yr end FTPay"/>
+					</items>
+				</ComboBox>
+		
+		<Label text="Incoterms Location" />
+		<Input placeholder="Incoterms Location"/>
+
+		<Label text="Supplier Legal Full Name" />
+        <Input placeholder="Supplier Legal Full Name" width="100%"/>
+		<Text text="Note - Should be the same as the legal name mentioned earlier" />
+
+		<Label text="Bank Country" required='true' />
+				<ComboBox id="Banklist" selectedKey="" >
+					<items>
+						<core:Item text="[IN] - INDIA" key="[IN] - INDIA"/>
+						<core:Item text="[US] UNITED STATES" key=" UNITED STATES"/>
+					</items>
+				</ComboBox>
+
+		<Label text="Bank Name" />
+		<Input placeholder="Bank Name"></Input>
+
+		<Label text="Bank Key (IFSC Code)" />
+		<Input placeholder="Bank Key (IFSC Code)" width="100%"/>
+		<Text text="Note - (Please make sure IFSC Code matches with the Cancelled Cheque  you have attached)" />
+
+		<Label text="IBAN Code / SWIFT Code " />
+		<Input placeholder="IBAN Code / SWIFT Code " width="100%"/>
+		<Text text="Note - (Please make sure SWIFT Code matches with the Cancelled Cheque  you have attached)"  />
+
+		<Label text="Bank Street Address" />
+		<Input placeholder="Bank Street Address"></Input>
+
+		<Label text="Bank Account Number" />
+		<Input placeholder="Bank Account Number"></Input>
+		<Text text="Note - (Please make sure Bank Account Number matches with the Cancelled Cheque you have attached)" />
+
+		<Label text="Re Confirm Bank Account Number" />
+		<Input placeholder="Re Confirm Bank Account Number"></Input>
+		<Text text="Note - (Please make sure Bank Account Number matches with the Cancelled Cheque you have attached)" />
+
+		<Label text="Bank Account Type (Control Key)" required='true' />
+				<ComboBox id="AccountTypelist" selectedKey="" >
+					<items>
+						<core:Item text="[11]- Savings Account" key="[11]- Savings Account"/>
+						<core:Item text="[13]- Current Account" key="[13]- Current Account"/>
+					</items>
+				</ComboBox>
+
+		<Label text="Postal Code" />
+		<Input placeholder="Postal Code"></Input>
+
+		<Label text="City / Village" />
+		<Input placeholder="City / Village"></Input>
+
+		<Label text="Branch Name" required='true' />
+				<ComboBox id="Branchlist" selectedKey="" >
+					<items>
+						<core:Item text="[11]- Savings Account" key="[11]- Savings Account"/>
+						<core:Item text="[13]- Current Account" key="[13]- Current Account"/>
+					</items>
+				</ComboBox>
+
+		<Label text="State" required='true' />
+				<ComboBox id="Statelist" selectedKey="gstr" >
+					<items>
+						<core:Item text="[11]- Savings Account" key="[11]- Savings Account"/>
+						<core:Item text="[13]- Current Account" key="[13]- Current Account"/>
+					</items>
+				</ComboBox>
+
+		<Label text="Region Code for Foreign Account" />
+		<Input placeholder="Region Code for Foreign Account"></Input>
+
+		<Label text="Please print the Bank Mandate Form on your official letter Head &amp; attach it. (Bank Mandate Form is attached for your reference)." required='true' />
+         <unified:FileUploader
+            id="BankMandatefileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+            width="100%"
+            />
+
+		<Label text="Please Upload/Attach Copy of Cancelled Cheque" required='true' />
+         <unified:FileUploader
+            id="CancelledChequefileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+<Text text="Note - If cancel cheque not there - provide Passbook copy/Bank letter where account number, name and IFSC code is mentioned with Bank stamp and Sign on Bank letter head" />
+
+<Label text="Company Registration Certificate" required='true' />
+         <unified:FileUploader
+            id="RegCertificatefileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+<Label text="Export License" required='true' />
+         <unified:FileUploader
+            id="ExpLicensefileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+		<Label text="Memorandum of Association (MOA)" required='true' />
+         <unified:FileUploader
+            id="MOAfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+			<Label text="Article of Association" required='true' />
+         <unified:FileUploader
+            id="AOAfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+      <Label text="International Sanction Document (PDF)" required='true' />
+         <unified:FileUploader
+            id="ISDocumentfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+
+			<Label text="Please Attach the ITR form for 02 years" required='true' />
+         <unified:FileUploader
+            id="ITRfileUploader"
+            name="myFileUpload"
+            uploadUrl="your/upload/endpoint"
+            fileType="pdf,doc,docx"
+            change="handleFileChange"
+            buttonText="Upload File"
+            icon="sap-icon://upload"
+             width="100%"
+            />
+
+			</f:content> 
+		</f:SimpleForm>
+	</VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</content>
+          <footer>
+<OverflowToolbar>
+<ToolbarSpacer />
+<Button
+                    id="SRFSaveID"
+                    width="150px"
                     class="sapUiSmallMargin"
                     text="Save"
                     press="onFormsubmit"
+                    type="Accept"
                 />
-            </FlexBox>
-        </content>
+ <Button
+                    id="SRFSubmitID"
+                    width="150px"
+                    class="sapUiSmallMargin"
+                    text="Submit"
+                    press="SubmitSupplieronBoardForm"
+                    type="Accept"
+                />
+                
+</OverflowToolbar>
+</footer>
+ 
     </Page>
 </mvc:View>

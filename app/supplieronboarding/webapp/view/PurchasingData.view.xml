@@ -3,10 +3,8 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns:uxap="sap.uxap"
-    xmlns:sample="com.sumo.supplieronboarding.controller.blocks"
     xmlns="sap.m"
     xmlns:upload="sap.m.upload"
-    xmlns:m="sap.m"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
@@ -37,7 +35,7 @@
                         <!-- <uxap:blocks>
                             <sample:GSInfo id="bbt5" />
                         </uxap:blocks> -->
-                        <VBox class="sapUiSmallMargin">
+        <VBox class="sapUiSmallMargin SRFForm">
             <f:SimpleForm
                 id="SimpleFormToolbar1"
                 editable="true"
@@ -489,7 +487,7 @@
                         <!-- <uxap:blocks>
                             <sample:POInfo id="bbt6" />
                         </uxap:blocks> -->
-                        <VBox class="sapUiSmallMargin">
+        <VBox class="sapUiSmallMargin SRFForm">
             <f:SimpleForm
                 id="SimpleFormToolbar5"
                 editable="true"
@@ -594,7 +592,7 @@
                         <!-- <uxap:blocks>
                             <sample:AIInfo id="bbt7" />
                         </uxap:blocks> -->
-                         <VBox class="sapUiSmallMargin">
+        <VBox class="sapUiSmallMargin SRFForm">
             <f:SimpleForm
                 id="SimpleFormToolbar8"
                 editable="true"
@@ -751,14 +749,16 @@
                     text="Save"
                     press="onPDFormSave"
                     width="150px"
-                    type="Emphasized"
+                    type="Accept"
+                    class="sapUiSmallMargin"
                 />
                 <Button
                     id="SubmitButton1"
                     text="Submit"
                     press="onPDFormsubmit"
                     width="150px"
-                    type="Emphasized"
+                    type="Accept"
+                    class="sapUiSmallMargin"
                 />
 </OverflowToolbar>
 </footer>

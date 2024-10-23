@@ -139,6 +139,16 @@
           "pattern": "RequestForm",
           "name": "RequestForm",
           "target": "RequestForm"
+        },
+        {
+          "pattern": "PurchasingData",
+          "name": "PurchasingData",
+          "target": "PurchasingData"
+        },
+        {
+          "pattern": "RegistrationForm",
+          "name": "RegistrationForm",
+          "target": "RegistrationForm"
         }
       ],
       "targets": {
@@ -152,6 +162,14 @@
         "RequestForm": {
           "viewName": "RequestForm",
           "viewLevel": 2
+        },
+        "PurchasingData": {
+          "viewName": "PurchasingData",
+          "viewLevel": 3
+        },
+        "RegistrationForm": {
+          "viewName": "RegistrationForm",
+          "viewLevel": 3
         }
       }
     },

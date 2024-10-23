@@ -45,11 +45,19 @@ sap.ui.define([
                 this.getView().setModel(oModel);
             },
             onNavBack: function () {
-                //   const oRouter = this.getOwnerComponent().getRouter();
-                //   oRouter.navTo("Dashboard", {}, true);
                   var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                   oRouter.navTo("Dashboard");
               },
+
+              onNavtoPD: function () {
+                  var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                  oRouter.navTo("PurchasingData");
+              },
+              onNavtoSRF: function () {
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("RegistrationForm");
+            },
+
             // onNavBack: function () {
             //     window.history.back();
             //   },

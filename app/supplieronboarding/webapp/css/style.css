@@ -1,6 +1,34 @@
 /* Enter your custom styles here */
+.editableForm {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+.editableForm label {
+    font-weight: bold;
+}
+.SRFForm {
+    max-width: 100%;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+.SRFForm label {
+    font-weight: bold;
+}
+.ui-datepicker, .ui-input, .ui-select, .ui-multicombobox {
+    width: 100%;
+}
+.ui-button {
+   width: 50px;
+   size: 10px;
+}
+
 .custom-section-spacing {
-    margin-top: 30px; /* Adjust as needed */
+    margin-top: 30px;
 }
 .sapMBarTitleAlignAuto .sapMBarPH {
     justify-content: center;

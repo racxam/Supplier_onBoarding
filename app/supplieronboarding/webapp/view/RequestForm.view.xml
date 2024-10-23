@@ -11,360 +11,111 @@
 >
     <Page
         id="page1"
-        title="{i18n>title}"
+        title="{i18n>SRForm}"
         showNavButton="true"
 		navButtonPress="onNavBack"
     >
-        <VBox
-            id="VBox1"
-            height="100%"
-            width="100%"
-        >
-            <f:SimpleForm
-                id="SimpleForm"
-                maxContainerCols="2"
-                editable="true"
-                layout="ResponsiveGridLayout"
-                labelSpanL="3"
-                labelSpanM="3"
-                columnsL="2"
-                columnsM="2"
-                emptySpanL="4"
-                emptySpanM="4"
-                adjustLabelSpan="false"
-                class="editableForm"
-                title="Request Form"
-            >
-                <f:content>
-                    <Label
-                        id="ValidityLabel"
-                        text="Validity of digression vendor code upto"
-                        required="true"
-                    />
-                    <DatePicker
-                        id="datePicker"
-                        valueFormat="yyyy-MM-dd"
-                        displayFormat="long"
-                        change="handleDateChange"
-                    />
+     <VBox class="editableForm">
+        <f:SimpleForm
+          id="SimpleForm"
+          title="Request Form"
+          maxContainerCols="2"
+          editable="true"
+          layout="ResponsiveGridLayout"
+          labelSpanL="6"
+          labelSpanM="4"
+          columnsL="2"
+          columnsM="2"
+          emptySpanL="4"
+          emptySpanM="2"
+          adjustLabelSpan="false"
+          >
+    <f:content>
+        <Label id="ValidityLabel" text="Validity of digression vendor code upto" required="true" />
+        <DatePicker id="datePicker" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleDateChange" class="ui-datepicker" />
 
-                    <Label
-                        id="relatedpartyLabelID"
-                        text="Is it a related party vendor code?"
-                        required="true"
-                    />
-                    <RadioButtonGroup
-                        id="radioGroup"
-                        columns="2"
-                        selectedIndex="0"
-                    >
-                        <buttons>
-                            <RadioButton
-                                id="RadioButton"
-                                text="Yes"
-                            />
-                            <RadioButton
-                                id="RadioButton_new"
-                                text="No"
-                            />
-                        </buttons>
-                    </RadioButtonGroup>
+        <Label id="relatedpartyLabelID" text="Is it a related party vendor code?" required="true" />
+        <RadioButtonGroup id="radioGroup" columns="2" selectedIndex="0">
+            <buttons>
+                <RadioButton id="RadioButton" text="Yes" />
+                <RadioButton id="RadioButton_new" text="No" />
+            </buttons>
+        </RadioButtonGroup>
 
-                    <Label
-                        id="SupplierSpendTypeLabelID"
-                        text="Supplier Spend Type"
-                        required="true"
-                    />
-                    <Select
-                        id="supplierSpendType"
-                        selectedKey=""
-                        items="{/results}"
-                        change="handleComboBoxChange"
-                    >
-                        <items>
-                            <core:Item
-                                id="Item"
-                                text="{SpendsTypes}"
-                                key="{SpendsTypes}"
-                            />
-                        </items>
-                    </Select>
+        <Label id="SupplierSpendTypeLabelID" text="Supplier Spend Type" required="true" />
+        <Select id="supplierSpendType" selectedKey="" items="{/results}" change="handleComboBoxChange" class="ui-select">
+            <items>
+                <core:Item id="Item" text="{SpendsTypes}" key="{SpendsTypes}" />
+            </items>
+        </Select>
 
-                    <Label
-                        id="NatureofActivityLabelID"
-                        text="Nature of Activity"
-                        required="true"
-                    />
-                    <Select
-                        id="NatureofActivity"
-                        selectedKey=""
-                        items="{/results}"
-                        change="handleComboBoxChange"
-                    >
-                        <items>
-                            <core:Item
-                                id="Item1"
-                                text="{Activity}"
-                                key="{Activity}"
-                            />
-                        </items>
-                    </Select>
+        <Label id="NatureofActivityLabelID" text="Nature of Activity" required="true" />
+        <Select id="NatureofActivity" selectedKey="" items="{/results}" change="handleComboBoxChange" class="ui-select">
+            <items>
+                <core:Item id="Item1" text="{Activity}" key="{Activity}" />
+            </items>
+        </Select>
 
-                    <Label
-                        id="SectorLabelID"
-                        text="Sector"
-                        required="true"
-                    />
-                    <MultiComboBox
-                        id="sectorComboBox"
-                        placeholder="Select sectors"
-                        items="{/results}"
-                        selectionChange="handleMultiComboBoxChange"
-                    >
-                        <items>
-                            <core:Item
-                                id="Item100"
-                                text="{Sectors} - {Description}"
-                                key="{Sectors} - {Description}"
-                            />
-                        </items>
-                    </MultiComboBox>
+        <Label id="SectorLabelID" text="Sector" required="true" />
+        <MultiComboBox id="sectorComboBox" placeholder="Select sectors" items="{/results}" selectionChange="handleMultiComboBoxChange" class="ui-multicombobox">
+            <items>
+                <core:Item id="Item100" text="{Sectors} - {Description}" key="{Sectors} - {Description}" />
+            </items>
+        </MultiComboBox>
 
-                    <Label
-                        id="FunctionLabel"
-                        text="Function &amp; Subfunction"
-                        required="true"
-                    />
+        <Label id="FunctionLabel" text="Function &amp; Subfunction" required="true" />
+        <Select id="FunctionandSubfunctionComboBox" change="onDepartmentChange" items="{ path: 'departmentsModel>/results' }" class="ui-select">
+            <core:Item id="Item3" key="{departmentsModel>DepartmentName}" text="{departmentsModel>DepartmentName}" />
+        </Select>
 
-                    <Select
-                        id="FunctionandSubfunctionComboBox"
-                        change="onDepartmentChange"
-                        items="{
-        path: 'departmentsModel>/results'
-    }"
-                    >
-                        <core:Item
-                            id="Item3"
-                            key="{departmentsModel>DepartmentName}"
-                            text="{departmentsModel>DepartmentName}"
-                        />
-                    </Select>
+        <MultiComboBox id="childMultiComboBox" visible="true" placeholder="Select Subfunction" items="{functionsModel>/Functions}" selectionChange="handleMultiComboBoxChange" class="ui-multicombobox">
+            <core:Item id="Item4" key="{functionsModel>}" text="{functionsModel>}" />
+        </MultiComboBox>
 
-                    <MultiComboBox
-                        id="childMultiComboBox"
-                        visible="true"
-                        placeholder="Select Subfunction"
-                        items="{functionsModel>/Functions}"
-                        selectionChange="handleMultiComboBoxChange"
-                    >
-                        <core:Item
-                            id="Item4"
-                            key="{functionsModel>}"
-                            text="{functionsModel>}"
-                        />
-                    </MultiComboBox>
+        <Label id="PANLabel" text="PAN Card No." required="true" />
+        <Input id="panInput" placeholder="ABCDE1234F" value="{/panCardValue}" liveChange="onPanCardChange" maxLength="10" class="ui-input" />
+        <Button id="Button110" text="Verify" press="onSubmitpan" class="ui-button" />
 
-                    <Label
-                        id="PANLabel"
-                        text="PAN Card No."
-                        required="true"
-                    />
-                    <Input
-                        id="panInput"
-                        placeholder="ABCDE1234F"
-                        value="{/panCardValue}"
-                        liveChange="onPanCardChange"
-                        maxLength="10"
-                    />
-                    <Button
-                        id="Button110"
-                        text="Verify"
-                        press="onSubmitpan"
-                    />
+        <Label id="PANCardAttachmentLabel" text="PAN Card Attachment" required="true" />
+        <unified:FileUploader id="fileUploaderPan" fileType="jpg,png,pdf,docx,jpeg" change="onFileUpload" width="100%" class="ui-fileuploader" />
+        <Button id="panuploadbutton" text="{ parts: [ { path: '/documentFiles/pan' }, { value: 'pan' } ], formatter: '.formatAttachmentButtonText' }" press="onOpenDialog('pan')" class="ui-button" />
 
-                    <Label
-                        id="PANCardAttachmentLabel"
-                        text="PAN Card Attachment"
-                        required="true"
-                    />
-                    <unified:FileUploader
-                        id="fileUploaderPan"
-                        fileType="jpg,png,pdf,docx,jpeg"
-                        change="onFileUpload"
-                        width="100%"
-                    />
-                    <Button
-                        id="panuploadbutton"
-                        text="{
-            parts: [
-                { path: '/documentFiles/pan' },
-                { value: 'pan' }
-            ],
-            formatter: '.formatAttachmentButtonText'
-        }"
-                        press="onOpenDialog('pan')"
-                    />
+        <Label id="GSTINLabel" text="GSTIN No." required="true" />
+        <Input id="gstinInput" placeholder="22ABCDE1234F1Z5" value="{/gstinValue}" liveChange="onGSTINChange" maxLength="15" class="ui-input" />
+        <Button id="Button" text="Verify" press="onSubmitgst" class="ui-button" />
 
-                    <Label
-                        id="GSTINLabel"
-                        text=" GSTIN No."
-                        required="true"
-                    />
-                    <Input
-                        id="gstinInput"
-                        placeholder="22ABCDE1234F1Z5"
-                        value="{/gstinValue}"
-                        liveChange="onGSTINChange"
-                        maxLength="15"
-                    />
-                    <Button
-                        id="Button"
-                        text="Verify"
-                        press="onSubmitgst"
-                    />
+        <Label id="GSTAttachmentLabel" text="GST Registration Certificate Attachment" required="true" />
+        <unified:FileUploader id="fileUploaderGst" fileType="jpg,png,pdf,docx,jpeg" change="onFileUpload" width="100%" class="ui-fileuploader" />
+        <Button id="gstuploadbutton" text="{ parts: [ { path: '/documentFiles/gst' }, { value: 'gst' } ], formatter: '.formatAttachmentButtonText' }" press="onOpenDialog('gst')" class="ui-button" />
 
-                    <Label
-                        id="GSTAttachmentLabel"
-                        text="GST Registration Certificate Attachment"
-                        required="true"
-                    />
-                    <Label
-                        text="GST Registration Certificate Attachment"
-                        required="true"
-                    />
-                    <unified:FileUploader
-                        id="fileUploaderGst"
-                        fileType="jpg,png,pdf,docx,jpeg"
-                        change="onFileUpload"
-                        width="100%"
-                    />
-                    <Button
-                        id="gstuploadbutton"
-                        text="{
-            parts: [
-                { path: '/documentFiles/gst' },
-                { value: 'gst' }
-            ],
-            formatter: '.formatAttachmentButtonText'
-        }"
-                        press="onOpenDialog('gst')"
-                    />
+        <Label id="SupplierNameLabel" text="Supplier Full Legal Name" required="true" />
+        <Input id="SupplierNameInput" type="Text" value="{/SupplierNameValue}" liveChange="handleLiveChange" maxLength="100" class="ui-input" />
 
-                    <Label
-                        id="SupplierNameLabel"
-                        text="Supplier Full Legal Name"
-                        required="true"
-                    />
-                    <Input
-                        id="SupplierNameInput"
-                        type="Text"
-                        value="{/SupplierNameValue}"
-                        liveChange="handleLiveChange"
-                        maxLength="100"
-                    />
+        <Label id="SuppliertradeNameLabel" text="Supplier Trade Name (GST)" required="true" />
+        <Input id="SuppliertradeNameInput" type="Text" value="{/SuppliertradeNameValue}" liveChange="handleLiveChange" maxLength="150" class="ui-input" />
 
-                    <Label
-                        id="SuppliertradeNameLabel"
-                        text="Supplier Trade Name (GST)"
-                        required="true"
-                    />
-                    <Input
-                        id="SuppliertradeNameInput"
-                        type="Text"
-                        value="{/SuppliertradeNameValue}"
-                        liveChange="handleLiveChange"
-                        maxLength="150"
-                    />
+        <Label id="SupplierAddressLabel" text="Supplier Address" required="true" />
+        <Input id="SupplierAddressInput" type="Text" value="{/SupplierAddressValue}" liveChange="handleLiveChange" maxLength="150" class="ui-input" />
 
-                    <Label
-                        id="SupplierAddressLabel"
-                        text="Supplier Address"
-                        required="true"
-                    />
-                    <Input
-                        id="SupplierAddressInput"
-                        type="Text"
-                        value="{/SupplierAddressValue}"
-                        liveChange="handleLiveChange"
-                        maxLength="150"
-                    />
+        <Label id="SupplierAddressgstLabel" text="Supplier Address (GST)" required="true" />
+        <Input id="SupplierAddressgstInput" type="Text" value="{/SupplierAddressgstValue}" liveChange="handleLiveChange" maxLength="150" class="ui-input" />
 
-                    <Label
-                        id="SupplierAddressgstLabel"
-                        text="Supplier Address (GST)"
-                        required="true"
-                    />
-                    <Input
-                        id="SupplierAddressgstInput"
-                        type="Text"
-                        value="{/SupplierAddressgstValue}"
-                        liveChange="handleLiveChange"
-                        maxLength="150"
-                    />
+        <Label id="PrimaryFirstnameLabel" text="Primary Contact First Name" required="true" />
+        <Input id="PrimaryFirstnameInput" type="Text" value="{/PrimaryFirstnameValue}" liveChange="handleLiveChange" maxLength="50" class="ui-input" />
 
-                    <Label
-                        id="PrimaryFirstnameLabel"
-                        text=" Primary Contact First Name"
-                        required="true"
-                    />
-                    <Input
-                        id="PrimaryFirstnameInput"
-                        type="Text"
-                        value="{/PrimaryFirstnameValue}"
-                        liveChange="handleLiveChange"
-                        maxLength="50"
-                    />
+        <Label id="PrimaryLastnameLabel" text="Primary Contact Last Name" required="true" />
+        <Input id="PrimaryLastnameInput" type="Text" value="{/PrimaryLastnameValue}" liveChange="handleLiveChange" maxLength="50" class="ui-input" />
 
-                    <Label
-                        id="PrimaryLastnameLabel"
-                        text="Primary Contact Last Name"
-                        required="true"
-                    />
-                    <Input
-                        id="PrimaryLastnameInput"
-                        type="Text"
-                        value="{/PrimaryLastnameValue}"
-                        liveChange="handleLiveChange"
-                        maxLength="50"
-                    />
+        <Label id="EmailLabel" text="Primary Contact Email" required="true" />
+        <Input id="emailInput" placeholder="Enter your email" value="{/emailValue}" liveChange="onEmailChange" class="ui-input" />
+        <Button id="EmailButton" text="Verify" press="onSubmitemail" class="ui-button" />
 
-                    <Label
-                        id="EmailLabel"
-                        text="Primary Contact Email"
-                        required="true"
-                    />
-                    <Input
-                        id="emailInput"
-                        placeholder="Enter your email"
-                        value="{/emailValue}"
-                        liveChange="onEmailChange"
-                    />
-                    <Button
-                        id="EmailButton"
-                        text="Verify"
-                        press="onSubmitemail"
-                    />
-
-                    <Label
-                        id="MobilenoLabel"
-                        text="Primary Contact Mobile Number"
-                        required="true"
-                    /> 
-                    <Input
-                        id="numberInput"
-                        placeholder="Enter your Mobile number"
-                        type="Number"
-                        value="{/numberValue}"
-                        liveChange="onNumberChange"
-                    />
-                    <Button
-                        id="MobilenoButton"
-                        text="Verify"
-                        press="onSubmitnumber"
-                    />
-                </f:content>
-            </f:SimpleForm>
-        </VBox>
+        <Label id="MobilenoLabel" text="Primary Contact Mobile Number" required="true" />
+        <Input id="numberInput" placeholder="Enter your Mobile number" type="Number" value="{/numberValue}" liveChange="onNumberChange" class="ui-input" />
+        <Button id="MobilenoButton" text="Verify" press="onSubmitnumber" class="ui-button" />
+    </f:content>
+</f:SimpleForm>
+</VBox>
 
  <footer>
             <OverflowToolbar>
@@ -373,15 +124,33 @@
                     id="SaveButton"
                     text="Save"
                     press="onSave"
-                    width="100px"
+                    width="150px"
                     type="Accept"
+                    class="sapUiSmallMargin"
                 />
                 <Button
                     id="SubmitButton"
                     text="Submit"
                     press="onFormsubmit"
-                    width="100px"
+                    width="150px"
                     type="Success"
+                    class="sapUiSmallMargin"
+                />
+                <Button
+                    id="GoPD"
+                    text="PD"
+                    press="onNavtoPD"
+                    width="150px"
+                    type="Attention"
+                    class="sapUiSmallMargin"
+                />
+                <Button
+                    id="GoSRF"
+                    text="SRF"
+                    press="onNavtoSRF"
+                    width="150px"
+                    type="Attention"
+                    class="sapUiSmallMargin"
                 />
             </OverflowToolbar>
 </footer>
